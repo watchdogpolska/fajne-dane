@@ -1,0 +1,42 @@
+version: '3.5'
+
+networks:
+  default:
+    external:
+      name: fajne-dane-network
+
+services:
+  app:
+    build: .
+    container_name: fajne-dane-app
+    restart: always
+    ports:
+      - "8888:80"
+    depends_on:
+      - "db"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: >
+      bash -c "./bin/wait-for-it.sh -t 360 ${POSTGRES_HOST}:${POSTGRES_PORT}
+      && ./manage.py migrate --no-input
+      && gunicorn fajne_dane.wsgi --bind 0.0.0.0:80 --workers 2 --worker-class gevent --reload --access-logfile=-"
+
+  db:
+    ports:
+      - "5432:5432"
+    image: postgres:13.0
+    restart: always
+    container_name: fajne-dane-db
+    volumes:
+      - fajne_dane_db:/var/lib/postgresql/data
+      - ./backups:/var/lib/backups
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+
+volumes:
+    fajne_dane_db:
+

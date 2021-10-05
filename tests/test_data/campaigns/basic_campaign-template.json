@@ -1,0 +1,37 @@
+{
+    "document": {
+        "data_fields": [
+            {
+                "name": "institution_id",
+                "widget": "hidden",
+                "type": "str"
+            }
+        ]
+    },
+    "queries": [
+        {
+            "order": 0,
+            "name": "Question 0",
+            "data_fields": [
+                {
+                    "name": "question",
+                    "value": "What is it?",
+                    "type": "str",
+                    "widget": "label"
+                }
+            ],
+            "output_field": {
+                "name": "answer",
+                "widget": "radio",
+                "answers": [
+                    "yes",
+                    "not"
+                ],
+                "meta": {},
+                "type": "str",
+                "validation": true,
+                "default_answer": 2
+            }
+        }
+    ]
+}

@@ -1,0 +1,286 @@
+{
+   "version":{
+      "name":"mdJson",
+      "version":"1.0.0"
+   },
+   "contact":[
+      {
+         "contactId":"1",
+         "organizationName":"Watchdog"
+      }
+   ],
+   "metadata":{
+
+   },
+   "$schema":"http://json-schema.org/draft-07/schema",
+   "$id":"http://example.com/example.json",
+   "type":"object",
+   "title":"The root schema",
+   "description":"The root schema comprises the entire JSON document.",
+   "default":{
+
+   },
+   "required":[
+      "document",
+      "queries"
+   ],
+   "properties":{
+      "document":{
+         "$id":"#/properties/document",
+         "type":"object",
+         "title":"The document schema",
+         "description":"An explanation about the purpose of this instance.",
+         "default":{
+
+         },
+         "required":[
+            "data_fields"
+         ],
+         "properties":{
+            "data_fields":{
+               "$id":"#/properties/document/properties/data_fields",
+               "type":"array",
+               "title":"The data_fields schema",
+               "description":"An explanation about the purpose of this instance.",
+               "default":[
+
+               ],
+               "items":{
+                  "$id":"#/properties/document/properties/data_fields/items",
+                  "anyOf":[
+                     {
+                        "$id":"#/properties/document/properties/data_fields/items/anyOf/0",
+                        "type":"object",
+                        "title":"The first anyOf schema",
+                        "description":"An explanation about the purpose of this instance.",
+                        "default":{
+
+                        },
+                        "required":[
+                           "name",
+                           "widget",
+                           "type"
+                        ],
+                        "properties":{
+                           "name":{
+                              "$id":"#/properties/document/properties/data_fields/items/anyOf/0/properties/name",
+                              "type":"string",
+                              "title":"The name schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           },
+                           "widget":{
+                              "$id":"#/properties/document/properties/data_fields/items/anyOf/0/properties/widget",
+                              "type":"string",
+                              "title":"The widget schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           },
+                           "type":{
+                              "$id":"#/properties/document/properties/data_fields/items/anyOf/0/properties/type",
+                              "type":"string",
+                              "title":"The type schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           }
+                        }
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "queries":{
+         "$id":"#/properties/queries",
+         "type":"array",
+         "title":"The queries schema",
+         "description":"An explanation about the purpose of this instance.",
+         "default":[
+
+         ],
+         "items":{
+            "$id":"#/properties/queries/items",
+            "anyOf":[
+               {
+                  "$id":"#/properties/queries/items/anyOf/0",
+                  "type":"object",
+                  "title":"The first anyOf schema",
+                  "description":"An explanation about the purpose of this instance.",
+                  "default":{
+
+                  },
+                  "required":[
+                     "order",
+                     "name",
+                     "data_fields",
+                     "output_field"
+                  ],
+                  "properties":{
+                     "order":{
+                        "$id":"#/properties/queries/items/anyOf/0/properties/order",
+                        "type":"integer",
+                        "title":"The order schema",
+                        "description":"An explanation about the purpose of this instance.",
+                        "default":0
+                     },
+                     "name":{
+                        "$id":"#/properties/queries/items/anyOf/0/properties/name",
+                        "type":"string",
+                        "title":"The name schema",
+                        "description":"An explanation about the purpose of this instance.",
+                        "default":""
+                     },
+                     "data_fields":{
+                        "$id":"#/properties/queries/items/anyOf/0/properties/data_fields",
+                        "type":"array",
+                        "title":"The data_fields schema",
+                        "description":"An explanation about the purpose of this instance.",
+                        "default":[
+
+                        ],
+                        "items":{
+                           "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items",
+                           "anyOf":[
+                              {
+                                 "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items/anyOf/0",
+                                 "type":"object",
+                                 "title":"The first anyOf schema",
+                                 "description":"An explanation about the purpose of this instance.",
+                                 "default":{
+
+                                 },
+                                 "required":[
+                                    "name",
+                                    "value",
+                                    "type",
+                                    "widget"
+                                 ],
+                                 "properties":{
+                                    "name":{
+                                       "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items/anyOf/0/properties/name",
+                                       "type":"string",
+                                       "title":"The name schema",
+                                       "description":"An explanation about the purpose of this instance.",
+                                       "default":""
+                                    },
+                                    "value":{
+                                       "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items/anyOf/0/properties/value",
+                                       "type":"string",
+                                       "title":"The value schema",
+                                       "description":"An explanation about the purpose of this instance.",
+                                       "default":""
+                                    },
+                                    "type":{
+                                       "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items/anyOf/0/properties/type",
+                                       "type":"string",
+                                       "title":"The type schema",
+                                       "description":"An explanation about the purpose of this instance.",
+                                       "default":""
+                                    },
+                                    "widget":{
+                                       "$id":"#/properties/queries/items/anyOf/0/properties/data_fields/items/anyOf/0/properties/widget",
+                                       "type":"string",
+                                       "title":"The widget schema",
+                                       "description":"An explanation about the purpose of this instance.",
+                                       "default":""
+                                    }
+                                 }
+                              }
+                           ]
+                        }
+                     },
+                     "output_field":{
+                        "$id":"#/properties/queries/items/anyOf/0/properties/output_field",
+                        "type":"object",
+                        "title":"The output_field schema",
+                        "description":"An explanation about the purpose of this instance.",
+                        "default":{
+
+                        },
+                        "required":[
+                           "name",
+                           "widget",
+                           "answers",
+                           "meta",
+                           "type",
+                           "validation",
+                           "default_answer"
+                        ],
+                        "properties":{
+                           "name":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/name",
+                              "type":"string",
+                              "title":"The name schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           },
+                           "widget":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/widget",
+                              "type":"string",
+                              "title":"The widget schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           },
+                           "answers":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/answers",
+                              "type":"array",
+                              "title":"The answers schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":[
+
+                              ],
+                              "items":{
+                                 "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/answers/items",
+                                 "anyOf":[
+                                    {
+                                       "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/answers/items/anyOf/0",
+                                       "type":"string",
+                                       "title":"The first anyOf schema",
+                                       "description":"An explanation about the purpose of this instance.",
+                                       "default":""
+                                    }
+                                 ]
+                              }
+                           },
+                           "meta":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/meta",
+                              "type":"object",
+                              "title":"The meta schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":{
+
+                              },
+                              "required":[
+
+                              ]
+                           },
+                           "type":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/type",
+                              "type":"string",
+                              "title":"The type schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":""
+                           },
+                           "validation":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/validation",
+                              "type":"boolean",
+                              "title":"The validation schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":false
+                           },
+                           "default_answer":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/default_answer",
+                              "type":"integer",
+                              "title":"The default_answer schema",
+                              "description":"An explanation about the purpose of this instance.",
+                              "default":0
+                           }
+                        }
+                     }
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

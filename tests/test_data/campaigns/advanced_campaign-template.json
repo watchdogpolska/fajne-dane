@@ -1,0 +1,98 @@
+{
+    "document": {
+        "data_fields": [
+            {
+                "name": "institution_id",
+                "widget": "hidden",
+                "type": "str"
+            },
+            {
+                "name": "document_url",
+                "widget": "pdf",
+                "type": "str"
+            }
+        ]
+    },
+    "queries": [
+        {
+            "order": 0,
+            "name": "Monitoring 47 - 0",
+            "data_fields": [
+                {
+                    "name": "question",
+                    "value": "Czy dokument, który czytasz to odpowiedź na wniosek o gminne social media?",
+                    "type": "str",
+                    "widget": "label"
+                }
+            ],
+            "output_field": {
+                "name": "answer",
+                "widget": "radio",
+                "answers": [
+                    "tak",
+                    "nie (w tym odmowa lub wydłużenie terminu odpowiedzi)",
+                    "trudno powiedzieć"
+                ],
+                "meta": {},
+                "type": "str",
+                "validation": true,
+                "default_answer": 2
+            }
+        },
+        {
+            "order": 1,
+            "name": "Monitoring 47 - 1",
+            "data_fields": [
+                {
+                    "name": "question",
+                    "value": "Jaką rolę ma pełnić profil gminy na Facebooku? (zaznacz wszystkie wskazane przez urząd odpowiedzi)",
+                    "type": "str",
+                    "widget": "label"
+                }
+            ],
+            "output_field": {
+                "name": "answer",
+                "widget": "multi_with_other",
+                "answers": [
+                    "informacyjną",
+                    "promocyjną",
+                    "dyskusyjną",
+                    "ma ułatwiać codzienny kontakt przedstawicieli urzędu z mieszkańcami/mieszkankami",
+                    "trudno powiedzieć (w tym brak odpowiedzi)"
+                ],
+                "meta": {
+                    "other_label": "inną, jaką?",
+                    "other_position": 4
+                },
+                "type": "str",
+                "validation": false,
+                "default_answer": 4
+            }
+        },
+        {
+            "order": 2,
+            "name": "Monitoring 47 - 2",
+            "data_fields": [
+                {
+                    "name": "question",
+                    "value": "Jakie informacje zostają publikowane na Facebooku?",
+                    "type": "str",
+                    "widget": "label"
+                }
+            ],
+            "output_field": {
+                "name": "answer",
+                "widget": "radio",
+                "answers": [
+                    "umieszczane są tylko informacje, które znalazły się wcześniej w BIP lub na stronie internetowej urzędu.",
+                    "facebook to pierwsze i najszybsze miejsce umieszczania informacji, tam informacje trafiają w pierwszej kolejności.",
+                    "na Facebooka przygotowywane są różne treści, niekoniecznie pokrywające się z tym, co na stronie internetowej i w BIP.",
+                    "trudno powiedzieć (w tym brak odpowiedzi)"
+                ],
+                "type": "str",
+                "validation": true,
+                "default_answer": 3
+            }
+        }
+    ]
+}

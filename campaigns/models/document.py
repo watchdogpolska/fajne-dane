@@ -1,7 +1,5 @@
 from django.db import models
 
-from campaigns.models.dto import DocumentDTO
-
 
 class Document(models.Model):
     """
@@ -18,15 +16,3 @@ class Document(models.Model):
     data = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    def clean(self):
-        cleaned_data = super().clean()
-        if hasattr(self, 'campaign'):
-            template = self.campaign.campaign_template
-            template.document_template.validate_data(self.data)
-
-        return cleaned_data
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)

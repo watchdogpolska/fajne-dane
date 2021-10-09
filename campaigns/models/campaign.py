@@ -1,11 +1,9 @@
-from typing import Dict
+from typing import Optional
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from campaigns.models.dto import DocumentDTO
-from campaigns.validators.campaign_template import CampaignTemplate
-from campaigns.validators.template import validate_campaign_template
 
 
 class CampaignStatus(models.TextChoices):
@@ -25,22 +23,27 @@ class Campaign(models.Model):
     or manually using and endpoint
     """
 
-    name = models.CharField(max_length=30, null=False)
-    template = models.JSONField(validators=[validate_campaign_template], null=False)
+    name = models.CharField(max_length=30, null=False, unique=True)
+    template = models.JSONField(null=False)
     status = models.CharField(max_length=12,
                               choices=CampaignStatus.choices,
                               default=CampaignStatus.CREATED)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    @property
-    def campaign_template(self) -> CampaignTemplate:
-        if self.template:
-            return CampaignTemplate.from_json(self.template)
 
-    def validate_document(self, document: DocumentDTO):
-        self.campaign_template.validate(document)
+    def validate_document(self, document: DocumentDTO, validate_records: Optional[bool]=True):
+        """
+        Validates Document's data using  DocumentTemplate from Campaign's template
 
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
+        :raises: ValidationError
+        """
+        for field in self.document_fields.all():
+            field.validate(document)
+
+        if validate_records:
+            for query in self.queries.all():
+                record = document.records.get(query.name)
+                if not record:
+                    continue
+                query.validate(record)

@@ -6,4 +6,4 @@ class OutputFieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OutputField
-        fields = ('name', 'widget', 'answers', 'type', 'validation', 'default_answer')
+        fields = ('name', 'widget', 'answers', 'metadata', 'type', 'validation', 'default_answer')

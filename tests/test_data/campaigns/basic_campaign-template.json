@@ -27,10 +27,10 @@
                     "yes",
                     "not"
                 ],
-                "meta": {},
+                "metadata": {},
                 "type": "str",
                 "validation": true,
-                "default_answer": 2
+                "default_answer": 1
             }
         }
     ]

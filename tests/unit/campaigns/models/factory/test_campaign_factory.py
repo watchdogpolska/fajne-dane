@@ -1,0 +1,47 @@
+from django.core.exceptions import ValidationError
+from django.test import TestCase
+
+from campaigns.models import Campaign
+from campaigns.models.factory import campaign_factory
+from tests.unit.campaigns.conftest import basic_campaign_template
+
+
+class CampaignTestCase(TestCase):
+
+    def test_creating_campaign(self):
+        """Tests creating a campaign with a correct template."""
+        campaign = campaign_factory.create("test", basic_campaign_template())
+        self.assertIsInstance(campaign, Campaign)
+        self.assertTrue(campaign.document_fields.count() == 1)
+        self.assertTrue(campaign.queries.count() == 1)
+
+        document_field = campaign.document_fields.first()
+        self.assertEqual(document_field.name, "institution_id")
+        self.assertEqual(document_field.widget, "hidden")
+        self.assertEqual(document_field.type, "str")
+
+        query = campaign.queries.first()
+        self.assertEqual(query.order, 0)
+        self.assertEqual(query.name, "Question 0")
+        self.assertEqual(query.data, [
+            {
+                "name": "question",
+                "value": "What is it?",
+                "type": "str",
+                "widget": "label"
+            }
+        ])
+
+        output_field = query.output_field
+        self.assertEqual(output_field.name, "answer")
+        self.assertEqual(output_field.widget, "radio")
+        self.assertEqual(output_field.answers, ["yes", "not"])
+        self.assertEqual(output_field.metadata, {})
+        self.assertEqual(output_field.type, "str")
+        self.assertEqual(output_field.validation, True)
+        self.assertEqual(output_field.default_answer, 1)
+
+    def test_creating_campaign_wrong_template(self):
+        """Tests creating a campaign with a wrong template."""
+        with self.assertRaises(ValidationError):
+            campaign_factory.create("test", {})

@@ -201,7 +201,7 @@
                            "name",
                            "widget",
                            "answers",
-                           "meta",
+                           "metadata",
                            "type",
                            "validation",
                            "default_answer"
@@ -242,10 +242,10 @@
                                  ]
                               }
                            },
-                           "meta":{
-                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/meta",
+                           "metadata":{
+                              "$id":"#/properties/queries/items/anyOf/0/properties/output_field/properties/metadata",
                               "type":"object",
-                              "title":"The meta schema",
+                              "title":"The metadata schema",
                               "description":"An explanation about the purpose of this instance.",
                               "default":{
 

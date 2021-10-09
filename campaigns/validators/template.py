@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 from django.core.exceptions import ValidationError
 from jsonschema import Draft7Validator
@@ -10,7 +11,7 @@ CAMPAIGN_SCHEMA = json.load(open(Path(__file__).resolve().parent / "./schemas/ca
 validate_json_meta_schema(CAMPAIGN_SCHEMA)
 
 
-def validate_campaign_template(template: dict):
+def validate_campaign_template(template: Dict):
     validator = Draft7Validator(CAMPAIGN_SCHEMA)
     errors = sorted(validator.iter_errors(template), key=lambda e: e.path)
     if errors:

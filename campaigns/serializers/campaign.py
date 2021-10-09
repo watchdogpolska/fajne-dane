@@ -12,5 +12,4 @@ class CampaignSerializer(serializers.ModelSerializer):
 class CampaignCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
-        fields = ['name', 'schema']
-
+        fields = ['name', 'template']

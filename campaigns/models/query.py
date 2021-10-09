@@ -1,7 +1,7 @@
 from django.db import models
 
+from campaigns.models.dto import RecordDTO
 from campaigns.models.output_field import OutputField
-from campaigns.validators.query import validate_query_integrity
 
 
 class Query(models.Model):
@@ -9,7 +9,6 @@ class Query(models.Model):
     Query specifies a question that is asked to the document.
     One campaign can have multiple Queries.
     Query objects should be created based on the template of the Campaign.
-    If any changes in the structure will cause ValidationError.
     """
 
     campaign = models.ForeignKey("Campaign",
@@ -28,13 +27,13 @@ class Query(models.Model):
     class Meta:
         ordering = ('order', )
 
-    def clean(self):
-        cleaned_data = super().clean()
-        if hasattr(self, 'campaign'):
-            template = self.campaign.campaign_template
-            query_template = template.query_schemas.get(self.name)
-            validate_query_integrity(query_template, self)
-        return cleaned_data
+    def validate(self, record: RecordDTO):
+        """
+        Validated records value using Query's OutputField.
+
+        :raises: ValidationError
+        """
+        self.output_field.validate(record)
 
     def save(self, *args, **kwargs):
         self.full_clean()

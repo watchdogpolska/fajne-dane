@@ -33,7 +33,7 @@
                     "nie (w tym odmowa lub wydłużenie terminu odpowiedzi)",
                     "trudno powiedzieć"
                 ],
-                "meta": {},
+                "metadata": {},
                 "type": "str",
                 "validation": true,
                 "default_answer": 2
@@ -60,7 +60,7 @@
                     "ma ułatwiać codzienny kontakt przedstawicieli urzędu z mieszkańcami/mieszkankami",
                     "trudno powiedzieć (w tym brak odpowiedzi)"
                 ],
-                "meta": {
+                "metadata": {
                     "other_label": "inną, jaką?",
                     "other_position": 4
                 },

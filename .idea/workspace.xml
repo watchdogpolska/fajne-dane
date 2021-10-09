@@ -5,46 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/models/document_data_field.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/models/sources/source.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/models/sources/user_source.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/serializers/document_data_field.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_file_source.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_source.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_user_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/dto/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/query_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/campaign_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/output_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/output_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/source.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/output_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/output_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/query.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/parsers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/validators/schemas/campaign_template-schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/schemas/campaign_template-schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/template.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-template.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-template.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_data/campaigns/basic_campaign-template.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_data/campaigns/basic_campaign-template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-report.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-dataset.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_output_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_output_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_record.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_record.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +113,7 @@
       <workItem from="1633607593733" duration="22000" />
       <workItem from="1633643599944" duration="4555000" />
       <workItem from="1633690196169" duration="8000" />
-      <workItem from="1633734456487" duration="5603000" />
+      <workItem from="1633734456487" duration="10102000" />
     </task>
     <servers />
   </component>

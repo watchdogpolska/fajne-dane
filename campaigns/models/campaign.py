@@ -1,9 +1,13 @@
-from typing import Optional
+from typing import Optional, List
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from campaigns.models.dto import DocumentDTO
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from campaigns.models import DocumentDataField, Query
 
 
 class CampaignStatus(models.TextChoices):
@@ -31,6 +35,25 @@ class Campaign(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._document_fields_objects = None
+        self._queries_objects = None
+
+    @property
+    def document_fields_objects(self) -> List["DocumentDataField"]:
+        """Documents fields objects cached for optimizing validation time."""
+        if not self._document_fields_objects:
+            self._document_fields_objects = list(self.document_fields.all())
+        return self._document_fields_objects
+
+    @property
+    def queries_objects(self) -> List["Query"]:
+        """Queries objects cached for optimizing validation time."""
+        if not self._queries_objects:
+            self._queries_objects = list(self.queries.all())
+        return self._queries_objects
+
 
     def validate_document(self, document: DocumentDTO, validate_records: Optional[bool]=True):
         """
@@ -38,11 +61,11 @@ class Campaign(models.Model):
 
         :raises: ValidationError
         """
-        for field in self.document_fields.all():
+        for field in self.document_fields_objects:
             field.validate(document)
 
         if validate_records:
-            for query in self.queries.all():
+            for query in self.queries_objects:
                 record = document.records.get(query.name)
                 if not record:
                     continue

@@ -1,12 +1,14 @@
+from unittest.mock import patch
+
 from django.core.exceptions import ValidationError
+from django.db.models import Manager
 from django.test import TestCase
 
-from campaigns.models import Document
 from campaigns.models.campaign import Campaign, CampaignStatus
 from campaigns.models.dto import DocumentDTO, RecordDTO
-from campaigns.validators.campaign_template import CampaignTemplate
 from tests.unit.campaigns.conftest import basic_campaign_template
-from tests.unit.campaigns.models.conftest import basic_campaign, basic_campaign_with_queries
+from tests.unit.campaigns.models.conftest import basic_campaign, basic_campaign_with_queries, \
+    advanced_campaign_with_queries
 
 
 class CampaignTestCase(TestCase):
@@ -20,6 +22,32 @@ class CampaignTestCase(TestCase):
         campaign = basic_campaign()
         self.assertEqual(campaign.status, CampaignStatus.CREATED)
         self.assertIsInstance(campaign.template, dict)
+
+    def test_data_field_objects_cache(self):
+        campaign = advanced_campaign_with_queries()
+        fields = list(campaign.document_fields.all())
+
+        with patch.object(Manager, 'all', return_value=fields) as mock_method:
+            fields_objects = campaign.document_fields_objects
+            self.assertEqual(fields_objects, fields)
+            self.assertEqual(mock_method.call_count, 1)
+
+            fields_objects = campaign.document_fields_objects
+            self.assertEqual(fields_objects, fields)
+            self.assertEqual(mock_method.call_count, 1)
+
+    def test_data_queries_cache(self):
+        campaign = advanced_campaign_with_queries()
+        fields = list(campaign.queries.all())
+
+        with patch.object(Manager, 'all', return_value=fields) as mock_method:
+            queries_objects = campaign.queries_objects
+            self.assertEqual(queries_objects, fields)
+            self.assertEqual(mock_method.call_count, 1)
+
+            queries_objects = campaign.queries_objects
+            self.assertEqual(queries_objects, fields)
+            self.assertEqual(mock_method.call_count, 1)
 
     def test_validating_correct_document(self):
         campaign = basic_campaign_with_queries()

@@ -201,7 +201,6 @@
                            "name",
                            "widget",
                            "answers",
-                           "metadata",
                            "type",
                            "validation",
                            "default_answer"

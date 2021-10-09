@@ -3,12 +3,12 @@ from django.test import TestCase
 
 from campaigns.models import Campaign
 from campaigns.models.factory import campaign_factory
-from tests.unit.campaigns.conftest import basic_campaign_template
+from tests.unit.campaigns.conftest import basic_campaign_template, advanced_campaign_template
 
 
-class CampaignTestCase(TestCase):
+class CampaignFactoryTestCase(TestCase):
 
-    def test_creating_campaign(self):
+    def test_creating_basic_campaign(self):
         """Tests creating a campaign with a correct template."""
         campaign = campaign_factory.create("test", basic_campaign_template())
         self.assertIsInstance(campaign, Campaign)
@@ -45,3 +45,10 @@ class CampaignTestCase(TestCase):
         """Tests creating a campaign with a wrong template."""
         with self.assertRaises(ValidationError):
             campaign_factory.create("test", {})
+
+    def test_creating_advanced_campaign(self):
+        """Tests creating a campaign with an advanced template."""
+        try:
+            campaign_factory.create("test", advanced_campaign_template())
+        except ValidationError:
+            self.fail()

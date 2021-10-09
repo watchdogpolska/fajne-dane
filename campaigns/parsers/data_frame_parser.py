@@ -1,10 +1,12 @@
+from dataclasses import dataclass
 from typing import List
 
 import pandas as pd
 
+from campaigns.models import Campaign
+from campaigns.parsers.base import Parser
 from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
-from campaigns.parsers.base import Parser
 from campaigns.validators.campaign_template import CampaignTemplate
 from campaigns.validators.campaign_template.query_template import QueryTemplate
 
@@ -46,17 +48,27 @@ def _parse_records(query: QueryTemplate, records_data: pd.DataFrame) -> List[Rec
     ]
 
 
+@dataclass
 class DataFrameParser(Parser):
+    campaign: Campaign
+
     def parse(self, df: pd.DataFrame) -> List[DocumentDTO]:
-        template = self.campaign.campaign_template
-        document_fields = [f.name for f in template.document_schema.data_field_schemas]
-        document_fields_columns = [('data_fields', f) for f in document_fields]
+        document_fields_columns = [
+            ('data_fields', f)
+            for f in [
+                f.name
+                for f in self.campaign.document_fields.all()
+            ]
+        ]
+        print(document_fields_columns)
 
         # parse documents
         documents = []
         for i, document_rows in df.groupby(document_fields_columns):
             document = _parse_document(template, document_rows)
+            break
             template.validate(document)
             documents.append(document)
+        3/0
 
         return documents

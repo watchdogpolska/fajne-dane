@@ -7,16 +7,7 @@
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/schemas/campaign_template-schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/schemas/campaign_template-schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-report.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-dataset.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/test_campaign.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
     </list>
@@ -113,7 +104,7 @@
       <workItem from="1633607593733" duration="22000" />
       <workItem from="1633643599944" duration="4555000" />
       <workItem from="1633690196169" duration="8000" />
-      <workItem from="1633734456487" duration="10102000" />
+      <workItem from="1633734456487" duration="11664000" />
     </task>
     <servers />
   </component>

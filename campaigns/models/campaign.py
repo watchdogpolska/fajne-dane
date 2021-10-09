@@ -54,7 +54,6 @@ class Campaign(models.Model):
             self._queries_objects = list(self.queries.all())
         return self._queries_objects
 
-
     def validate_document(self, document: DocumentDTO, validate_records: Optional[bool]=True):
         """
         Validates Document's data using  DocumentTemplate from Campaign's template

@@ -16,4 +16,4 @@ def get_json_test_data(directory: str, data_file: str) -> dict:
 
 
 def get_csv_data(directory: str, data_file: str) -> pd.DataFrame:
-    return pd.read_csv(_get_test_data_path(directory, data_file))
+    return pd.read_csv(_get_test_data_path(directory, data_file), header=[0, 1])

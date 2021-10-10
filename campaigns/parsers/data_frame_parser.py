@@ -9,6 +9,7 @@ from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
 from campaigns.parsers.base import Parser
 from campaigns.parsers.report import ParsingReport, ParsingError, DocumentError
+from lib.utils import encoding
 
 
 def _parse_records(query: Query, records_data: pd.DataFrame) -> List[RecordDTO]:
@@ -41,7 +42,7 @@ class DataFrameParser(Parser):
             value = first_row[('data_fields', field.name)]
             if pd.isnull(value):
                 continue
-            data[field.name] = value
+            data[field.name] = encoding.decode_numpy(value)
 
         # read queries
         records = {}

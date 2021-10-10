@@ -5,29 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/campaigns/parsers/report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign_wrong-dataset.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/document_data_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document_data_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/dto/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/campaign.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/output_field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/query.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/output_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/output_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/base.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/campaign_template.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/document_data_field_template.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/document_template.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/output_field_template.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/campaign_template/query_template.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/type.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/reports/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/reports/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/reports/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/reports/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/validators/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/validators/test_campaign.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +64,7 @@
       <recent name="$PROJECT_DIR$/campaigns/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/unit" />
       <recent name="$PROJECT_DIR$/tests/unit/campaigns/models/sources" />
       <recent name="$PROJECT_DIR$/campaigns/models/sources" />
     </key>
@@ -123,7 +109,7 @@
       <workItem from="1633607593733" duration="22000" />
       <workItem from="1633643599944" duration="4555000" />
       <workItem from="1633690196169" duration="8000" />
-      <workItem from="1633734456487" duration="19857000" />
+      <workItem from="1633734456487" duration="24058000" />
     </task>
     <servers />
   </component>

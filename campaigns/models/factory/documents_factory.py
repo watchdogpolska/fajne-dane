@@ -7,7 +7,6 @@ from ..dto import DocumentDTO, RecordDTO
 
 
 
-
 @dataclass
 class DocumentsFactory(BaseFactory):
     campaign: Campaign
@@ -29,15 +28,48 @@ class DocumentsFactory(BaseFactory):
             probability=record_dto.probability
     )
 
-    def bulk_create(self, documents_dto: List[DocumentDTO]) -> List[Document]:
-        raise NotImplemented
+    def bulk_create(self, document_dtos: List[DocumentDTO]) -> List[Document]:
+        """
+        Creates a list of Document and their Records in bulk, based on provided list of DocumentDTOs.
+
+        :param document_dtos: a list of documents' DTOs
+        :returns: a list of created and saved Document objects
+        """
+        queries = {q.name: q for q in self.campaign.queries_objects}
+
+        # create documents
+        documents = []
+        for document_dto in document_dtos:
+            documents.append(self._create_campaign_document(document_dto))
+        documents = Document.objects.bulk_create(documents)
+
+        # create records
+        records = []
+        for document, dto in zip(documents, document_dtos):
+            for query_name, query in queries.items():
+                record_dto = dto.records.get(query_name)
+                if not record_dto:
+                    continue
+                records.append(self._create_document_query_record(document, query, record_dto))
+        Record.objects.bulk_create(records)
+        return documents
 
     def create(self, document_dto: DocumentDTO) -> Document:
-        queries = {q.name: q for q in self.campaign.queries.all()}
+        """
+        Creates Document and its Records based on provided DocumentDTO
 
-        document = self._create_campaign_document(document_dto).save()
+        :param document_dto: dto of the document
+        :returns: created and saved Document object
+        """
+        queries = {q.name: q for q in self.campaign.queries_objects}
+
+        # create the document
+        document = self._create_campaign_document(document_dto)
+        document.save()
+
+        # create records
         records = []
-        for query_name, query in queries:
+        for query_name, query in queries.items():
             record_dto = document_dto.records.get(query_name)
             if not record_dto:
                 continue

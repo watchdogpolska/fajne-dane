@@ -32,7 +32,7 @@ class OutputField(models.Model):
             if self.validation and record.value not in self.answers:
                 errors.append(
                     ValidationError(
-                        _("Record value: %(value)s not found in the list of accepted answers."),
+                        _("Record value: '%(value)s' not found in the list of accepted answers."),
                         code='invalid-value',
                         params={'value': record.value}
                     )

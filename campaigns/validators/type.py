@@ -16,7 +16,7 @@ def validate_type(value: Any, type_name: str):
         _type(value)
     except ValueError:
         raise ValidationError(
-            _("Value type is not matching expected type: %(type_name)s."),
+            _("Value type is not matching expected type: '%(type_name)s'."),
             code='wrong-type',
             params={'type_name': type_name}
         )

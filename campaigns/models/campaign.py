@@ -1,5 +1,6 @@
 from typing import Optional, List
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -60,12 +61,22 @@ class Campaign(models.Model):
 
         :raises: ValidationError
         """
+        errors = []
         for field in self.document_fields_objects:
-            field.validate(document)
+            try:
+                field.validate(document)
+            except ValidationError as e:
+               errors.append(e)
 
         if validate_records:
             for query in self.queries_objects:
                 record = document.records.get(query.name)
                 if not record:
                     continue
-                query.validate(record)
+                try:
+                    query.validate(record)
+                except ValidationError as e:
+                    errors.append(e)
+
+        if errors:
+            raise ValidationError(errors)

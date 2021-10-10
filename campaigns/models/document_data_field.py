@@ -25,7 +25,7 @@ class DocumentDataField(models.Model):
         except KeyError:
             errors.append(
                 ValidationError(
-                    _("Field: %(value)s not found in the document data."),
+                    _("Field: '%(value)s' not found in the document data."),
                     code='missing-field',
                     params={'value': self.name}
                 )

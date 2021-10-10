@@ -1,12 +1,14 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Tuple
 
 import pandas as pd
+from django.core.exceptions import ValidationError
 
 from campaigns.models import Campaign, Query
 from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
 from campaigns.parsers.base import Parser
+from campaigns.parsers.report import ParsingReport, ParsingError, DocumentError
 
 
 def _parse_records(query: Query, records_data: pd.DataFrame) -> List[RecordDTO]:
@@ -36,7 +38,11 @@ class DataFrameParser(Parser):
         # read data fields
         data = {}
         for field in self.campaign.document_fields_objects:
-            data[field.name] = first_row[('data_fields', field.name)]
+            value = first_row[('data_fields', field.name)]
+            if pd.isnull(value):
+                continue
+            data[field.name] = value
+
         # read queries
         records = {}
         for query in self.campaign.queries_objects:
@@ -48,8 +54,7 @@ class DataFrameParser(Parser):
             records=records
         )
 
-
-    def parse(self, df: pd.DataFrame) -> List[DocumentDTO]:
+    def parse(self, df: pd.DataFrame) -> ParsingReport:
         document_fields_columns = [
             ('data_fields', f)
             for f in [
@@ -59,9 +64,26 @@ class DataFrameParser(Parser):
         ]
 
         # parse documents
-        documents = []
-        for i, document_rows in df.groupby(document_fields_columns):
+        documents, errors = [], []
+        for _, document_rows in df.groupby(document_fields_columns, dropna=False):
+            document_index = document_rows.index[0]
             document = self._parse_document(document_rows)
-            self.campaign.validate_document(document)
-            documents.append(document)
-        return documents
+            try:
+                self.campaign.validate_document(document)
+                documents.append(document)
+            except ValidationError as e:
+                errors.append(
+                    DocumentError(
+                        index=document_index,
+                        data=document.data,
+                        errors=[
+                            ParsingError(
+                                code=error.code,
+                                message=error.message % error.params
+                            )
+                            for error in e.error_list
+                        ]
+                    )
+                )
+
+        return ParsingReport(documents, errors)

@@ -18,6 +18,10 @@ def advanced_campaign_dataset() -> pd.DataFrame:
     return get_csv_data("campaigns", "advanced_campaign-dataset.csv")
 
 
+def wrong_advanced_campaign_dataset() -> pd.DataFrame:
+    return get_csv_data("campaigns", "advanced_campaign_wrong-dataset.csv")
+
+
 
 def user1() -> User:
     user, _ = User.objects.get_or_create(

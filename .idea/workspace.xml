@@ -5,35 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/factory/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/password.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/serializers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/serializers/activation_token.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/signals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/users/serializers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/users/serializers/test_activation_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/users/serializers/test_user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/user_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/user_source.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_user_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_user_source.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +142,8 @@
       <workItem from="1633983561853" duration="4977000" />
       <workItem from="1633994374930" duration="1810000" />
       <workItem from="1634994767186" duration="601000" />
-      <workItem from="1635071650987" duration="2186000" />
+      <workItem from="1635071650987" duration="6193000" />
+      <workItem from="1635080365313" duration="70000" />
     </task>
     <servers />
   </component>

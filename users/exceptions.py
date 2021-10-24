@@ -20,10 +20,10 @@ class EmailUsed(APIException):
     default_code = 'email_used'
 
 
-class PasswordNotMatch(APIException):
+class PasswordsNotMatch(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Passwords does not match'
-    default_code = 'password_not_match'
+    default_code = 'passwords_not_match'
 
 
 class ActivationTokenWrong(APIException):

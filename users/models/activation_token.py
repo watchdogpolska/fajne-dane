@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -6,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from lib.utils.tokens import generate_uuid_token
 from users.exceptions import ActivationTokenUsed, UserAlreadyActive, ActivationTokenExpired
+from users.models.user import User
 
 
 class ActionTypes(models.TextChoices):
@@ -43,7 +43,7 @@ class ActivationToken(models.Model):
 
         self.user.is_active = True
         self.user.save()
-        self.token_used = True
+        self.is_used = True
         self.save()
 
     def save(self, *args, **kwargs):

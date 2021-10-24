@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
 
+from users.models.user import User
 from .source import Source, SourceTypes
 
 

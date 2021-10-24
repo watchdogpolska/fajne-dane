@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from tests.conftest import user1
+from users.exceptions import ActivationTokenExpired, ActivationTokenUsed, UserAlreadyActive
 from users.models.activation_token import ActivationToken, ActionTypes, AccountTypes
 
 
@@ -47,3 +48,21 @@ class ActivationTokenTestCase(TestCase):
         self.assertFalse(token.user.is_active)
         token.activate()
         self.assertTrue(token.user.is_active)
+        self.assertTrue(token.is_used)
+
+    def test_activate_expired_token(self):
+        token = expired_activation_token()
+        with self.assertRaises(ActivationTokenExpired):
+            token.activate()
+
+    def test_activate_user_token(self):
+        token = activation_token()
+        token.activate()
+        with self.assertRaises(ActivationTokenUsed):
+            token.activate()
+
+    def test_activate_user_token(self):
+        user1(is_active=True)
+        token = activation_token()
+        with self.assertRaises(UserAlreadyActive):
+            token.activate()

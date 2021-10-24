@@ -1,7 +1,6 @@
 from typing import Dict
 
 import pandas as pd
-from django.contrib.auth.models import User
 
 from tests.utils import get_json_test_data, get_csv_data
 
@@ -20,13 +19,3 @@ def advanced_campaign_dataset() -> pd.DataFrame:
 
 def wrong_advanced_campaign_dataset() -> pd.DataFrame:
     return get_csv_data("campaigns", "advanced_campaign_wrong-dataset.csv")
-
-
-
-def user1() -> User:
-    user, _ = User.objects.get_or_create(
-        username="test_user",
-        email="test_user@test.com",
-        password="password"
-    )
-    return user

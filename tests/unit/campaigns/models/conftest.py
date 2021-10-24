@@ -2,7 +2,8 @@ from campaigns.models import Campaign, Document, Query, OutputField, FileSource,
 from campaigns.models.factory import campaign_factory
 from campaigns.models.factory.documents_factory import DocumentsFactory
 from campaigns.parsers.data_frame_parser import DataFrameParser
-from tests.unit.campaigns.conftest import basic_campaign_template, user1, advanced_campaign_template
+from tests.conftest import user1
+from tests.unit.campaigns.conftest import basic_campaign_template, advanced_campaign_template
 
 
 def basic_user_source() -> UserSource:

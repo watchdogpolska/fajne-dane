@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from campaigns.models import Source, UserSource, FileSource
 from campaigns.models.sources.source import SourceTypes
-from tests.unit.campaigns.conftest import user1
+from tests.conftest import user1
 
 
 class UserSourceTestCase(TestCase):

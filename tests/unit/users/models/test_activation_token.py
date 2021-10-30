@@ -1,18 +1,16 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from tests.conftest import user1
 from users.exceptions import ActivationTokenExpired, ActivationTokenUsed, UserAlreadyActive
-from users.models.activation_token import ActivationToken, ActionTypes, AccountTypes
+from users.models.activation_token import ActivationToken, ActionTypes
 
 
 def activation_token() -> ActivationToken:
     return ActivationToken.objects.create(
         user=user1(),
-        action_type=ActionTypes.REGISTRATION,
-        account_type=AccountTypes.STANDARD
+        action_type=ActionTypes.REGISTRATION
     )
 
 
@@ -28,8 +26,7 @@ class ActivationTokenTestCase(TestCase):
     def test_creating_token(self):
         token = ActivationToken.objects.create(
             user=user1(),
-            action_type=ActionTypes.REGISTRATION,
-            account_type=AccountTypes.STANDARD
+            action_type=ActionTypes.REGISTRATION
         )
         self.assertIsInstance(token, ActivationToken)
         self.assertTrue(len(token.token) > 0)

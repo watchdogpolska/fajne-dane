@@ -1,26 +1,14 @@
-from typing import Dict
-
 from django.test import TestCase
 
-from users.exceptions import PasswordsNotMatch
+from tests.conftest import user1
+from tests.integration.users.conftest import (
+    registration_payload,
+    registration_payload_passwords_not_match,
+    registration_payload_used_email
+)
+from users.exceptions import PasswordsNotMatch, EmailUsed
 from users.models import User
 from users.serializers.user import UserRegistrationSerializer
-
-
-def registration_payload() -> Dict:
-    return {
-        "username": "testuser",
-        "email": "test@email.com",
-        "first_name": "User",
-        "last_name": "Test",
-        "password1": "testpass123",
-        "password2": "testpass123",
-    }
-
-def registration_payload_passwords_not_match() -> Dict:
-    payload = registration_payload()
-    payload['password2'] = "otherpassword"
-    return payload
 
 
 class UserSerializerTestCase(TestCase):
@@ -34,7 +22,7 @@ class UserRegistrationSerializerTestCase(TestCase):
         serializer.is_valid()
         serializer.save()
 
-        user = User.objects.get(username=payload['username'])
+        user = User.objects.get(email=payload['email'])
         self.assertIsInstance(user, User)
 
     def test_validate_passwords(self):
@@ -42,4 +30,12 @@ class UserRegistrationSerializerTestCase(TestCase):
         serializer = UserRegistrationSerializer(data=payload)
 
         with self.assertRaises(PasswordsNotMatch):
+            serializer.is_valid()
+
+    def test_validate_email(self):
+        user1()  # add first user
+        payload = registration_payload_used_email()
+
+        serializer = UserRegistrationSerializer(data=payload)
+        with self.assertRaises(EmailUsed):
             serializer.is_valid()

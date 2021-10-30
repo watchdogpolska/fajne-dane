@@ -1,21 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from lib.utils.tokens import generate_uuid_token
 from users.exceptions import ActivationTokenUsed, UserAlreadyActive, ActivationTokenExpired
-from users.models.user import User
-
-
-class ActionTypes(models.TextChoices):
-    REGISTRATION = 'CREATED', _('Registration')
-    RESETTING_PASSWORD = 'RESET_PASSWORD', _('Resetting password')
-
-
-class AccountTypes(models.TextChoices):
-    STANDARD = 'STANDARD', _('Standard')
-    STAFF = 'STAFF', _('Staff')
+from users.models.user import ActionTypes, User
 
 
 class ActivationToken(models.Model):
@@ -25,8 +14,6 @@ class ActivationToken(models.Model):
     is_used = models.BooleanField(default=False)
     action_type = models.CharField(max_length=20,
                                    choices=ActionTypes.choices)
-    account_type = models.CharField(max_length=20,
-                                    choices=AccountTypes.choices)
 
     @property
     def is_expired(self):

@@ -5,31 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/serializers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/serializers/test_activation_token.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/test_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/dependencies.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/user/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/user/consts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/user/manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_password.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/user/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/api/views/status.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fajne_dane/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/factory/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/serializers/test_activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/serializers/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/serializers/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/api/views/registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/activation_token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
@@ -102,11 +89,11 @@
       <recent name="$PROJECT_DIR$/campaigns/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/unit/users/models/user" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/users/models/user" />
       <recent name="$PROJECT_DIR$/tests/integration/users" />
       <recent name="$PROJECT_DIR$/tests/unit/users" />
-      <recent name="$PROJECT_DIR$/users" />
     </key>
   </component>
   <component name="RunManager">
@@ -160,7 +147,9 @@
       <workItem from="1635421089128" duration="908000" />
       <workItem from="1635546952045" duration="3561000" />
       <workItem from="1635550727480" duration="1762000" />
-      <workItem from="1635584615228" duration="7004000" />
+      <workItem from="1635584615228" duration="9348000" />
+      <workItem from="1635636465119" duration="2704000" />
+      <workItem from="1635639176397" duration="1730000" />
     </task>
     <servers />
   </component>

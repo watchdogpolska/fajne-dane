@@ -4,8 +4,10 @@ from django.apps import apps
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from lib.emails import helper
 from .consts import ActionTypes
 from .manager import UserManager
+from ...exceptions import UserAlreadyActive
 
 
 class User(AbstractUser):
@@ -35,4 +37,12 @@ class User(AbstractUser):
         ActivationToken = apps.get_model("users.ActivationToken")
         return ActivationToken.objects.filter(user=self, action_type=action_type).last()
 
+    def send_activation_token_email(self, action_type: ActionTypes):
+        if self.is_active:
+            raise UserAlreadyActive()
 
+        token = self.create_activation_token(action_type)
+        if action_type == ActionTypes.REGISTRATION:
+            helper.send_registration_email(self, token)
+        elif action_type == ActionTypes.RESETTING_PASSWORD:
+            helper.send_reset_password_email(self, token)

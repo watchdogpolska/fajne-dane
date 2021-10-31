@@ -8,3 +8,4 @@ class ActivationTokenSerializer(RetrieveModelSerializer):
 
     class Meta:
         model = ActivationToken
+        fields = ("token",)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from lib.serializers.retrieve_model_serializer import RetrieveModelSerializer
 from users.exceptions import PasswordsNotMatch, EmailUsed
 from users.models.user import User
 
@@ -39,3 +40,10 @@ class UserRegistrationSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         raise NotImplemented
+
+
+class UserEmailSerializer(RetrieveModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ("email",)

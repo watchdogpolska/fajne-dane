@@ -5,7 +5,7 @@ from users.models.activation_token import ActivationToken
 
 
 class ActivationTokenSerializer(RetrieveModelSerializer):
+    token = serializers.CharField(required=True)
 
     class Meta:
         model = ActivationToken
-        fields = ("token",)

@@ -1,6 +1,10 @@
+from unittest.mock import patch
+
 from django.test import TestCase
+from rest_framework.authtoken.models import Token
 
 from tests.conftest import user1
+from users.exceptions import UserAlreadyActive
 from users.models import User, ActivationToken
 from users.models.user.consts import ActionTypes
 
@@ -60,6 +64,32 @@ class CreatingTokensTestCase(TestCase):
         self.assertTrue(registration_token.is_used)
 
 
-class SendingActivationTokenEmailsTestCase(TestCase):
-    def test_sending_email(self):
-        self.assertTrue(False)
+class SendingTokenEmailsTestCase(TestCase):
+    @patch('lib.emails.helper.send_registration_email')
+    def test_sending_registration_email(self, mocked_sending):
+        user = user1()
+        user.send_registration_email()
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION))
+
+    def test_sending_registration_email_already_active(self):
+        user = user1(is_active=True)
+        with self.assertRaises(UserAlreadyActive):
+            user.send_registration_email()
+
+    @patch('lib.emails.helper.send_reset_password_email')
+    def test_sending_reset_password_email(self, mocked_sending):
+        user = user1()
+        user.send_reset_password_email()
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.RESETTING_PASSWORD))
+
+
+class CreatingTokenTestCase(TestCase):
+    def test_get_token(self):
+        user = user1()
+        token = user.token
+        self.assertIsInstance(token, Token)
+
+    def test_reusing_token(self):
+        user = user1()
+        token = user.token
+        self.assertEqual(token, user.token)

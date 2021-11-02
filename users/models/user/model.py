@@ -2,9 +2,10 @@ from typing import Optional
 
 from django.apps import apps
 from django.contrib.auth.models import AbstractUser
+from rest_framework.authtoken.models import Token
 from django.db import models
 
-from lib.emails import helper
+from lib.emails import helper as email_helper
 from .consts import ActionTypes
 from .manager import UserManager
 from ...exceptions import UserAlreadyActive
@@ -17,6 +18,15 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
+
+    @property
+    def token(self):
+        """
+        Gets or create authentication Token.
+        :return: Token
+        """
+        _token, _ = Token.objects.get_or_create(user=self)
+        return _token
 
     def _close_activation_tokens(self, action_type: ActionTypes):
         ActivationToken = apps.get_model("users.ActivationToken")
@@ -37,12 +47,12 @@ class User(AbstractUser):
         ActivationToken = apps.get_model("users.ActivationToken")
         return ActivationToken.objects.filter(user=self, action_type=action_type).last()
 
-    def send_activation_token_email(self, action_type: ActionTypes):
+    def send_registration_email(self):
         if self.is_active:
             raise UserAlreadyActive()
+        token = self.create_activation_token(ActionTypes.REGISTRATION)
+        email_helper.send_registration_email(self, token)
 
-        token = self.create_activation_token(action_type)
-        if action_type == ActionTypes.REGISTRATION:
-            helper.send_registration_email(self, token)
-        elif action_type == ActionTypes.RESETTING_PASSWORD:
-            helper.send_reset_password_email(self, token)
+    def send_reset_password_email(self):
+        token = self.create_activation_token(ActionTypes.RESETTING_PASSWORD)
+        email_helper.send_reset_password_email(self, token)

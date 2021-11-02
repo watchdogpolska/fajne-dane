@@ -8,12 +8,6 @@ class AccountInactive(APIException):
     default_code = 'account_not_active'
 
 
-class UsernameUsed(APIException):
-    status_code = status.HTTP_400_BAD_REQUEST
-    default_detail = 'Username is already used'
-    default_code = 'username_used'
-
-
 class EmailUsed(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Email is already used'
@@ -24,6 +18,18 @@ class PasswordsNotMatch(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Passwords does not match'
     default_code = 'passwords_not_match'
+
+
+class PasswordIncorrect(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Password was incorrect'
+    default_code = 'password_incorrect'
+
+
+class UnableToAuthenticate(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Unable to authenticate'
+    default_code = 'authentication_error'
 
 
 class ActivationTokenWrong(APIException):
@@ -44,14 +50,8 @@ class ActivationTokenUsed(APIException):
     default_code = 'activation_token_used'
 
 
-class UsernameNotFound(APIException):
-    status_code = status.HTTP_404_NOT_FOUND
-    default_detail = 'User with following username not found'
-    default_code = 'username_not_found'
-
-
 class EmailNotFound(APIException):
-    status_code = status.HTTP_404_NOT_FOUND
+    status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'User with following email not found'
     default_code = 'email_not_found'
 

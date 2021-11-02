@@ -5,18 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_password.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/user/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_details.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/api/views/details.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_status.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/password.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/password.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/api/views/registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/status.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/activation_token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
@@ -75,7 +81,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/wi/work/app/data-science-team/ebay_promoted_listings_advanced/ds-1573_bids_vs_fees" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/integration/users/api/views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -84,6 +90,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/integration/users/api/views" />
       <recent name="$PROJECT_DIR$/tests/test_data/campaigns" />
       <recent name="$PROJECT_DIR$/tests/unit/campaigns/models/sources" />
       <recent name="$PROJECT_DIR$/campaigns/models" />
@@ -149,7 +156,11 @@
       <workItem from="1635550727480" duration="1762000" />
       <workItem from="1635584615228" duration="9348000" />
       <workItem from="1635636465119" duration="2704000" />
-      <workItem from="1635639176397" duration="1730000" />
+      <workItem from="1635639176397" duration="20511000" />
+      <workItem from="1635813013522" duration="472000" />
+      <workItem from="1635844636737" duration="5907000" />
+      <workItem from="1635866754080" duration="36000" />
+      <workItem from="1635882638326" duration="3290000" />
     </task>
     <servers />
   </component>

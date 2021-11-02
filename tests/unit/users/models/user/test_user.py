@@ -65,7 +65,7 @@ class CreatingTokensTestCase(TestCase):
 
 
 class SendingTokenEmailsTestCase(TestCase):
-    @patch('lib.emails.helper.send_registration_email')
+    @patch('fajne_dane.lib.emails.helper.send_registration_email')
     def test_sending_registration_email(self, mocked_sending):
         user = user1()
         user.send_registration_email()
@@ -76,7 +76,7 @@ class SendingTokenEmailsTestCase(TestCase):
         with self.assertRaises(UserAlreadyActive):
             user.send_registration_email()
 
-    @patch('lib.emails.helper.send_reset_password_email')
+    @patch('fajne_dane.lib.emails.helper.send_reset_password_email')
     def test_sending_reset_password_email(self, mocked_sending):
         user = user1()
         user.send_reset_password_email()

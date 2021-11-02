@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'drf_yasg',
 ] + [
     'users.apps.UsersConfig',
-    'campaigns.apps.CampaignsConfig'
+    'campaigns.apps.CampaignsConfig',
+    'lib'
 ]
 
 MIDDLEWARE = [

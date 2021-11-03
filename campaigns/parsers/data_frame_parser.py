@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List
 
 import pandas as pd
 from django.core.exceptions import ValidationError
@@ -9,7 +9,7 @@ from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
 from campaigns.parsers.base import Parser
 from campaigns.parsers.report import ParsingReport, ParsingError, DocumentError
-from lib.utils import encoding
+from fajne_dane.core.utils import encoding
 
 
 def _parse_records(query: Query, records_data: pd.DataFrame) -> List[RecordDTO]:

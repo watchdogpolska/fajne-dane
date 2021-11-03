@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from rest_framework.authtoken.models import Token
 from django.db import models
 
-from lib.emails import helper as email_helper
+from fajne_dane.core.emails import helper as email_helper
 from .consts import ActionTypes
 from .manager import UserManager
 from ...exceptions import UserAlreadyActive

@@ -59,5 +59,5 @@ class TokenReactivate(generics.GenericAPIView):
             if not user:
                 raise EmailNotFound()
             user.send_registration_email()
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

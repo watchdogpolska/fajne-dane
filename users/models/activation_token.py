@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
-from lib.utils.tokens import generate_uuid_token
+from fajne_dane.core.utils import generate_uuid_token
 from users.exceptions import ActivationTokenUsed, UserAlreadyActive, ActivationTokenExpired
 from users.models.user import ActionTypes, User
 

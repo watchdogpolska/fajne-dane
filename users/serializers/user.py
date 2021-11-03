@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-from lib.serializers.retrieve_model_serializer import RetrieveModelSerializer
+from fajne_dane.core import RetrieveModelSerializer
 from users.exceptions import PasswordsNotMatch, EmailUsed, EmailNotFound, PasswordIncorrect, AccountInactive
 from users.models.user import User
 

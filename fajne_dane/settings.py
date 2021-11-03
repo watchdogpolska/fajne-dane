@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 ] + [
     'users.apps.UsersConfig',
     'campaigns.apps.CampaignsConfig',
-    'lib'
 ]
 
 MIDDLEWARE = [

@@ -5,25 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_details.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/api/views/details.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_status.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/password.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/password.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/api/views/registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/activation_token.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/password.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,23 +47,30 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/users/models/activation_token.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/password.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/registration.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/models/activation_token.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/auth.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/urls.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1z6XqqBbfQN8XIfKxrEdtkK4Hav" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -96,11 +97,11 @@
       <recent name="$PROJECT_DIR$/campaigns/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fajne_dane" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tests/unit/users/models/user" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/users/models/user" />
-      <recent name="$PROJECT_DIR$/tests/integration/users" />
-      <recent name="$PROJECT_DIR$/tests/unit/users" />
     </key>
   </component>
   <component name="RunManager">

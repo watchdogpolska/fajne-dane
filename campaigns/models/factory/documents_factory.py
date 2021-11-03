@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from lib.base.factory import BaseFactory
+from fajne_dane.core.base.factory import BaseFactory
 from .. import Campaign, Document, Query, Record, Source
 from ..dto import DocumentDTO, RecordDTO
 

@@ -2,8 +2,8 @@ from typing import Dict
 
 from rest_framework import serializers
 
-from lib.serializers.retrieve_model_serializer import RetrieveModelSerializer
-from users.exceptions import PasswordsNotMatch, EmailUsed
+from fajne_dane.core import RetrieveModelSerializer
+from users.exceptions import PasswordsNotMatch
 from users.models.user import User
 
 

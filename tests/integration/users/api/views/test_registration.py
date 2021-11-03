@@ -50,7 +50,7 @@ class UserRegistrationTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    @patch('fajne_dane.lib.emails.helper.send_registration_email')
+    @patch('fajne_dane.core.emails.helper.send_registration_email')
     def test_post(self, mocked_sending):
         payload = registration_payload()
         response = self.client.post('/api/v1/users/register/', payload)
@@ -143,7 +143,7 @@ class TokenReactivationTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    @patch('fajne_dane.lib.emails.helper.send_registration_email')
+    @patch('fajne_dane.core.emails.helper.send_registration_email')
     def test_post(self, mocked_sending):
         user = user1()
 

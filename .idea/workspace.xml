@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/dependencies.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/activation_token.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/password.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

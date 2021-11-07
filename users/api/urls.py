@@ -9,7 +9,7 @@ from .views import (
 
 
 urlpatterns = [
-    path('<int:pk>/', UserDetails.as_view(), name='user_details'),
+    path('details/', UserDetails.as_view(), name='user_details'),
     path('register/', UserRegister.as_view(), name='user_register'),
     path('activate/resend/', TokenReactivate.as_view(), name='token_reactivate'),
     path('activate/', AccountActivate.as_view(), name='account_register'),

@@ -81,15 +81,3 @@ class SendingTokenEmailsTestCase(TestCase):
         user = user1()
         user.send_reset_password_email()
         mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.RESETTING_PASSWORD))
-
-
-class CreatingTokenTestCase(TestCase):
-    def test_get_token(self):
-        user = user1()
-        token = user.token
-        self.assertIsInstance(token, Token)
-
-    def test_reusing_token(self):
-        user = user1()
-        token = user.token
-        self.assertEqual(token, user.token)

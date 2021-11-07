@@ -7,6 +7,15 @@
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fajne_dane/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/users/api/views/test_details.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/users/api/views/test_details.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api/views/details.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/details.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,29 +45,29 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/campaigns/models/query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/models/activation_token.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/api/views/password.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/api/views/registration.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/models/activation_token.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/unit/users/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/views/auth.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/users/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/views/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/urls.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/integration/users/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/unit/campaigns/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/password.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/registration.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1z6XqqBbfQN8XIfKxrEdtkK4Hav" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -150,6 +159,9 @@
       <workItem from="1635844636737" duration="5907000" />
       <workItem from="1635866754080" duration="36000" />
       <workItem from="1635882638326" duration="3290000" />
+      <workItem from="1636200837405" duration="2646000" />
+      <workItem from="1636227409634" duration="1905000" />
+      <workItem from="1636238809354" duration="3520000" />
     </task>
     <servers />
   </component>

@@ -28,8 +28,7 @@ class LoginTestCase(TestCase):
                 'id': user.id,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'email': user.email,
-                'token': str(user.token)
+                'email': user.email
             }
         )
 
@@ -68,7 +67,7 @@ class LogoutTestCase(TestCase):
         self.client.force_login(user)
 
         # check if logged in
-        response = self.client.get(f'/api/v1/users/{user.id}/')
+        response = self.client.get(f'/api/v1/users/details/')
         self.assertEqual(response.status_code, 200)
 
         # logout
@@ -76,7 +75,7 @@ class LogoutTestCase(TestCase):
         self.assertEqual(response.status_code, 204)
 
         # check if logged in
-        response = self.client.get(f'/api/v1/users/{user.id}/')
+        response = self.client.get(f'/api/v1/users/details/')
         self.assertEqual(response.status_code, 401)
 
 
@@ -85,12 +84,49 @@ class LogoutTestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
 
-class AuthenticationTokenTestCase(TestCase):
+class JWTTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_token_auth(self):
+    def test_get_token(self):
         user = user1(is_active=True)
-        response = self.client.get(f'/api/v1/users/{user.id}/',
-                                   HTTP_AUTHORIZATION='Token {}'.format(user.token))
+        response = self.client.post(f'/api/v1/token/',
+                                    user_login_payload(user.email))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(set(response.data.keys()), {'refresh', 'access'})
+
+    def test_authenticate_with_token(self):
+        user = user1(is_active=True)
+        response = self.client.post(f'/api/v1/token/',
+                                    user_login_payload(user.email))
+        access_token = response.data['access']
+
+        # without token
+        response = self.client.get(f'/api/v1/users/details/')
+        self.assertEqual(response.status_code, 401)
+
+        # with token
+        response = self.client.get(f'/api/v1/users/details/',
+                                   HTTP_AUTHORIZATION='Bearer ' + access_token)
+        self.assertEqual(response.status_code, 200)
+
+    def test_refresh_token(self):
+        user = user1(is_active=True)
+
+        # get tokens
+        response = self.client.post(f'/api/v1/token/',
+                                    user_login_payload(user.email))
+        data = response.data
+
+        # refresh tokens
+        response = self.client.post(f'/api/v1/token/refresh/',
+                                    {'refresh': data['refresh']})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(set(response.data.keys()), {'access'})
+
+
+    def test_get_token_not_active(self):
+        user = user1(is_active=False)
+        response = self.client.post(f'/api/v1/token/',
+                                    user_login_payload(user.email))
+        self.assertEqual(response.status_code, 401)

@@ -13,7 +13,7 @@ class DetailsTestCase(TestCase):
     def test_get_details(self):
         user = user1(is_active=True)
         self.client.force_login(user)
-        response = self.client.get(f'/api/v1/users/{user.id}/')
+        response = self.client.get(f'/api/v1/users/details/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data,
@@ -21,14 +21,13 @@ class DetailsTestCase(TestCase):
                 'id': user.id,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'email': user.email,
-                'token': str(user.token)
+                'email': user.email
             }
         )
 
     def test_get_details_not_logged(self):
-        user = user1(is_active=True)
-        response = self.client.get(f'/api/v1/users/{user.id}/')
+        user1(is_active=True)
+        response = self.client.get(f'/api/v1/users/details/')
         self.assertEqual(response.status_code, 401)
 
 
@@ -41,12 +40,12 @@ class UpdateDetailsTestCase(TestCase):
             'last_name': user.last_name,
         }
         response = self.client.put(
-            f'/api/v1/users/{user.id}/',
+            f'/api/v1/users/details/',
             data=json.dumps(payload),
             content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
     def test_put_details_not_logged(self):
-        user = user1(is_active=True)
-        response = self.client.put(f'/api/v1/users/{user.id}/', {})
+        user1(is_active=True)
+        response = self.client.put(f'/api/v1/users/details/', {})
         self.assertEqual(response.status_code, 401)

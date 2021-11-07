@@ -7,11 +7,10 @@ from users.models.user import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    token = serializers.CharField(read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email', 'token')
+        fields = ('id', 'first_name', 'last_name', 'email')
         read_only_fields = ['id', 'token', 'email']
 
 

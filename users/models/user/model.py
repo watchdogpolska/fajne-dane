@@ -2,7 +2,6 @@ from typing import Optional
 
 from django.apps import apps
 from django.contrib.auth.models import AbstractUser
-from rest_framework.authtoken.models import Token
 from django.db import models
 
 from fajne_dane.core.emails import helper as email_helper
@@ -12,21 +11,13 @@ from ...exceptions import UserAlreadyActive
 
 
 class User(AbstractUser):
+    username = None
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
-
-    @property
-    def token(self):
-        """
-        Gets or create authentication Token.
-        :return: Token
-        """
-        _token, _ = Token.objects.get_or_create(user=self)
-        return _token
 
     def _close_activation_tokens(self, action_type: ActionTypes):
         ActivationToken = apps.get_model("users.ActivationToken")

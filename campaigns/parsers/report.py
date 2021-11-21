@@ -25,3 +25,9 @@ class ParsingReport:
     @property
     def is_valid(self):
         return len(self.errors) == 0
+
+    @property
+    def documents_count(self):
+        if not self.is_valid:
+            return 0
+        return len(self.documents)

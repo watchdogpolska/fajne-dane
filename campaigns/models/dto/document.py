@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 
 from . import RecordDTO
 
@@ -7,4 +7,4 @@ from . import RecordDTO
 @dataclass
 class DocumentDTO:
     data: Dict
-    records: Optional[Dict[str, RecordDTO]] = field(default_factory=dict)
+    records: Optional[Dict[str, List[RecordDTO]]] = field(default_factory=dict)

@@ -2,19 +2,18 @@ from dataclasses import dataclass
 from typing import List
 
 from fajne_dane.core.base.factory import BaseFactory
-from .. import Campaign, Document, Query, Record, Source
+from .. import Campaign, Document, Query, Record, FileSource
 from ..dto import DocumentDTO, RecordDTO
-
 
 
 @dataclass
 class DocumentsFactory(BaseFactory):
     campaign: Campaign
-    source: Source
+    source: FileSource
 
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
         return Document(
-            campaign=self.campaign,
+            campaign=self.source.campaign,
             source=self.source,
             data=document_dto.data
         )
@@ -47,10 +46,9 @@ class DocumentsFactory(BaseFactory):
         records = []
         for document, dto in zip(documents, document_dtos):
             for query_name, query in queries.items():
-                record_dto = dto.records.get(query_name)
-                if not record_dto:
-                    continue
-                records.append(self._create_document_query_record(document, query, record_dto))
+                records_dtos = dto.records.get(query_name)
+                for record_dto in records_dtos:
+                    records.append(self._create_document_query_record(document, query, record_dto))
         Record.objects.bulk_create(records)
         return documents
 
@@ -70,9 +68,8 @@ class DocumentsFactory(BaseFactory):
         # create records
         records = []
         for query_name, query in queries.items():
-            record_dto = document_dto.records.get(query_name)
-            if not record_dto:
-                continue
-            records.append(self._create_document_query_record(document, query, record_dto))
+            records_dtos = document_dto.records.get(query_name)
+            for record_dto in records_dtos:
+                records.append(self._create_document_query_record(document, query, record_dto))
         Record.objects.bulk_create(records)
         return document

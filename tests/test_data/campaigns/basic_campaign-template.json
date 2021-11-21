@@ -25,7 +25,7 @@
                 "widget": "radio",
                 "answers": [
                     "yes",
-                    "not"
+                    "no"
                 ],
                 "metadata": {},
                 "type": "str",

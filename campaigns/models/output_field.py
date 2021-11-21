@@ -38,4 +38,4 @@ class OutputField(models.Model):
                     )
                 )
         if errors:
-            raise ValidationError(errors)
+            raise ValidationError({"value": errors})

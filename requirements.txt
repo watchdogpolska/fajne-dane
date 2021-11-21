@@ -16,5 +16,6 @@ django==3.2.5
 pandas
 numpy
 ipython
+boto3
 
 # development requirements

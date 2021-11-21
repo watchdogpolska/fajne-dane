@@ -1,4 +1,11 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+
+class DocumentStatus(models.TextChoices):
+    NONE = 'NONE', _('None')
+    VALIDATING = 'VALIDATING', _('Validating')
+    CLOSED = 'CLOSED', _('Closed')
 
 
 class Document(models.Model):
@@ -16,3 +23,11 @@ class Document(models.Model):
     data = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=12,
+                              choices=DocumentStatus.choices,
+                              default=DocumentStatus.NONE)
+
+    def update_status(self):
+        raise NotImplemented()
+        # update my status
+        self.campaign.update_status()

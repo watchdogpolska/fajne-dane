@@ -1,5 +1,5 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 
 from campaigns.serializers import (
     CampaignSerializer, CampaignCreateSerializer
@@ -8,8 +8,7 @@ from campaigns.models import Campaign
 
 
 class CampaignList(generics.ListAPIView):
-    permission_classes = (IsAdminUser,)
-    
+    permission_classes = (AllowAny,)
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
 

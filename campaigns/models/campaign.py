@@ -41,6 +41,9 @@ class Campaign(models.Model):
         self._document_fields_objects = None
         self._queries_objects = None
 
+    def update_status(self):
+        raise NotImplemented()
+
     @property
     def document_fields_objects(self) -> List["DocumentDataField"]:
         """Documents fields objects cached for optimizing validation time."""
@@ -70,13 +73,12 @@ class Campaign(models.Model):
 
         if validate_records:
             for query in self.queries_objects:
-                record = document.records.get(query.name)
-                if not record:
-                    continue
-                try:
-                    query.validate(record)
-                except ValidationError as e:
-                    errors.append(e)
+                records = document.records.get(query.name, [])
+                for record in records:
+                    try:
+                        query.validate_record(record)
+                    except ValidationError as e:
+                        errors.append(e)
 
         if errors:
-            raise ValidationError(errors)
+            raise ValidationError({"data": errors})

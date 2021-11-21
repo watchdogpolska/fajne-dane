@@ -47,8 +47,9 @@ class DataFrameParser(Parser):
         # read queries
         records = {}
         for query in self.campaign.queries_objects:
+            records[query.name] = []
             for record in _parse_records(query, document_data):
-                records[query.name] = record
+                records[query.name].append(record)
 
         return DocumentDTO(
             data=data,
@@ -82,7 +83,7 @@ class DataFrameParser(Parser):
                                 code=error.code,
                                 message=error.message % error.params
                             )
-                            for error in e.error_list
+                            for error in e.error_dict['data']
                         ]
                     )
                 )

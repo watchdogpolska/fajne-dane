@@ -27,14 +27,10 @@ class Query(models.Model):
     class Meta:
         ordering = ('order', )
 
-    def validate(self, record: RecordDTO):
+    def validate_record(self, record: RecordDTO):
         """
         Validated records value using Query's OutputField.
 
         :raises: ValidationError
         """
         self.output_field.validate(record)
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)

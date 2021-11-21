@@ -7,8 +7,12 @@ def _get_test_data_path(directory: str, data_file: str) -> Path:
     return Path(__file__).resolve().parent / "test_data" / directory / data_file
 
 
+def get_test_file(directory: str, data_file: str, mode='r'):
+    return open(_get_test_data_path(directory, data_file), mode=mode)
+
+
 def get_test_data(directory: str, data_file: str) -> str:
-    return open(_get_test_data_path(directory, data_file)).read()
+    return  get_test_file(directory, data_file).read()
 
 
 def get_json_test_data(directory: str, data_file: str) -> dict:

@@ -1,8 +1,8 @@
 from typing import Dict
 
 from campaigns.models import Campaign
-from campaigns.serializers import QuerySerializer
-from campaigns.serializers.document_data_field import DocumentDataFieldSerializer
+from campaigns.serializers import QueryCreateSerializer
+from campaigns.serializers.document_data_field import DocumentDataFieldCreateSerializer
 from campaigns.validators.template import validate_campaign_template
 
 
@@ -15,7 +15,7 @@ def _create_campaign(name: str, template: Dict) -> Campaign:
 
 def _create_document_fields(campaign: Campaign, document_template: Dict):
     for field_template in document_template['data_fields']:
-        serializer = DocumentDataFieldSerializer(data=field_template)
+        serializer = DocumentDataFieldCreateSerializer(data=field_template)
         serializer.is_valid()
         serializer.save(campaign=campaign)
 
@@ -23,7 +23,7 @@ def _create_document_fields(campaign: Campaign, document_template: Dict):
 def _create_queries(campaign, query_templates: Dict):
     for raw_query in query_templates:
         raw_query['data'] = raw_query.pop('data_fields')
-        serializer = QuerySerializer(data=raw_query)
+        serializer = QueryCreateSerializer(data=raw_query)
         serializer.is_valid()
         serializer.save(campaign=campaign)
 

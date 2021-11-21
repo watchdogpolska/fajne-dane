@@ -26,7 +26,6 @@ class Record(models.Model):
     value = models.TextField()
     probability = models.FloatField()
 
-
     source = models.ForeignKey("Source",
                                on_delete=models.CASCADE,
                                related_name="+")

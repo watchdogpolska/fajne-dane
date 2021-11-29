@@ -6,6 +6,7 @@ from django.test import TestCase, Client
 from campaigns.models import Campaign
 from tests.campaigns.conftest import basic_campaign
 from tests.conftest import user1, basic_campaign_template
+from tests.utils import serialize_date
 
 
 def campaign_payload() -> Dict:
@@ -85,7 +86,8 @@ class CampaignDetailsTestCase(TestCase):
         self.assertEqual(response.data, {
             "id": campaign.id,
             "name": campaign.name,
-            "status": campaign.status
+            "status": campaign.status,
+            "created": serialize_date(campaign.created)
         })
 
     def test_get_campaign_no_permission(self):

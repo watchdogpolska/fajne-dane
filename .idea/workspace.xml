@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/campaigns/models/sources/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/serializers/document_factory_report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_factory_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/details.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/details.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +54,9 @@
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/parsers/base.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/parsers/report.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/.cache/JetBrains/PyCharm2021.2/remote_sources/1958950115/-109814386/rest_framework/serializers.py" root0="SKIP_INSPECTION" />
@@ -98,12 +91,15 @@
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/document_factory_report.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/utils.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/urls.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/record.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/campaign.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/document.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/file_source.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1z6XqqBbfQN8XIfKxrEdtkK4Hav" />
@@ -211,7 +207,10 @@
       <workItem from="1637180905769" duration="7557000" />
       <workItem from="1637275562818" duration="5758000" />
       <workItem from="1637421015156" duration="604000" />
-      <workItem from="1637426965194" duration="25539000" />
+      <workItem from="1637426965194" duration="26148000" />
+      <workItem from="1637569379183" duration="8000" />
+      <workItem from="1637711599363" duration="2070000" />
+      <workItem from="1638144876205" duration="539000" />
     </task>
     <servers />
   </component>

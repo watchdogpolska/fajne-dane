@@ -5,6 +5,7 @@ from campaigns.serializers import CampaignSerializer, CampaignCreateSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_campaign
 from tests.conftest import basic_campaign_template
+from tests.utils import serialize_date
 
 
 class CampaignSerializerTestCase(TestCase):
@@ -17,7 +18,8 @@ class CampaignSerializerTestCase(TestCase):
             {
                 'id': campaign.id,
                 'name': campaign.name,
-                'status': campaign.status
+                'status': campaign.status,
+                'created': serialize_date(campaign.created)
             }
         )
 

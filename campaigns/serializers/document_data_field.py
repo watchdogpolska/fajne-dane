@@ -1,10 +1,9 @@
-from rest_framework import serializers
-
 from campaigns.models.document_data_field import DocumentDataField
 from fajne_dane.core.exceptions import NotSupported
+from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer
 
 
-class DocumentDataFieldCreateSerializer(serializers.ModelSerializer):
+class DocumentDataFieldCreateSerializer(ReadCreateOnlyModelSerializer):
     class Meta:
         model = DocumentDataField
         fields = ['id', 'name', 'widget', 'type']

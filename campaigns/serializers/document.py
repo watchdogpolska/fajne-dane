@@ -4,7 +4,8 @@ from rest_framework import serializers
 from campaigns.models import Document, Campaign
 from campaigns.models.dto import DocumentDTO
 from campaigns.serializers.utils import get_source_serializer
-from fajne_dane.core.exceptions import NotSupported
+from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer
+
 
 def _validate_attrs(campaign: Campaign, attrs: Dict):
     if 'data' in attrs:
@@ -12,7 +13,7 @@ def _validate_attrs(campaign: Campaign, attrs: Dict):
         campaign.validate_document(document_dto)
 
 
-class DocumentSerializer(serializers.ModelSerializer):
+class DocumentSerializer(ReadUpdateOnlyModelSerializer):
     source = serializers.SerializerMethodField()
 
     class Meta:
@@ -30,11 +31,8 @@ class DocumentSerializer(serializers.ModelSerializer):
             _validate_attrs(self.instance.campaign, attrs)
         return super().validate(attrs)
 
-    def create(self, validated_data):
-        raise NotSupported()
 
-
-class DocumentCreateSerializer(serializers.ModelSerializer):
+class DocumentCreateSerializer(ReadCreateOnlyModelSerializer):
     class Meta:
         model = Document
         fields = ['id', 'data', 'campaign', 'status']
@@ -43,6 +41,3 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         _validate_attrs(attrs.get('campaign'), attrs)
         return super().validate(attrs)
-
-    def update(self, instance, validated_data):
-        raise NotSupported()

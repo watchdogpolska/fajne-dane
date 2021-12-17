@@ -6,13 +6,16 @@ from .views import (
     DocumentList, DocumentDetail, DocumentCreate,
     QueryList, QueryDetail,
     RecordList, RecordDetail, RecordCreate,
-    FileSourceList, FileSourceCreate, FileSourceDetail
+    FileSourceList, FileSourceCreate, FileSourceDetail,
+    GetMetaTemplate, ValidateCampaignTemplate
 )
 
 
 urlpatterns = [
     path('', CampaignList.as_view(), name="campaigns_list"),
     path('create/', CampaignCreate.as_view(), name="campaign_create"),
+    path('template/', GetMetaTemplate.as_view(), name="get_meta_template"),
+    path('template/validate/', ValidateCampaignTemplate.as_view(), name="validate_campaign_template"),
     path('<int:pk>/', CampaignDetail.as_view(), name="campaign_details"),
     path('<int:campaign_id>/sources/', FileSourceList.as_view(), name="file_sources_list"),
     path('<int:campaign_id>/sources/create/', FileSourceCreate.as_view(), name="file_source_create"),

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from campaigns.parsers.report import ParsingReport, DocumentError, ParsingError
-from campaigns.serializers import ParsingErrorSerializer, DocumentErrorSerializer, DocumentFactoryReportSerializer
+from campaigns.serializers import ValidationErrorSerializer, DocumentErrorSerializer, DocumentFactoryReportSerializer
 from tests.campaigns.conftest import advanced_campaign_data_frame_parser
 from tests.conftest import wrong_advanced_campaign_dataset, advanced_campaign_dataset
 
@@ -34,7 +34,7 @@ class ErrorSerializerTestCase(TestCase):
 
     def test_serialize(self):
         error = parsing_error()
-        serializer = ParsingErrorSerializer(error)
+        serializer = ValidationErrorSerializer(error)
 
         self.assertEqual(serializer.data, {
             'code': 'missing-field',

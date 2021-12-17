@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 from campaigns.models import Campaign
 from campaigns.models import Document, Query, OutputField, FileSource, UserSource
@@ -13,7 +13,11 @@ from tests.conftest import (
 )
 
 
-def basic_campaign():
+def invalid_campaign_template() -> Dict:
+    return {'type': 'object', 'properties': {'value': {'type': 'any'}}}
+
+
+def basic_campaign() -> Campaign:
     campaign, _ = Campaign.objects.get_or_create(
         name="test1",
         template=basic_campaign_template()

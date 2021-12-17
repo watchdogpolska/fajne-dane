@@ -5,12 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/campaigns/api/views/template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/serializers/template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/serializers/validation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fajne_dane/core/serializers/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_template.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document_data_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document_data_field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document_factory_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document_factory_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/output_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/output_field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/validators/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/template.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fajne_dane/core/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/core/serializers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_factory_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_factory_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/validators/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +65,12 @@
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_output_field.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/utils.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/parsers/base.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_query.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/parsers/report.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
@@ -90,7 +106,7 @@
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/document_factory_report.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/utils.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
@@ -112,7 +128,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/test_data/campaigns" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/campaigns/integration/api/views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -122,6 +138,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/campaigns/integration/api/views" />
       <recent name="$PROJECT_DIR$/tests/test_data/campaigns" />
       <recent name="$PROJECT_DIR$/tests/integration/users/api/views" />
       <recent name="$PROJECT_DIR$/tests/unit/campaigns/models/sources" />
@@ -211,6 +228,12 @@
       <workItem from="1637569379183" duration="8000" />
       <workItem from="1637711599363" duration="2070000" />
       <workItem from="1638144876205" duration="539000" />
+      <workItem from="1638278878397" duration="1070000" />
+      <workItem from="1639090672847" duration="1683000" />
+      <workItem from="1639125220876" duration="325000" />
+      <workItem from="1639402567060" duration="2038000" />
+      <workItem from="1639473953958" duration="27000" />
+      <workItem from="1639689680940" duration="9724000" />
     </task>
     <servers />
   </component>

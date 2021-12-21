@@ -9,6 +9,13 @@ class CampaignSerializer(ReadUpdateOnlyModelSerializer):
         read_only_fields = ['id', 'status', 'created']
 
 
+class CampaignFullSerializer(ReadUpdateOnlyModelSerializer):
+    class Meta:
+        model = Campaign
+        fields = ['id', 'name', 'status', 'created', 'template']
+        read_only_fields = ['id', 'status', 'created', 'template']
+
+
 class CampaignCreateSerializer(ReadCreateOnlyModelSerializer):
     class Meta:
         model = Campaign

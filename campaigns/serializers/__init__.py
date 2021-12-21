@@ -1,4 +1,4 @@
-from .campaign import CampaignCreateSerializer, CampaignSerializer
+from .campaign import CampaignCreateSerializer, CampaignSerializer, CampaignFullSerializer
 from .document import DocumentSerializer, DocumentCreateSerializer
 from .query import QuerySerializer, QueryCreateSerializer
 from .record import RecordSerializer

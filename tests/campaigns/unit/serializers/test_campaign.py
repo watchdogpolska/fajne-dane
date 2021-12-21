@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from campaigns.models import Campaign
-from campaigns.serializers import CampaignSerializer, CampaignCreateSerializer
+from campaigns.serializers import CampaignSerializer, CampaignCreateSerializer, CampaignFullSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_campaign
 from tests.conftest import basic_campaign_template
@@ -40,6 +40,48 @@ class CampaignSerializerTestCase(TestCase):
 
     def test_create(self):
         serializer = CampaignSerializer(
+            data={
+                "name": "new"
+            }
+        )
+        serializer.is_valid()
+        with self.assertRaises(NotSupported):
+            serializer.save()
+
+
+class CampaignFullSerializerTestCase(TestCase):
+
+    def test_serialize(self):
+        campaign = basic_campaign()
+        serializer = CampaignFullSerializer(campaign)
+        self.assertEqual(
+            serializer.data,
+            {
+                'id': campaign.id,
+                'name': campaign.name,
+                'status': campaign.status,
+                'created': serialize_date(campaign.created),
+                'template': campaign.template
+            }
+        )
+
+    def test_update(self):
+        instance = basic_campaign()
+
+        serializer = CampaignFullSerializer(
+            instance,
+            data={
+                "name": "new"
+            }
+        )
+        serializer.is_valid()
+        serializer.save()
+
+        instance.refresh_from_db()
+        self.assertEqual(instance.name, "new")
+
+    def test_create(self):
+        serializer = CampaignFullSerializer(
             data={
                 "name": "new"
             }

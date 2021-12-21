@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, AllowAny
 
 from campaigns.serializers import (
-    CampaignSerializer, CampaignCreateSerializer
+    CampaignSerializer, CampaignCreateSerializer, CampaignFullSerializer
 )
 from campaigns.models import Campaign
 
@@ -16,7 +16,7 @@ class CampaignList(generics.ListAPIView):
 class CampaignDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Campaign.objects.all()
-    serializer_class = CampaignSerializer
+    serializer_class = CampaignFullSerializer
 
 
 class CampaignCreate(generics.CreateAPIView):

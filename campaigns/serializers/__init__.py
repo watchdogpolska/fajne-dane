@@ -1,5 +1,5 @@
 from .campaign import CampaignCreateSerializer, CampaignSerializer, CampaignFullSerializer
-from .document import DocumentSerializer, DocumentCreateSerializer
+from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer
 from .query import QuerySerializer, QueryCreateSerializer
 from .record import RecordSerializer
 from .document_data_field import DocumentDataFieldCreateSerializer

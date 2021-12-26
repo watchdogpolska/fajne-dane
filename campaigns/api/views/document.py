@@ -2,12 +2,12 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
-from campaigns.serializers import DocumentSerializer, DocumentCreateSerializer
+from campaigns.serializers import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer
 from campaigns.models import Document, UserSource
 
 
 class DocumentList(generics.ListAPIView):
-    serializer_class = DocumentSerializer
+    serializer_class = DocumentFullSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class DocumentList(generics.ListAPIView):
 
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
-    serializer_class = DocumentSerializer
+    serializer_class = DocumentFullSerializer
     permission_classes = (IsAdminUser,)
 
 

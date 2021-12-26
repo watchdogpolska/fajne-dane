@@ -18,8 +18,27 @@ class DocumentSerializer(ReadUpdateOnlyModelSerializer):
 
     class Meta:
         model = Document
-        fields = ['id', 'data', 'source', 'status']
-        read_only_fields = ['id', 'source', 'status']
+        fields = ['id', 'source', 'status', 'created']
+        read_only_fields = ['id', 'source', 'status', 'created']
+
+    def get_source(self, obj):
+        source = obj.source.to_child()
+        serializer = get_source_serializer(source.type)
+        return serializer(source).data
+
+    def validate(self, attrs):
+        if self.instance:
+            _validate_attrs(self.instance.campaign, attrs)
+        return super().validate(attrs)
+
+
+class DocumentFullSerializer(ReadUpdateOnlyModelSerializer):
+    source = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Document
+        fields = ['id', 'data', 'source', 'status', 'created']
+        read_only_fields = ['id', 'source', 'status', 'created']
 
     def get_source(self, obj):
         source = obj.source.to_child()

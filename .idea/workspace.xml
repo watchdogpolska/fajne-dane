@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/api/views/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/document.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/campaigns/integration/api/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pictionary-air" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -221,7 +219,16 @@
       <workItem from="1639473953958" duration="27000" />
       <workItem from="1639689680940" duration="9724000" />
       <workItem from="1639746373005" duration="10000" />
-      <workItem from="1640046334993" duration="352000" />
+      <workItem from="1640046334993" duration="416000" />
+      <workItem from="1640046912730" duration="363000" />
+      <workItem from="1640119554684" duration="218000" />
+      <workItem from="1640126843311" duration="1854000" />
+      <workItem from="1640163752013" duration="30000" />
+      <workItem from="1640433152479" duration="6000" />
+      <workItem from="1640436804445" duration="3301000" />
+      <workItem from="1640452076364" duration="110000" />
+      <workItem from="1640453752663" duration="4251000" />
+      <workItem from="1640476027749" duration="602000" />
     </task>
     <servers />
   </component>

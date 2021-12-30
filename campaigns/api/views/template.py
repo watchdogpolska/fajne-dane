@@ -1,16 +1,14 @@
 from rest_framework import status, views
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from campaigns.serializers import (
-    TemplateInfoSerializer, TemplateValidationReportSerializer
-)
+from campaigns.serializers import TemplateContentSerializer, ValidationReportSerializer
 from campaigns.validators.template import CAMPAIGN_SCHEMA, prepare_validation_report
 
 
 class GetMetaTemplate(views.APIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = TemplateInfoSerializer
+    permission_classes = (IsAdminUser,)
+    serializer_class = TemplateContentSerializer
 
     def get(self, request):
         serializer = self.serializer_class(data={"template": CAMPAIGN_SCHEMA})
@@ -19,11 +17,11 @@ class GetMetaTemplate(views.APIView):
 
 
 class ValidateCampaignTemplate(views.APIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = TemplateValidationReportSerializer
+    permission_classes = (IsAdminUser,)
+    serializer_class = ValidationReportSerializer
 
     def post(self, request):
-        input_serializer = TemplateInfoSerializer(data=request.data)
+        input_serializer = TemplateContentSerializer(data=request.data)
         if input_serializer.is_valid():
             report = prepare_validation_report(input_serializer.data['template'])
             serializer = self.serializer_class(data=report.to_json())

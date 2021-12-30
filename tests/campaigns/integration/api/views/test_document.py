@@ -5,6 +5,7 @@ from tests.campaigns.conftest import (
     basic_campaign_with_documents, advanced_campaign_with_documents, basic_campaign
 )
 from tests.conftest import user1
+from tests.utils import serialize_date
 
 
 class DocumentListTestCase(TestCase):
@@ -65,7 +66,8 @@ class DocumentDetailsTestCase(TestCase):
                 'name': source.name,
                 'description': source.description,
                 'file': None
-            }
+            },
+            'created': serialize_date(document.created)
         })
 
     def test_document_get_no_document(self):

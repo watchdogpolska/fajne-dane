@@ -12,7 +12,7 @@ class GetMetaTemplateTestCase(TestCase):
         self.client = Client()
 
     def test_get_template(self):
-        user = user1(is_active=True)
+        user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
         response = self.client.get("/api/v1/campaigns/template/")
         self.assertEqual(response.status_code, 200)
@@ -28,7 +28,7 @@ class ValidateCampaignTemplate(TestCase):
         self.client = Client()
 
     def test_validate_post_valid(self):
-        user = user1(is_active=True)
+        user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
 
         payload = json.dumps({"template": basic_campaign_template()})
@@ -44,7 +44,7 @@ class ValidateCampaignTemplate(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_validate_post_invalid(self):
-        user = user1(is_active=True)
+        user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
 
         payload = json.dumps({"template": invalid_campaign_template()})

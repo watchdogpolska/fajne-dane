@@ -8,7 +8,8 @@ from campaigns.models import Campaign, Query
 from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
 from campaigns.parsers.base import Parser
-from campaigns.parsers.report import ParsingReport, ParsingError, DocumentError
+from campaigns.validators.parsing_report import ParsingReport, DocumentParsingReport
+from campaigns.validators.report import ValidationError as DocumentParsingError
 from fajne_dane.core.utils import encoding
 
 
@@ -75,11 +76,11 @@ class DataFrameParser(Parser):
                 documents.append(document)
             except ValidationError as e:
                 errors.append(
-                    DocumentError(
+                    DocumentParsingReport(
                         index=document_index,
                         data=document.data,
                         errors=[
-                            ParsingError(
+                            DocumentParsingError(
                                 code=error.code,
                                 message=error.message % error.params
                             )

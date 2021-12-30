@@ -2,7 +2,6 @@ from typing import Any
 
 from django.core.exceptions import ValidationError
 from jsonschema import Draft7Validator
-from django.utils.translation import gettext_lazy as _
 
 
 def validate_json_meta_schema(schema: dict):

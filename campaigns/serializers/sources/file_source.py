@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from campaigns.models import FileSource
 from fajne_dane.core.exceptions import NotSupported
+from fajne_dane.core.serializers import ReadOnlySerializer
 
 
 class FileSourceSerializer(serializers.ModelSerializer):
@@ -26,3 +27,7 @@ class FileSourceCreateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         raise NotSupported()
+
+
+class FileSourceContentSerializer(ReadOnlySerializer):
+    file = serializers.FileField()

@@ -115,7 +115,8 @@ class FileSourceCreateTestCase(TestCase):
         self.assertEqual(response.data, {
             'is_valid': True,
             'errors': [],
-            'documents_count': 4
+            'valid_documents_count': 4,
+            'invalid_documents_count': 0
         })
         self.assertEqual(campaign.documents.count(), 4)
 
@@ -135,7 +136,8 @@ class FileSourceCreateTestCase(TestCase):
             )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data['is_valid'], False)
-        self.assertEqual(response.data['documents_count'], 0)
+        self.assertEqual(response.data['valid_documents_count'], 1)
+        self.assertEqual(response.data['invalid_documents_count'], 3)
         self.assertEqual(len(response.data['errors']), 3)
 
     def test_file_source_create_no_permission(self):

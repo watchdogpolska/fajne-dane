@@ -1,17 +1,18 @@
 from django.test import TestCase
 
 from campaigns.models import UserSource
-from campaigns.serializers import DocumentSerializer
+from campaigns.serializers import DocumentFullSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_document
 from tests.conftest import user1
+from tests.utils import serialize_date
 
 
-class DocumentSerializerTestCase(TestCase):
+class DocumentFullSerializerTestCase(TestCase):
 
     def test_serialize(self):
         document = basic_document()
-        serializer = DocumentSerializer(document)
+        serializer = DocumentFullSerializer(document)
 
         source = document.source.to_child()
         self.assertEqual(
@@ -25,14 +26,15 @@ class DocumentSerializerTestCase(TestCase):
                     'name': source.name,
                     'description': source.description,
                     'file': None
-                }
+                },
+                'created': serialize_date(document.created)
             }
         )
 
     def test_update(self):
         instance = basic_document()
 
-        serializer = DocumentSerializer(
+        serializer = DocumentFullSerializer(
             instance,
             data={"data": {"institution_id": "123"}}
         )
@@ -44,7 +46,7 @@ class DocumentSerializerTestCase(TestCase):
 
     def test_create(self):
         source, _ = UserSource.objects.get_or_create(user=user1())
-        serializer = DocumentSerializer(
+        serializer = DocumentFullSerializer(
             data={"data": {"institution_id": "123"}},
         )
         serializer.is_valid()

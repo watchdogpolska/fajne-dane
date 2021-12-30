@@ -1,7 +1,8 @@
 from django.test import TestCase
 
-from campaigns.parsers.report import ParsingReport, DocumentError, ParsingError
-from campaigns.serializers import ValidationErrorSerializer, DocumentErrorSerializer, DocumentFactoryReportSerializer
+from campaigns.serializers import ValidationErrorSerializer, ParsingReportSerializer, DocumentParsingReportSerializer
+from campaigns.validators.parsing_report import ParsingReport, DocumentParsingReport
+from campaigns.validators.report import ValidationError
 from tests.campaigns.conftest import advanced_campaign_data_frame_parser
 from tests.conftest import wrong_advanced_campaign_dataset, advanced_campaign_dataset
 
@@ -20,12 +21,12 @@ def valid_parsing_report() -> ParsingReport:
     return report
 
 
-def document_error() -> DocumentError:
+def document_error() -> DocumentParsingReport:
     report = failed_parsing_report()
     return report.errors[0]
 
 
-def parsing_error() -> ParsingError:
+def parsing_error() -> ValidationError:
     error = document_error()
     return error.errors[0]
 
@@ -46,7 +47,7 @@ class DocumentErrorSerializerTestCase(TestCase):
 
     def test_serialize(self):
         error = document_error()
-        serializer = DocumentErrorSerializer(error)
+        serializer = DocumentParsingReportSerializer(error)
 
         self.assertEqual(serializer.data, {
             'index': 3,
@@ -68,10 +69,11 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
 
     def test_serialize(self):
         report = failed_parsing_report()
-        serializer = DocumentFactoryReportSerializer(report)
+        serializer = ParsingReportSerializer(report)
 
         self.assertEqual(serializer.data['is_valid'], False)
-        self.assertEqual(serializer.data['documents_count'], 0)
+        self.assertEqual(serializer.data['valid_documents_count'], 1)
+        self.assertEqual(serializer.data['invalid_documents_count'], 3)
         self.assertEqual(serializer.data, {
             'is_valid': False,
             'errors': [
@@ -113,12 +115,14 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
                     ]
                 }
             ],
-            'documents_count': 0
+            'valid_documents_count': 1,
+            'invalid_documents_count': 3
         })
 
     def test_serialize_valid(self):
         report = valid_parsing_report()
-        serializer = DocumentFactoryReportSerializer(report)
+        serializer = ParsingReportSerializer(report)
 
         self.assertEqual(serializer.data['is_valid'], True)
-        self.assertEqual(serializer.data['documents_count'], 4)
+        self.assertEqual(serializer.data['valid_documents_count'], 4)
+        self.assertEqual(serializer.data['invalid_documents_count'], 0)

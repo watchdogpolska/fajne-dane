@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from campaigns.models import Source, FileSource, Document
 from campaigns.models.sources.source import SourceTypes
-from campaigns.parsers.report import ParsingReport
+from campaigns.validators.parsing_report import ParsingReport
 from tests.campaigns.conftest import basic_campaign, basic_campaign_with_queries, advanced_campaign_with_queries
 from tests.conftest import basic_campaign_documents_file, wrong_advanced_campaign_documents_file
 
@@ -64,7 +64,8 @@ class FileSourceTestCase(TestCase):
         report = source.parse_file()
         self.assertIsInstance(report, ParsingReport)
         self.assertEqual(report.is_valid, True)
-        self.assertEqual(report.documents_count, 4)
+        self.assertEqual(report.valid_documents_count, 4)
+        self.assertEqual(report.invalid_documents_count, 0)
         self.assertEqual(len(report.errors), 0)
 
     def test_parse_file_wrong(self):
@@ -73,7 +74,8 @@ class FileSourceTestCase(TestCase):
         report = source.parse_file()
         self.assertIsInstance(report, ParsingReport)
         self.assertEqual(report.is_valid, False)
-        self.assertEqual(report.documents_count, 0)
+        self.assertEqual(report.valid_documents_count, 1)
+        self.assertEqual(report.invalid_documents_count, 3)
         self.assertEqual(len(report.errors), 3)
 
     def test_creating_documents(self):

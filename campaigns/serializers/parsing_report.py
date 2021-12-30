@@ -4,14 +4,14 @@ from fajne_dane.core.serializers import ReadOnlySerializer
 from .validation import ValidationErrorSerializer
 
 
-
-class DocumentErrorSerializer(ReadOnlySerializer):
+class DocumentParsingReportSerializer(ReadOnlySerializer):
     index = serializers.IntegerField()
     data = serializers.JSONField()
     errors = ValidationErrorSerializer(many=True)
 
 
-class DocumentFactoryReportSerializer(ReadOnlySerializer):
+class ParsingReportSerializer(ReadOnlySerializer):
     is_valid = serializers.BooleanField()
-    errors = DocumentErrorSerializer(many=True)
-    documents_count = serializers.IntegerField()
+    errors = DocumentParsingReportSerializer(many=True)
+    valid_documents_count = serializers.IntegerField()
+    invalid_documents_count = serializers.IntegerField()

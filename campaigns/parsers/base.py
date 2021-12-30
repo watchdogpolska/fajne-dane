@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
-from campaigns.parsers.report import ParsingReport
+from campaigns.validators.parsing_report import ParsingReport
 
 
 @dataclass

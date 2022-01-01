@@ -24,6 +24,7 @@ class DocumentFullSerializerTestCase(TestCase):
                 'source': {
                     'id': source.id,
                     'name': source.name,
+                    'source': source.source,
                     'description': source.description,
                     'file': None
                 },

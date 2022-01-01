@@ -8,7 +8,7 @@ from fajne_dane.core.serializers import ReadOnlySerializer
 class FileSourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileSource
-        fields = ['id', 'name', 'description', 'file']
+        fields = ['id', 'name', 'description', 'file', 'source']
         read_only_field = ['id', 'file']
 
         extra_kwargs = {
@@ -22,7 +22,7 @@ class FileSourceSerializer(serializers.ModelSerializer):
 class FileSourceCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileSource
-        fields = ['id', 'name', 'description', 'file']
+        fields = ['id', 'name', 'description', 'file', 'source']
         read_only_field = ['id']
 
     def update(self, instance, validated_data):

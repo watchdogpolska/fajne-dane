@@ -65,6 +65,7 @@ class DocumentDetailsTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
+                'source': source.source,
                 'file': None
             },
             'created': serialize_date(document.created)

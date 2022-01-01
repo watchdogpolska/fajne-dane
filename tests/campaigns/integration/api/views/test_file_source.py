@@ -31,6 +31,7 @@ class FileSourceListTestCase(TestCase):
             "id": source.id,
             'name': source.name,
             'description': source.description,
+            "source": source.source,
             'file': None
         })
 
@@ -55,6 +56,7 @@ class FileSourceDetailTestCase(TestCase):
             "id": source.id,
             'name': source.name,
             'description': source.description,
+            "source": source.source,
             'file': None
         })
 
@@ -108,6 +110,7 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
+                    "source": "file source",
                     "file": fp
                 }
             )
@@ -132,6 +135,7 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
+                    "source": "file source",
                     "file": fp
                 }
             )
@@ -153,6 +157,7 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
+                    "source": "file source",
                     "file": fp
                 }
             )

@@ -36,6 +36,7 @@ class FileSourceSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
+                'source': source.source,
                 'file': None
             }
         )
@@ -50,6 +51,7 @@ class FileSourceSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
+                'source': source.source,
                 'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
             }
         )
@@ -75,6 +77,7 @@ class FileSourceSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'description',
+                'source': 'file source',
                 'file': fake_file()
             }
         )
@@ -94,6 +97,7 @@ class FileSourceCreateSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
+                'source': source.source,
                 'file': None
             }
         )
@@ -108,6 +112,7 @@ class FileSourceCreateSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
+                'source': source.source,
                 'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
             }
         )
@@ -120,6 +125,7 @@ class FileSourceCreateSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'other description',
+                'source': 'file source',
                 'file': fake_file()
             }
         )
@@ -132,6 +138,7 @@ class FileSourceCreateSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'description',
+                'source': 'file source',
                 'file': fake_file()
             }
         )

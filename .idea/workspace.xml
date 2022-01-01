@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/campaigns/validators/data_frame.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_data/campaigns/basic_campaign_wrong_no_prob-dataset.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/parsing_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/parsing_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/validators/parsing_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/parsing_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_parsing_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_parsing_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/validators/test_parsing_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/validators/test_parsing_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +237,7 @@
       <workItem from="1640861850187" duration="10000" />
       <workItem from="1640908177038" duration="2528000" />
       <workItem from="1640949464769" duration="4588000" />
-      <workItem from="1641040148624" duration="6432000" />
+      <workItem from="1641040148624" duration="8438000" />
     </task>
     <servers />
   </component>

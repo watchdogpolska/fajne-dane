@@ -15,6 +15,7 @@ class FileSource(Source):
     campaign = models.ForeignKey("Campaign",
                                  on_delete=models.CASCADE,
                                  related_name="file_sources")
+    source = models.TextField(default="", blank=True)
     description = models.TextField(default="", blank=True)
     file = models.FileField(upload_to='resources')  # uploads to S3
 

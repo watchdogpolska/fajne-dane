@@ -70,6 +70,7 @@ class RecordDetailsTestCase(TestCase):
                 "id": source.id,
                 "name": source.name,
                 "description": source.description,
+                'source': source.source,
                 "file": None
             },
             "status": record.status

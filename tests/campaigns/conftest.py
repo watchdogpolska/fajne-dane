@@ -66,6 +66,7 @@ def basic_file_source(campaign: Campaign) -> FileSource:
         campaign=campaign,
         name="file source",
         description="description",
+        source="file source",
         file=None
     )
     return source

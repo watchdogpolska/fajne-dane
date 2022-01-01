@@ -66,7 +66,8 @@ class FileSourceTestCase(TestCase):
         self.assertEqual(report.is_valid, True)
         self.assertEqual(report.valid_documents_count, 4)
         self.assertEqual(report.invalid_documents_count, 0)
-        self.assertEqual(len(report.errors), 0)
+        self.assertEqual(len(report.documents_errors), 0)
+        self.assertEqual(len(report.file_errors), 0)
 
     def test_parse_file_wrong(self):
         source = file_source_with_wrong_file()
@@ -76,7 +77,8 @@ class FileSourceTestCase(TestCase):
         self.assertEqual(report.is_valid, False)
         self.assertEqual(report.valid_documents_count, 1)
         self.assertEqual(report.invalid_documents_count, 3)
-        self.assertEqual(len(report.errors), 3)
+        self.assertEqual(len(report.documents_errors), 3)
+        self.assertEqual(len(report.file_errors), 0)
 
     def test_creating_documents(self):
         source = file_source_with_file()

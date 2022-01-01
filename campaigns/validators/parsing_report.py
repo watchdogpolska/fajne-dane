@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Dict
 
 from campaigns.models.dto import DocumentDTO
-from campaigns.validators.report import ValidationReport
+from campaigns.validators.report import ValidationReport, ValidationError as FileParsingError
 
 
 @dataclass
@@ -14,18 +14,19 @@ class DocumentParsingReport(ValidationReport):
         return {
             "index": self.index,
             "data": self.data,
-            **self.to_json()
+            **super().to_json()
         }
 
 
 @dataclass
 class ParsingReport:
+    file_errors: List[FileParsingError]
     documents: List[DocumentDTO]
-    errors: List[DocumentParsingReport]
+    documents_errors: List[DocumentParsingReport]
 
     @property
     def is_valid(self):
-        return len(self.errors) == 0
+        return len(self.file_errors) == 0 and self.invalid_documents_count == 0
 
     @property
     def valid_documents_count(self):
@@ -33,12 +34,13 @@ class ParsingReport:
 
     @property
     def invalid_documents_count(self):
-        return len(self.errors)
+        return len(self.documents_errors)
 
     def to_json(self):
         return {
             "is_valid": self.is_valid,
             "valid_documents_count": self.valid_documents_count,
             "invalid_documents_count": self.invalid_documents_count,
-            "errors": [e.to_json() for e in self.errors]
+            "documents_errors": [e.to_json() for e in self.documents_errors],
+            "file_errors": [e.to_json() for e in self.file_errors]
         }

@@ -3,7 +3,8 @@ from django.test import TestCase
 from campaigns.models.dto import DocumentDTO
 from campaigns.parsers.data_frame_parser import DataFrameParser
 from tests.conftest import (
-    advanced_campaign_dataset, wrong_advanced_campaign_dataset, basic_campaign_dataset
+    advanced_campaign_dataset, wrong_advanced_campaign_dataset, basic_campaign_dataset,
+    basic_campaign_dataset_wrong_no_prob
 )
 from tests.campaigns.conftest import (
     advanced_campaign_with_queries,
@@ -59,7 +60,8 @@ class CampaignFactoryTestCase(TestCase):
         report = parser.parse(df)
 
         self.assertFalse(report.is_valid)
-        self.assertEqual(len(report.errors), 3)
+        self.assertEqual(len(report.file_errors), 0)
+        self.assertEqual(len(report.documents_errors), 3)
 
         expected_error_codes = {
             1: ['missing-field'],
@@ -67,8 +69,44 @@ class CampaignFactoryTestCase(TestCase):
             3: ['missing-field', 'invalid-value']
         }
 
-        for error in report.errors:
+        for error in report.documents_errors:
             self.assertEqual(
                 [e.code for e in error.errors],
                 expected_error_codes[error.index]
             )
+
+    def test_parse_wrong_columns_data_frame(self):
+        parser = basic_campaign_data_frame_parser()
+        df = advanced_campaign_dataset()
+        report = parser.parse(df)
+
+        self.assertFalse(report.is_valid)
+        self.assertEqual(len(report.file_errors), 3)
+        self.assertEqual(len(report.documents_errors), 0)
+
+        for error in report.file_errors:
+            self.assertEqual(error.code, 'missing-column')
+
+    def test_parse_unmatching_data_frame(self):
+        parser = advanced_campaign_data_frame_parser()
+        df = basic_campaign_dataset()
+        report = parser.parse(df)
+
+        self.assertFalse(report.is_valid)
+        self.assertEqual(len(report.file_errors), 10)
+        self.assertEqual(len(report.documents_errors), 0)
+
+        for error in report.file_errors:
+            self.assertEqual(error.code, 'missing-column')
+
+    def test_parse_no_prob_data_frame(self):
+        parser = basic_campaign_data_frame_parser()
+        df = basic_campaign_dataset_wrong_no_prob()
+        report = parser.parse(df)
+
+        self.assertFalse(report.is_valid)
+        self.assertEqual(len(report.file_errors), 1)
+        self.assertEqual(len(report.documents_errors), 0)
+
+        for error in report.file_errors:
+            self.assertEqual(error.code, 'missing-column')

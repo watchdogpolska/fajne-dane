@@ -23,7 +23,7 @@ def valid_parsing_report() -> ParsingReport:
 
 def document_error() -> DocumentParsingReport:
     report = failed_parsing_report()
-    return report.errors[0]
+    return report.documents_errors[0]
 
 
 def parsing_error() -> ValidationError:
@@ -76,7 +76,8 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
         self.assertEqual(serializer.data['invalid_documents_count'], 3)
         self.assertEqual(serializer.data, {
             'is_valid': False,
-            'errors': [
+            'file_errors': [],
+            'documents_errors': [
                 {
                     'index': 3,
                     'data': {'institution_id': 28012},

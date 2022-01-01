@@ -114,7 +114,8 @@ class FileSourceCreateTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data, {
             'is_valid': True,
-            'errors': [],
+            'file_errors': [],
+            'documents_errors': [],
             'valid_documents_count': 4,
             'invalid_documents_count': 0
         })
@@ -138,7 +139,8 @@ class FileSourceCreateTestCase(TestCase):
         self.assertEqual(response.data['is_valid'], False)
         self.assertEqual(response.data['valid_documents_count'], 1)
         self.assertEqual(response.data['invalid_documents_count'], 3)
-        self.assertEqual(len(response.data['errors']), 3)
+        self.assertEqual(len(response.data['documents_errors']), 3)
+        self.assertEqual(len(response.data['file_errors']), 0)
 
     def test_file_source_create_no_permission(self):
         user = user1(is_active=True, is_staff=False)
@@ -155,3 +157,46 @@ class FileSourceCreateTestCase(TestCase):
                 }
             )
         self.assertEqual(response.status_code, 403)
+
+
+class FileSourceValidateTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_file_source_validate(self):
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+
+        campaign = basic_campaign_with_queries()
+        with basic_campaign_documents_file() as fp:
+            response = self.client.post(
+                f"/api/v1/campaigns/{campaign.id}/sources/validate/",
+                data={
+                    "file": fp
+                }
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            'is_valid': True,
+            'file_errors': [],
+            'documents_errors': [],
+            'valid_documents_count': 4,
+            'invalid_documents_count': 0
+        })
+
+    def test_file_source_validate_invalid(self):
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+
+        campaign = advanced_campaign_with_queries()
+        with wrong_advanced_campaign_documents_file() as fp:
+            response = self.client.post(
+                f"/api/v1/campaigns/{campaign.id}/sources/validate/",
+                data={
+                    "file": fp
+                }
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data['is_valid'], False)
+        self.assertEqual(response.data['valid_documents_count'], 1)
+        self.assertEqual(response.data['invalid_documents_count'], 3)

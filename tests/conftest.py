@@ -33,6 +33,10 @@ def basic_campaign_dataset() -> pd.DataFrame:
     return get_csv_data("campaigns", "basic_campaign-dataset.csv")
 
 
+def basic_campaign_dataset_wrong_no_prob() -> pd.DataFrame:
+    return get_csv_data("campaigns", "basic_campaign_wrong_no_prob-dataset.csv")
+
+
 def basic_campaign_documents_file(mode='r'):
     return get_test_file("campaigns", "basic_campaign-dataset.csv", mode=mode)
 
@@ -43,6 +47,7 @@ def advanced_campaign_dataset() -> pd.DataFrame:
 
 def wrong_advanced_campaign_dataset() -> pd.DataFrame:
     return get_csv_data("campaigns", "advanced_campaign_wrong-dataset.csv")
+
 
 def wrong_advanced_campaign_documents_file(mode='r'):
     return get_test_file("campaigns", "advanced_campaign_wrong-dataset.csv", mode=mode)

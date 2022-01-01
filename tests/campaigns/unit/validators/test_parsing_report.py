@@ -30,7 +30,7 @@ class DocumentParsingReportTestCase(TestCase):
 
 class ParsingReportTestCase(TestCase):
     def test_create_parsing_error_valid(self):
-        report = ParsingReport(documents=[], errors=[])
+        report = ParsingReport(file_errors=[], documents=[], documents_errors=[])
         self.assertIsInstance(report, ParsingReport)
         self.assertTrue(report.is_valid)
         self.assertEqual(report.valid_documents_count, 0)
@@ -38,8 +38,9 @@ class ParsingReportTestCase(TestCase):
 
     def test_prepare_validation_error_invalid(self):
         report = ParsingReport(
+            file_errors=[],
             documents=[],
-            errors=[
+            documents_errors=[
                 test_invalid_document_report()
             ]
         )

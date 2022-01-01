@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 from campaigns.models import FileSource, Document, Campaign
+from campaigns.models.sources.utils import load_data_frame
 from campaigns.parsers.data_frame_parser import DataFrameParser
 from campaigns.serializers import DocumentParsingReportSerializer, ParsingReportSerializer
 from campaigns.serializers.sources import FileSourceSerializer, FileSourceCreateSerializer, FileSourceContentSerializer
@@ -65,15 +66,16 @@ class FileSourceCreate(generics.CreateAPIView):
 
 
 
-class ValidateFileResource(views.APIView):
+class FileSourceValidate(views.APIView):
     permission_classes = (IsAdminUser,)
     serializer_class = ParsingReportSerializer
 
-    def post(self, request):
+    def post(self, request, campaign_id):
         input_serializer = FileSourceContentSerializer(data=request.data)
         if input_serializer.is_valid():
-            campaign = Campaign.objects.get(id=self.kwargs['campaign_id'])
-            df = None
+            campaign = Campaign.objects.get(id=campaign_id)
+            file = input_serializer.validated_data['file']
+            df = load_data_frame(file)
             report = DataFrameParser(campaign).parse(df)
             serializer = self.serializer_class(data=report.to_json())
             serializer.is_valid()

@@ -132,3 +132,5 @@ class CampaignCreateSerializerTestCase(TestCase):
 
         campaign = Campaign.objects.get(name="new")
         self.assertIsInstance(campaign, Campaign)
+        self.assertEqual(len(campaign.document_fields_objects), 1)
+        self.assertEqual(len(campaign.queries_objects), 1)

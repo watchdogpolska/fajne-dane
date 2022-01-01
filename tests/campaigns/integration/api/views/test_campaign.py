@@ -33,6 +33,8 @@ class CampaignCreateTestCase(TestCase):
 
         campaign = Campaign.objects.get(name=payload['name'])
         self.assertIsInstance(campaign, Campaign)
+        self.assertEqual(len(campaign.document_fields_objects), 1)
+        self.assertEqual(len(campaign.queries_objects), 1)
 
     def test_create_campaign_no_permission(self):
         user = user1(is_active=True)

@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +35,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
@@ -79,7 +73,9 @@
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/campaign.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/models/sources/source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
@@ -237,7 +233,7 @@
       <workItem from="1640861850187" duration="10000" />
       <workItem from="1640908177038" duration="2528000" />
       <workItem from="1640949464769" duration="4588000" />
-      <workItem from="1641040148624" duration="8438000" />
+      <workItem from="1641040148624" duration="11639000" />
     </task>
     <servers />
   </component>

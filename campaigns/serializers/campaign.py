@@ -20,3 +20,8 @@ class CampaignCreateSerializer(ReadCreateOnlyModelSerializer):
     class Meta:
         model = Campaign
         fields = ['id', 'name', 'template', 'status']
+
+    def create(self, validated_data):
+        from campaigns.models.factory import campaign_factory
+        campaign = campaign_factory.create(validated_data['name'], validated_data['template'])
+        return campaign

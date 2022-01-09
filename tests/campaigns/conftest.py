@@ -1,6 +1,8 @@
 from typing import List, Dict
 
-from campaigns.models import Campaign
+from django.utils import timezone
+
+from campaigns.models import Campaign, DocumentQuery
 from campaigns.models import Document, Query, OutputField, FileSource, UserSource
 from campaigns.models.dto import DocumentDTO
 from campaigns.models.factory import campaign_factory
@@ -66,7 +68,8 @@ def basic_file_source(campaign: Campaign) -> FileSource:
         campaign=campaign,
         name="file source",
         description="description",
-        source="file source",
+        source_link="http://source.access.link",
+        source_date=timezone.now(),
         file=None
     )
     return source
@@ -102,6 +105,13 @@ def basic_query() -> Query:
             validation=False,
             default_answer=0
         )
+    )
+
+
+def basic_document_query() -> DocumentQuery:
+    return DocumentQuery.objects.create(
+        document=basic_document(),
+        query=basic_query()
     )
 
 

@@ -1,30 +1,18 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.db import models, transaction
 
-
-class RecordStatus(models.TextChoices):
-    NONE = 'NONE', _('None')
-    ACCEPTED = 'ACCEPTED', _('Accepted')
-    REJECTED = 'REJECTED', _('Rejected')
-
-
-class RecordSource(models.TextChoices):
-    NONE = 'NONE', _('None')
+from campaigns.models.consts import RecordStatus
 
 
 class Record(models.Model):
     """
     A single answer for a given Query
     """
-    query = models.ForeignKey("Query",
-                              on_delete=models.CASCADE,
-                              related_name="records")
-    document = models.ForeignKey("Document",
-                                 on_delete=models.CASCADE,
-                                 related_name="records")
-
     value = models.TextField()
     probability = models.FloatField()
+
+    parent = models.ForeignKey("DocumentQuery",
+                               on_delete=models.CASCADE,
+                               related_name="records")
 
     source = models.ForeignKey("Source",
                                on_delete=models.CASCADE,
@@ -34,3 +22,13 @@ class Record(models.Model):
                               default=RecordStatus.NONE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @transaction.atomic
+    def accept(self):
+        """
+        Accepts selected record as a final record for given query and document.
+        """
+        self.parent.records.exclude(id=self.id).update(status=RecordStatus.REJECTED)
+        self.status = RecordStatus.ACCEPTED
+        self.save()
+        self.parent.update_status()

@@ -3,7 +3,8 @@ from typing import Dict
 from rest_framework import serializers
 from campaigns.models import Document, Campaign
 from campaigns.models.dto import DocumentDTO
-from campaigns.serializers.utils import get_source_serializer
+from campaigns.serializers import DocumentQuerySerializer
+from campaigns.serializers.sources.utils import get_source_serializer
 from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer
 
 
@@ -34,11 +35,12 @@ class DocumentSerializer(ReadUpdateOnlyModelSerializer):
 
 class DocumentFullSerializer(ReadUpdateOnlyModelSerializer):
     source = serializers.SerializerMethodField()
+    document_queries = DocumentQuerySerializer(many=True, read_only=True)
 
     class Meta:
         model = Document
-        fields = ['id', 'data', 'source', 'status', 'created']
-        read_only_fields = ['id', 'source', 'status', 'created']
+        fields = ['id', 'data', 'source', 'status', 'created', 'document_queries']
+        read_only_fields = ['id', 'source', 'status', 'created', 'document_queries']
 
     def get_source(self, obj):
         source = obj.source.to_child()

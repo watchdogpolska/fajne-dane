@@ -4,11 +4,12 @@ from django.core.exceptions import ValidationError
 from django.db.models import Manager
 from django.test import TestCase
 
+from campaigns.models import Document
 from campaigns.models.campaign import Campaign, CampaignStatus
 from campaigns.models.dto import DocumentDTO, RecordDTO
 from tests.conftest import basic_campaign_template
 from tests.campaigns.conftest import basic_campaign_with_queries, \
-    advanced_campaign_with_queries
+    advanced_campaign_with_queries, advanced_campaign_with_documents, basic_campaign_with_documents
 
 
 class CampaignTestCase(TestCase):
@@ -102,3 +103,33 @@ class CampaignTestCase(TestCase):
                     }
                 )
             )
+
+
+class CampaignStatusTestCase(TestCase):
+    def _close_document(self, document: Document):
+        for dq in document.document_queries.all():
+            record = dq.records.first()
+            record.accept()
+
+    def setUp(self):
+        self.campaign = basic_campaign_with_documents()
+        self.document = self.campaign.documents.get(data__institution_id=1425011)
+
+    def test_close_one_document(self):
+        document = self.campaign.documents.first()
+        campaign = self.campaign
+
+        self.assertEqual(campaign.status, CampaignStatus.INITIALIZED)
+        self._close_document(document)
+        campaign.refresh_from_db()
+        self.assertEqual(campaign.status, CampaignStatus.VALIDATING)
+
+
+    def test_close_all_documents(self):
+        campaign = self.campaign
+
+        self.assertEqual(campaign.status, CampaignStatus.INITIALIZED)
+        for document in campaign.documents.all():
+            self._close_document(document)
+        campaign.refresh_from_db()
+        self.assertEqual(campaign.status, CampaignStatus.CLOSED)

@@ -14,7 +14,7 @@ class SourceSerializerTestCase(TestCase):
             serializer.data,
             {
                 'id': source.id,
-                'name': source.name
+                'name': source.name,
             }
         )
 

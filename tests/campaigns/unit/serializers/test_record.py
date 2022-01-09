@@ -6,18 +6,18 @@ from tests.campaigns.conftest import advanced_campaign_with_documents
 from tests.conftest import user1
 
 
-def basic_records() -> Record:
+def basic_record() -> Record:
     campaign = advanced_campaign_with_documents()
-    record = campaign.documents.first().records.first()
+    record = campaign.documents.first().document_queries.first().records.first()
     return record
 
 
 class RecordSerializerTestCase(TestCase):
     def test_serialize(self):
-        record = basic_records()
+        record = basic_record()
         serializer = RecordSerializer(record)
-
         source = record.source.to_child()
+
         self.assertEqual(
             serializer.data,
             {
@@ -27,23 +27,21 @@ class RecordSerializerTestCase(TestCase):
                 'source': {
                     'id': source.id,
                     'name': source.name,
-                    'source': source.source,
-                    'description': source.description,
-                    'file': None
+                    'type': source.type
                 },
                 'status': record.status
             }
         )
 
     def test_update(self):
-        instance = basic_records()
+        instance = basic_record()
         serializer = RecordSerializer(
             instance,
             data={
                 'value': "tak",
                 'probability': 0.2,
-                'query': instance.query.id
-            }
+            },
+            partial=True
         )
         serializer.is_valid()
         serializer.save()
@@ -56,16 +54,16 @@ class RecordSerializerTestCase(TestCase):
         source, _ = UserSource.objects.get_or_create(user=user1())
         campaign = advanced_campaign_with_documents()
         document = campaign.documents.first()
-        query = campaign.queries.first()
+        dq = document.document_queries.first()
 
         serializer = RecordSerializer(
             data={
                 'value': "tak",
                 'probability': 0.2,
-                'query': query.id
+                'parent': dq.id
             }
         )
         serializer.is_valid()
-        record = serializer.save(document=document, source=source)
+        record = serializer.save(source=source)
 
         self.assertIsInstance(record, Record)

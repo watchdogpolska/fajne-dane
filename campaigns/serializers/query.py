@@ -1,6 +1,8 @@
 from campaigns.models import Query
 from campaigns.serializers.output_field import OutputFieldSerializer
-from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer
+from fajne_dane.core.serializers import (
+    ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer, ReadOnlyModelSerializer
+)
 
 
 class QueryCreateSerializer(ReadCreateOnlyModelSerializer):
@@ -33,4 +35,11 @@ class QuerySerializer(ReadUpdateOnlyModelSerializer):
     class Meta:
         model = Query
         fields = ('id', 'order', 'name', 'data', 'output_field')
-        read_only_fields = ['id', 'read_only']
+        read_only_fields = ['id']
+
+
+class QueryDataSerializer(ReadOnlyModelSerializer):
+    class Meta:
+        model = Query
+        fields = ('id', 'order', 'name', 'data')
+        read_only_fields = ['id']

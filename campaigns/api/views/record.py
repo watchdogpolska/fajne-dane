@@ -11,8 +11,8 @@ class RecordList(generics.ListAPIView):
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        document_id = self.kwargs.get("document_id")
-        records = Record.objects.filter(document_id=document_id)
+        doc_query_id = self.kwargs.get("doc_query_id")
+        records = Record.objects.filter(parent_id=doc_query_id)
         return records
 
 
@@ -31,6 +31,6 @@ class RecordCreate(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         source, _ = UserSource.objects.get_or_create(user=request.user)
-        serializer.save(document_id=self.kwargs['document_id'], source_id=source.id)
+        serializer.save(parent_id=self.kwargs['doc_query_id'], source_id=source.id)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

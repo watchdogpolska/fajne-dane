@@ -1,9 +1,11 @@
 from django.test import TestCase, Client
+from django.utils.datetime_safe import datetime
 
 from campaigns.models import FileSource
 from tests.campaigns.conftest import basic_campaign, basic_campaign_with_documents, advanced_campaign_with_documents, \
     basic_campaign_with_queries, advanced_campaign_with_queries
 from tests.conftest import user1, basic_campaign_documents_file, wrong_advanced_campaign_documents_file
+from tests.utils import serialize_date
 
 
 class FileSourceListTestCase(TestCase):
@@ -31,8 +33,11 @@ class FileSourceListTestCase(TestCase):
             "id": source.id,
             'name': source.name,
             'description': source.description,
-            "source": source.source,
-            'file': None
+            'source_link': source.source_link,
+            "source_date": serialize_date(source.source_date),
+            "created": serialize_date(source.created),
+            'file': None,
+            'type': source.type
         })
 
 
@@ -56,8 +61,11 @@ class FileSourceDetailTestCase(TestCase):
             "id": source.id,
             'name': source.name,
             'description': source.description,
-            "source": source.source,
-            'file': None
+            "source_link": source.source_link,
+            "source_date": serialize_date(source.source_date),
+            "created": serialize_date(source.created),
+            'file': None,
+            'type': source.type
         })
 
     def test_file_source_patch(self):
@@ -110,7 +118,8 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
-                    "source": "file source",
+                    'source_link': 'http://source.link',
+                    'source_date': serialize_date(datetime(2021, 12, 24)),
                     "file": fp
                 }
             )
@@ -135,7 +144,8 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
-                    "source": "file source",
+                    'source_link': 'http://source.link',
+                    'source_date': serialize_date(datetime(2021, 12, 24)),
                     "file": fp
                 }
             )
@@ -157,7 +167,8 @@ class FileSourceCreateTestCase(TestCase):
                 data={
                     "name": "file1",
                     "description": "description",
-                    "source": "file source",
+                    'source_link': 'http://source.link',
+                    'source_date': serialize_date(datetime(2021, 12, 24)),
                     "file": fp
                 }
             )

@@ -1,21 +1,14 @@
 from typing import Optional, List
+from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.db import models, transaction
 
+from campaigns.models.consts import CampaignStatus, DocumentStatus
 from campaigns.models.dto import DocumentDTO
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from campaigns.models import DocumentDataField, Query
-
-
-class CampaignStatus(models.TextChoices):
-    CREATED = 'CREATED', _('Created')
-    INITIALIZED = 'INITIALIZED', _('Initialized')
-    VALIDATING = 'VALIDATING', _('Validating')
-    CLOSED = 'CLOSED', _('Closed')
 
 
 class Campaign(models.Model):
@@ -41,8 +34,28 @@ class Campaign(models.Model):
         self._document_fields_objects = None
         self._queries_objects = None
 
+    @transaction.atomic
     def update_status(self):
-        raise NotImplemented()
+        """
+        Updates campaign status based on the status of its documents.
+        """
+        last_status = self.status
+
+        if self.status == CampaignStatus.CREATED:
+            if self.documents.count() > 0:  # check if at least one document added
+                self.status = CampaignStatus.INITIALIZED
+
+        if self.status == CampaignStatus.INITIALIZED:  # at least one document was checked
+            if self.documents.exclude(status__in=[DocumentStatus.CREATED, DocumentStatus.INITIALIZED]).count() > 0:
+                self.status = CampaignStatus.VALIDATING
+
+        if self.status != CampaignStatus.CREATED:  # all documents are closed
+            if self.documents.exclude(status=DocumentStatus.CLOSED).count() == 0:
+                self.status = CampaignStatus.CLOSED
+
+        if last_status != self.status:
+            self.save()
+
 
     @property
     def document_fields_objects(self) -> List["DocumentDataField"]:

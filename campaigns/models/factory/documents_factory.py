@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List
 
 from fajne_dane.core.base.factory import BaseFactory
-from .. import Campaign, Document, Query, Record, FileSource
+from .. import Campaign, Document, Query, Record, FileSource, DocumentQuery
 from ..dto import DocumentDTO, RecordDTO
 
 
@@ -18,14 +18,19 @@ class DocumentsFactory(BaseFactory):
             data=document_dto.data
         )
 
-    def _create_document_query_record(self, document: Document, query: Query, record_dto: RecordDTO) -> Record:
-        return Record(
+    def _create_document_query(self, document: Document, query: Query) -> DocumentQuery:
+        return DocumentQuery(
             document=document,
-            query=query,
+            query=query
+        )
+
+    def _create_record(self, document_query: DocumentQuery, record_dto: RecordDTO) -> Record:
+        return Record(
+            parent=document_query,
             source=self.source,
             value=record_dto.value,
             probability=record_dto.probability
-    )
+        )
 
     def bulk_create(self, document_dtos: List[DocumentDTO]) -> List[Document]:
         """
@@ -42,14 +47,30 @@ class DocumentsFactory(BaseFactory):
             documents.append(self._create_campaign_document(document_dto))
         documents = Document.objects.bulk_create(documents)
 
+        # create document queries
+        document_queries = []
+        for document, dto in zip(documents, document_dtos):
+            for query_name, query in queries.items():
+                document_queries.append(self._create_document_query(document, query))
+        document_queries = {
+            (dq.document.id, dq.query.id): dq
+            for dq in DocumentQuery.objects.bulk_create(document_queries)
+        }
+
         # create records
         records = []
         for document, dto in zip(documents, document_dtos):
             for query_name, query in queries.items():
                 records_dtos = dto.records.get(query_name)
+                document_query = document_queries[(document.id, query.id)]
                 for record_dto in records_dtos:
-                    records.append(self._create_document_query_record(document, query, record_dto))
+                    records.append(self._create_record(document_query, record_dto))
         Record.objects.bulk_create(records)
+
+        # update status:
+        for dq in document_queries.values():
+            dq.update_status()
+
         return documents
 
     def create(self, document_dto: DocumentDTO) -> Document:
@@ -65,11 +86,26 @@ class DocumentsFactory(BaseFactory):
         document = self._create_campaign_document(document_dto)
         document.save()
 
+        # create document queries
+        document_queries = []
+        for query_name, query in queries.items():
+            document_queries.append(self._create_document_query(document, query))
+        document_queries = {
+            (dq.document.id, dq.query.id): dq
+            for dq in DocumentQuery.objects.bulk_create(document_queries)
+        }
+
         # create records
         records = []
         for query_name, query in queries.items():
             records_dtos = document_dto.records.get(query_name)
+            document_query = document_queries[(document.id, query.id)]
             for record_dto in records_dtos:
-                records.append(self._create_document_query_record(document, query, record_dto))
+                records.append(self._create_record(document_query, record_dto))
         Record.objects.bulk_create(records)
+
+        # update status:
+        for dq in document_queries.values():
+            dq.update_status()
+
         return document

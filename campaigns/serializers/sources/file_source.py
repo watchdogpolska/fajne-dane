@@ -1,32 +1,34 @@
 from rest_framework import serializers
 
 from campaigns.models import FileSource
-from fajne_dane.core.exceptions import NotSupported
-from fajne_dane.core.serializers import ReadOnlySerializer
+from fajne_dane.core.serializers import (
+    ReadOnlySerializer, ReadUpdateOnlyModelSerializer, ReadCreateOnlyModelSerializer, ReadOnlyModelSerializer
+)
 
 
-class FileSourceSerializer(serializers.ModelSerializer):
+class FileSourceSerializer(ReadUpdateOnlyModelSerializer):
     class Meta:
         model = FileSource
-        fields = ['id', 'name', 'description', 'file', 'source']
-        read_only_field = ['id', 'file']
+        fields = ['id', 'name', 'description', 'file', 'source_link', 'source_date', 'created', 'type']
+        read_only_field = ['id', 'file', 'created', 'type']
 
         extra_kwargs = {
             'file': {'required': False},
         }
 
-    def create(self, validated_data):
-        raise NotSupported()
 
-
-class FileSourceCreateSerializer(serializers.ModelSerializer):
+class FileSourceMinimalSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = FileSource
-        fields = ['id', 'name', 'description', 'file', 'source']
-        read_only_field = ['id']
+        fields = ['id', 'name', 'type']
+        read_only_field = ['id', 'name', 'type']
 
-    def update(self, instance, validated_data):
-        raise NotSupported()
+
+class FileSourceCreateSerializer(ReadCreateOnlyModelSerializer):
+    class Meta:
+        model = FileSource
+        fields = ['id', 'name', 'description', 'file', 'source_link', 'source_date']
+        read_only_field = ['id']
 
 
 class FileSourceContentSerializer(ReadOnlySerializer):

@@ -1,16 +1,8 @@
-from rest_framework import serializers
-
 from campaigns.models import Source
-from fajne_dane.core.exceptions import NotSupported
+from fajne_dane.core.serializers import ReadOnlyModelSerializer
 
 
-class SourceSerializer(serializers.ModelSerializer):
+class SourceSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = Source
         fields = ['id', 'name']
-
-    def update(self, instance, validated_data):
-        raise NotSupported()
-
-    def create(self, validated_data):
-        raise NotSupported()

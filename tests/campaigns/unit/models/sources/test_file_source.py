@@ -1,5 +1,6 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+from django.utils import timezone
 
 from campaigns.models import Source, FileSource, Document
 from campaigns.models.sources.source import SourceTypes
@@ -21,6 +22,8 @@ def file_source_with_file() -> FileSource:
         name="file source",
         description="this is a file",
         campaign=basic_campaign_with_queries(),
+        source_link="http://source.link",
+        source_date=timezone.now(),
         file=fake_file()
     )
     return source
@@ -39,6 +42,8 @@ def file_source_with_wrong_file() -> FileSource:
         name="file source",
         description="this is a file",
         campaign=advanced_campaign_with_queries(),
+        source_link="http://source.link",
+        source_date=timezone.now(),
         file=wrong_fake_file()
     )
     return source
@@ -51,6 +56,8 @@ class FileSourceTestCase(TestCase):
             name="file source",
             description="this is a file",
             campaign=basic_campaign_with_queries(),
+            source_link="http://source.link",
+            source_date=timezone.now(),
             file=fake_file()
         )
 

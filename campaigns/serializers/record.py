@@ -1,8 +1,16 @@
+from typing import Dict
+
 from rest_framework import serializers
 
-from campaigns.models import Record
+from campaigns.models import Record, DocumentQuery
 from campaigns.models.dto import RecordDTO
-from campaigns.serializers.utils import get_source_serializer
+from campaigns.serializers.sources.utils import get_source_serializer
+
+
+def _validate_attrs(document_query: DocumentQuery, attrs: Dict):
+    if 'value' in attrs:
+        record_dto = RecordDTO(value=attrs['value'], probability=0)
+        document_query.query.validate_record(record=record_dto)
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -10,10 +18,10 @@ class RecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Record
-        fields = ['id', 'value', 'probability', 'source', 'status', 'query']
+        fields = ['id', 'value', 'probability', 'source', 'status', 'parent']
         read_only_fields = ['id']
         extra_kwargs = {
-            'query': {'write_only': True},
+            'parent': {'write_only': True},
         }
 
     def get_source(self, obj):
@@ -22,8 +30,9 @@ class RecordSerializer(serializers.ModelSerializer):
         return serializer(source).data
 
     def validate(self, attrs):
-        query = attrs.get('query') or self.instance.query
-        if 'value' in attrs:
-            record_dto = RecordDTO(value=attrs['value'], probability=0)
-            query.validate_record(record=record_dto)
+        if self.instance:
+            document_query = self.instance.parent
+        else:
+            document_query = attrs.get('parent')
+        _validate_attrs(document_query, attrs)
         return super().validate(attrs)

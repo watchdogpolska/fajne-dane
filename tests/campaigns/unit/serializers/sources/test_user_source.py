@@ -14,7 +14,7 @@ class UserSourceSerializerTestCase(TestCase):
             serializer.data,
             {
                 'id': source.id,
-                'name': source.name,
+                'type': source.type.name,
                 'user': {
                     'id': source.user.id,
                     'first_name': source.user.first_name,

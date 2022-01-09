@@ -1,11 +1,6 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.db import models, transaction
 
-
-class DocumentStatus(models.TextChoices):
-    NONE = 'NONE', _('None')
-    VALIDATING = 'VALIDATING', _('Validating')
-    CLOSED = 'CLOSED', _('Closed')
+from campaigns.models.consts import DocumentStatus, RecordStatus, DocumentQueryStatus
 
 
 class Document(models.Model):
@@ -25,9 +20,28 @@ class Document(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=12,
                               choices=DocumentStatus.choices,
-                              default=DocumentStatus.NONE)
+                              default=DocumentStatus.CREATED)
 
+    @transaction.atomic
     def update_status(self):
-        raise NotImplemented()
-        # update my status
-        self.campaign.update_status()
+        """
+        Updates document's status based on its document queries.
+        """
+        last_status = self.status
+
+        if self.status == DocumentStatus.CREATED:  # check if there is at least one document query added
+            if self.document_queries.count() > 0:
+                self.status = DocumentStatus.INITIALIZED
+
+        if self.status == DocumentStatus.INITIALIZED:  # check if one of document query has been closed
+            if self.document_queries.filter(status=DocumentQueryStatus.CLOSED).count() > 0:
+                self.status = DocumentStatus.VALIDATING
+
+        if self.status == DocumentStatus.VALIDATING:  # every document query has been closed
+            if self.document_queries.exclude(status=DocumentQueryStatus.CLOSED).count() == 0:
+                self.status = DocumentStatus.CLOSED
+
+        if last_status != self.status:  # check if status has changed
+            self.save()
+
+        self.campaign.update_status()  # update campaign status

@@ -17,15 +17,16 @@ class RecordListTestCase(TestCase):
         self.client.force_login(user)
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
+        dq = document.document_queries.first()
 
-        response = self.client.get(f"/api/v1/campaigns/documents/{document.id}/records/")
+        response = self.client.get(f"/api/v1/campaigns/doc-queries/{dq.id}/records/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), document.records.count())
+        self.assertEqual(len(response.data), dq.records.count())
         self.assertTrue(len(response.data) < Record.objects.count())
 
         response_records_ids = set([d['id'] for d in response.data])
-        expected_records_ids = set(document.records.values_list('id', flat=True))
+        expected_records_ids = set(dq.records.values_list('id', flat=True))
         self.assertEqual(expected_records_ids, response_records_ids)
 
     def test_list_records_empty(self):
@@ -33,18 +34,22 @@ class RecordListTestCase(TestCase):
         self.client.force_login(user)
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
-        document.records.all().delete()
+        dq = document.document_queries.first()
+        dq.records.all().delete()
 
-        response = self.client.get(f"/api/v1/campaigns/documents/{document.id}/records/")
+        response = self.client.get(f"/api/v1/campaigns/doc-queries/{dq.id}/records/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), document.records.count())
+        self.assertEqual(len(response.data), dq.records.count())
         self.assertEqual(len(response.data), 0)
 
     def test_list_campaigns_not_logged(self):
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
-        response = self.client.get(f"/api/v1/campaigns/documents/{document.id}/records/")
+        dq = document.document_queries.first()
+
+        response = self.client.get(f"/api/v1/campaigns/doc-queries/{dq.id}/records/")
+
         self.assertEqual(response.status_code, 200)
 
 
@@ -69,9 +74,7 @@ class RecordDetailsTestCase(TestCase):
             "source": {
                 "id": source.id,
                 "name": source.name,
-                "description": source.description,
-                'source': source.source,
-                "file": None
+                "type": source.type
             },
             "status": record.status
         })
@@ -132,12 +135,12 @@ class RecordCreateTestCase(TestCase):
 
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
-        query = campaign.queries.first()
+        dq = document.document_queries.first()
 
         response = self.client.post(
-            f"/api/v1/campaigns/documents/{document.id}/records/create/",
+            f"/api/v1/campaigns/doc-queries/{dq.id}/records/create/",
             data={
-                "query": query.id,
+                "parent": dq.id,
                 "value": "yes",
                 "probability": 0.3
             },
@@ -150,8 +153,7 @@ class RecordCreateTestCase(TestCase):
         self.assertEqual(source.user, user)
         self.assertEqual(record.value, "yes")
         self.assertEqual(record.probability, 0.3)
-        self.assertEqual(record.query, query)
-        self.assertEqual(record.document, document)
+        self.assertEqual(record.parent, dq)
 
     def test_record_create_wrong_value(self):
         user = user1(is_active=True, is_staff=True)
@@ -159,12 +161,12 @@ class RecordCreateTestCase(TestCase):
 
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
-        query = campaign.queries.first()
+        dq = document.document_queries.first()
 
         response = self.client.post(
-            f"/api/v1/campaigns/documents/{document.id}/records/create/",
+            f"/api/v1/campaigns/doc-queries/{dq.id}/records/create/",
             data={
-                "query": query.id,
+                "parent": dq.id,
                 "value": "other",
                 "probability": 0.3
             },
@@ -175,18 +177,18 @@ class RecordCreateTestCase(TestCase):
         self.assertEqual(str(response.data['value'][0]),
                          "Record value: 'other' not found in the list of accepted answers.")
 
-    def test_record_query_no_permission(self):
+    def test_record_no_permission(self):
         user = user1(is_active=True, is_staff=False)
         self.client.force_login(user)
 
         campaign = basic_campaign_with_documents()
         document = campaign.documents.first()
-        query = campaign.queries.first()
+        dq = document.document_queries.first()
 
         response = self.client.post(
-            f"/api/v1/campaigns/documents/{document.id}/records/create/",
+            f"/api/v1/campaigns/doc-queries/{document.id}/records/create/",
             data={
-                "query": query.id,
+                "parent": dq.id,
                 "value": "yes",
                 "probability": 0.3
             },

@@ -1,11 +1,14 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+from django.utils import timezone
+from django.utils.datetime_safe import datetime
 
 from campaigns.models import FileSource
 from campaigns.serializers.sources import FileSourceSerializer
 from campaigns.serializers.sources.file_source import FileSourceCreateSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_file_source, basic_campaign
+from tests.utils import serialize_date
 
 
 def fake_file() -> SimpleUploadedFile:
@@ -19,6 +22,8 @@ def uploaded_file_source() -> FileSource:
     source, _ = FileSource.objects.get_or_create(
         name="file source",
         description="description",
+        source_link="http://source.access.link",
+        source_date=timezone.now(),
         file=fake_file(),
         campaign=basic_campaign()
     )
@@ -36,7 +41,10 @@ class FileSourceSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
-                'source': source.source,
+                'source_link': source.source_link,
+                'source_date': serialize_date(source.source_date),
+                'created': serialize_date(source.created),
+                'type': source.type,
                 'file': None
             }
         )
@@ -51,7 +59,10 @@ class FileSourceSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
-                'source': source.source,
+                'source_link': source.source_link,
+                'source_date': serialize_date(source.source_date),
+                'created': serialize_date(source.created),
+                'type': source.type,
                 'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
             }
         )
@@ -64,7 +75,8 @@ class FileSourceSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'other description'
-            }
+            },
+            partial=True
         )
         serializer.is_valid()
         serializer.save(campaign=instance.campaign)
@@ -77,7 +89,8 @@ class FileSourceSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'description',
-                'source': 'file source',
+                'source_link': 'http://source.link',
+                'source_date': serialize_date(datetime(2021, 12, 24)),
                 'file': fake_file()
             }
         )
@@ -97,7 +110,8 @@ class FileSourceCreateSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
-                'source': source.source,
+                'source_link': source.source_link,
+                'source_date': serialize_date(source.source_date),
                 'file': None
             }
         )
@@ -112,7 +126,8 @@ class FileSourceCreateSerializerTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'description': source.description,
-                'source': source.source,
+                'source_link': source.source_link,
+                'source_date': serialize_date(source.source_date),
                 'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
             }
         )
@@ -125,7 +140,8 @@ class FileSourceCreateSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'other description',
-                'source': 'file source',
+                'source_link': 'http://source.link',
+                'source_date': serialize_date(datetime(2021, 12, 24)),
                 'file': fake_file()
             }
         )
@@ -138,7 +154,8 @@ class FileSourceCreateSerializerTestCase(TestCase):
             data={
                 'name': "other",
                 'description': 'description',
-                'source': 'file source',
+                'source_link': 'http://source.link',
+                'source_date': serialize_date(datetime(2021, 12, 24)),
                 'file': fake_file()
             }
         )

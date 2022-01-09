@@ -60,14 +60,25 @@ class DocumentDetailsTestCase(TestCase):
         self.assertEqual(response.data, {
             "id": document.id,
             'data': document.data,
-            'status': 'NONE',
+            'status': document.status,
             'source': {
                 'id': source.id,
                 'name': source.name,
-                'description': source.description,
-                'source': source.source,
-                'file': None
+                'type': source.type
             },
+            'document_queries': [
+                {
+                    "id": dq.id,
+                    "query": {
+                        "id": dq.query.id,
+                        "order": dq.query.order,
+                        "name": dq.query.name,
+                        "data": dq.query.data
+                    },
+                    "status": dq.status
+                }
+                for dq in document.document_queries.all()
+            ],
             'created': serialize_date(document.created)
         })
 

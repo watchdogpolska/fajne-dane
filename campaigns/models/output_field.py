@@ -1,5 +1,3 @@
-from typing import TYPE_CHECKING
-
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models

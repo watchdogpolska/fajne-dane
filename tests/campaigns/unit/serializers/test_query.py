@@ -2,7 +2,7 @@ from django.test import TestCase
 from rest_framework.exceptions import ValidationError
 
 from campaigns.models import Query, OutputField
-from campaigns.serializers import QueryCreateSerializer, QuerySerializer
+from campaigns.serializers import QueryCreateSerializer, QuerySerializer, QueryDataSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_query, basic_campaign
 
@@ -165,6 +165,58 @@ class QuerySerializerTestCase(TestCase):
 
     def test_create(self):
         serializer = QuerySerializer(
+            data={
+                'order': 1,
+                'name': 'Question 1',
+                'data': {
+                    'name': "question",
+                    'value': "What is it?",
+                    'type': 'str',
+                    'widget': 'TextLabel'
+                }
+            }
+        )
+        serializer.is_valid()
+        with self.assertRaises(NotSupported):
+            serializer.save(campaign=basic_campaign())
+
+
+class QueryDataSerializerTestCase(TestCase):
+    def test_serialize(self):
+        query = basic_query()
+        serializer = QueryDataSerializer(query)
+        self.assertEqual(
+            serializer.data,
+            {
+                'id': query.id,
+                'name': query.name,
+                'order': query.order,
+                'data': query.data,
+            }
+        )
+
+    def test_update(self):
+        instance = basic_query()
+
+        serializer = QueryDataSerializer(
+            instance,
+            data={
+                'order': 1,
+                'name': 'Question 1',
+                'data': {
+                    'name': "question",
+                    'value': "What is it?",
+                    'type': 'str',
+                    'widget': 'TextLabel'
+                }
+            }
+        )
+        serializer.is_valid()
+        with self.assertRaises(NotSupported):
+            serializer.save(campaign=basic_campaign())
+
+    def test_create(self):
+        serializer = QueryDataSerializer(
             data={
                 'order': 1,
                 'name': 'Question 1',

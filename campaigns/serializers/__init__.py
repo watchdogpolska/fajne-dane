@@ -1,9 +1,10 @@
 from .campaign import CampaignCreateSerializer, CampaignSerializer, CampaignFullSerializer
-from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer
-from .query import QuerySerializer, QueryCreateSerializer
+from .query import QuerySerializer, QueryCreateSerializer, QueryDataSerializer
 from .record import RecordSerializer
 from .document_data_field import DocumentDataFieldCreateSerializer
+from .document_query import DocumentQuerySerializer
 from .output_field import OutputFieldSerializer
 from .parsing_report import DocumentParsingReportSerializer, ParsingReportSerializer
 from .validation import ValidationErrorSerializer, ValidationReportSerializer
 from .template import TemplateContentSerializer
+from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer

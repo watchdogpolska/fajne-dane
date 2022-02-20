@@ -1,0 +1,39 @@
+{% extends "users/base.html" %}
+
+{% block main %}
+
+    <main class="form-signin">
+        <form method="post" action="{% url 'users:account-login' %}">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Zaloguj się</h1>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.pl">
+                <label for="floatingInput">Adres email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Hasło">
+                <label for="floatingPassword">Hasło</label>
+            </div>
+            <div class="text-danger">
+                {% for error in errors %}
+                    <p>
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" style="margin-top: 10px" type="submit">Zaloguj</button>
+        </form>
+        <div>
+            <a href="{% url 'users:account-register' %}">Zarejestruj się</a>
+        </div>
+        <div>
+            <a href="{% url 'users:account-reset-password' %}">Przypomnij hasło</a>
+        </div>
+        <div>
+            <a href="{% url 'index' %}">Wróc do strony głównej</a>
+        </div>
+    </main>
+
+{% endblock %}

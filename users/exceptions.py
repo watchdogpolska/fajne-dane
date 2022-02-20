@@ -32,6 +32,12 @@ class UnableToAuthenticate(APIException):
     default_code = 'authentication_error'
 
 
+class ActivationNotFound(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Activation token not found'
+    default_code = 'activation_token_not_found'
+
+
 class ActivationTokenWrong(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Activation token is incorrect'
@@ -60,3 +66,9 @@ class UserAlreadyActive(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'User is already active'
     default_code = 'user_active'
+
+
+class ObjectNotFound(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Object not found'
+    default_code = 'object_not_found'

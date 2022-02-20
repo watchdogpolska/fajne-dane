@@ -2,6 +2,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from fajne_dane.consts import Platform
 from users.exceptions import EmailNotFound
 from users.serializers import PasswordResetSerializer, UserEmailSerializer, PasswordChangeSerializer
 
@@ -17,7 +18,9 @@ class PasswordResetRequest(generics.GenericAPIView):
             user = serializer.retrieve()
             if not user:
                 raise EmailNotFound()
-            user.send_reset_password_email()
+
+            platform = request.GET.get("platform", Platform.API)
+            user.send_reset_password_email(platform=platform)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -30,8 +33,9 @@ class PasswordReset(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            user = serializer.retrieve()
-            serializer.update(user, serializer.validated_data)
+            token = serializer.retrieve()
+            token.activate()
+            serializer.update(token.user, serializer.validated_data)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

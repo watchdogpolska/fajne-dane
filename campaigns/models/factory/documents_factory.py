@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List
 
 from fajne_dane.core.base.factory import BaseFactory
-from .. import Campaign, Document, Query, Record, FileSource, DocumentQuery
+from .. import Campaign, Document, Query, Record, FileSource, DocumentQuery, Institution
 from ..dto import DocumentDTO, RecordDTO
 
 
@@ -11,11 +11,19 @@ class DocumentsFactory(BaseFactory):
     campaign: Campaign
     source: FileSource
 
+
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
+        institution_id = document_dto.data['institution_id']
+        institution, _ = Institution.objects.get_or_create(
+            key=institution_id,
+            name=f"Instytucja_{institution_id}"
+        )
+
         return Document(
             campaign=self.source.campaign,
             source=self.source,
-            data=document_dto.data
+            data=document_dto.data,
+            institution=institution
         )
 
     def _create_document_query(self, document: Document, query: Query) -> DocumentQuery:

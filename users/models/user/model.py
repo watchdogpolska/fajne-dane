@@ -4,6 +4,7 @@ from django.apps import apps
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from fajne_dane.consts import Platform
 from fajne_dane.core.emails import helper as email_helper
 from .consts import ActionTypes
 from .manager import UserManager
@@ -38,12 +39,12 @@ class User(AbstractUser):
         ActivationToken = apps.get_model("users.ActivationToken")
         return ActivationToken.objects.filter(user=self, action_type=action_type).last()
 
-    def send_registration_email(self):
+    def send_registration_email(self, platform: Platform):
         if self.is_active:
             raise UserAlreadyActive()
         token = self.create_activation_token(ActionTypes.REGISTRATION)
-        email_helper.send_registration_email(self, token)
+        email_helper.send_registration_email(self, token, platform)
 
-    def send_reset_password_email(self):
+    def send_reset_password_email(self, platform: Platform):
         token = self.create_activation_token(ActionTypes.RESETTING_PASSWORD)
-        email_helper.send_reset_password_email(self, token)
+        email_helper.send_reset_password_email(self, token, platform)

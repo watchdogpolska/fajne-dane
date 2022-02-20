@@ -3,6 +3,7 @@ from unittest.mock import patch
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
 
+from fajne_dane.consts import Platform
 from tests.conftest import user1
 from users.exceptions import UserAlreadyActive
 from users.models import User, ActivationToken
@@ -68,16 +69,16 @@ class SendingTokenEmailsTestCase(TestCase):
     @patch('fajne_dane.core.emails.helper.send_registration_email')
     def test_sending_registration_email(self, mocked_sending):
         user = user1()
-        user.send_registration_email()
+        user.send_registration_email(platform=Platform.API)
         mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION))
 
     def test_sending_registration_email_already_active(self):
         user = user1(is_active=True)
         with self.assertRaises(UserAlreadyActive):
-            user.send_registration_email()
+            user.send_registration_email(platform=Platform.API)
 
     @patch('fajne_dane.core.emails.helper.send_reset_password_email')
     def test_sending_reset_password_email(self, mocked_sending):
         user = user1()
-        user.send_reset_password_email()
+        user.send_reset_password_email(platform=Platform.API)
         mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.RESETTING_PASSWORD))

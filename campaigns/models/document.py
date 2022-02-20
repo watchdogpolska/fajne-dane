@@ -15,6 +15,9 @@ class Document(models.Model):
     source = models.ForeignKey("Source",
                                on_delete=models.CASCADE,
                                related_name="+")
+    institution = models.ForeignKey("Institution",
+                                    on_delete=models.CASCADE,
+                                    related_name="documents")
     data = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

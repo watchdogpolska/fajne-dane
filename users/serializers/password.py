@@ -2,12 +2,12 @@ from typing import Dict
 
 from rest_framework import serializers
 
-from fajne_dane.core import RetrieveModelSerializer
-from users.exceptions import PasswordsNotMatch
+from users.exceptions import PasswordsNotMatch, ActivationNotFound
+from users.models import ActivationToken
 from users.models.user import User
 
 
-class PasswordResetSerializer(RetrieveModelSerializer):
+class PasswordResetSerializer(serializers.Serializer):
     token = serializers.CharField(required=True)
     password = serializers.CharField(
         write_only=True, required=True, style={'input_type': 'password'})
@@ -22,6 +22,12 @@ class PasswordResetSerializer(RetrieveModelSerializer):
         instance.set_password(validated_data['password'])
         instance.save()
         return instance
+
+    def retrieve(self) -> ActivationToken:
+        token = ActivationToken.objects.filter(token=self.validated_data['token']).first()
+        if not token:
+            raise ActivationNotFound()
+        return token
 
 
 class PasswordChangeSerializer(serializers.Serializer):

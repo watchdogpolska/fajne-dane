@@ -19,15 +19,7 @@ class DocumentQuery(models.Model):
     status = models.CharField(max_length=12,
                               choices=DocumentQueryStatus.choices,
                               default=DocumentQueryStatus.CREATED)
-
-    @property
-    def accepted_record(self) -> "Record":
-        """
-        Selects accepted record for this query in this document.
-
-        :returns: a record with an ACCEPTED status
-        """
-        return self.records.filter(status=RecordStatus.ACCEPTED).first()
+    accepted_record = models.OneToOneField("Record", on_delete=models.CASCADE, blank=True, null=True)
 
     @transaction.atomic
     def update_status(self):
@@ -47,3 +39,11 @@ class DocumentQuery(models.Model):
             self.save()
 
         self.document.update_status()  # update document status
+
+    def accept_record(self, record: "Record"):
+        self.records.exclude(id=record.id).update(status=RecordStatus.REJECTED)
+        record.status = RecordStatus.ACCEPTED
+        record.save()
+        self.accepted_record = record
+        self.save()
+        self.update_status()

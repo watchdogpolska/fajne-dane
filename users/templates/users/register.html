@@ -1,0 +1,60 @@
+{% extends "users/base.html" %}
+
+{% block main %}
+
+    <main class="form-signin">
+        <form method="post" action="{% url 'users:account-register' %}">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Zarejestruj się</h1>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="name@example.pl">
+                        <label for="floatingEmail">Adres email</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingName" name="name" placeholder="Anna Nowak">
+                        <label for="floatingName">Imię i naziwsko</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="password" class="form-control first-password" name="password" id="floatingPassword1" placeholder="Hasło">
+                        <label for="floatingPassword1">Hasło</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="password" class="form-control second-password" name="password_confirmation" id="floatingPassword2" placeholder="Powtórz hasło">
+                        <label for="floatingPassword2">Potwórz hasło</label>
+                    </div>
+                </div>
+            </div>
+            <div class="text-danger">
+                {% for error in errors %}
+                    <p>
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" style="margin-top: 10px" type="submit">Zarejestruj</button>
+        </form>
+        <div>
+            <a href="{% url 'users:account-login' %}">Zaloguj się</a>
+        </div>
+        <div>
+            <a href="{% url 'index' %}">Wróc do strony głównej</a>
+        </div>
+    </main>
+
+{% endblock %}

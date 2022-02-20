@@ -32,5 +32,8 @@ class RecordCreate(generics.CreateAPIView):
 
         source, _ = UserSource.objects.get_or_create(user=request.user)
         serializer.save(parent_id=self.kwargs['doc_query_id'], source_id=source.id)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        instance = serializer.instance
+        instance.accept()
+        output_serializer = self.get_serializer(instance)
+        headers = self.get_success_headers(output_serializer.data)
+        return Response(output_serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -4,6 +4,7 @@ from rest_framework import serializers
 from campaigns.models import Document, Campaign
 from campaigns.models.dto import DocumentDTO
 from campaigns.serializers import DocumentQuerySerializer
+from campaigns.serializers.sources import SourceSerializer
 from campaigns.serializers.sources.utils import get_source_serializer
 from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer
 
@@ -15,17 +16,12 @@ def _validate_attrs(campaign: Campaign, attrs: Dict):
 
 
 class DocumentSerializer(ReadUpdateOnlyModelSerializer):
-    source = serializers.SerializerMethodField()
+    source = SourceSerializer()
 
     class Meta:
         model = Document
-        fields = ['id', 'source', 'status', 'created']
-        read_only_fields = ['id', 'source', 'status', 'created']
-
-    def get_source(self, obj):
-        source = obj.source.to_child()
-        serializer = get_source_serializer(source.type)
-        return serializer(source).data
+        fields = ['id', 'source', 'status', 'created', 'data']
+        read_only_fields = ['id', 'source', 'status', 'created', 'data']
 
     def validate(self, attrs):
         if self.instance:

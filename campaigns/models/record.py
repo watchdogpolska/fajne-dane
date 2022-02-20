@@ -28,7 +28,4 @@ class Record(models.Model):
         """
         Accepts selected record as a final record for given query and document.
         """
-        self.parent.records.exclude(id=self.id).update(status=RecordStatus.REJECTED)
-        self.status = RecordStatus.ACCEPTED
-        self.save()
-        self.parent.update_status()
+        self.parent.accept_record(self)

@@ -5,13 +5,13 @@ from rest_framework import mixins
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from fajne_dane.consts import Platform
 from users.exceptions import EmailNotFound
 from users.serializers.activation_token import ActivationTokenSerializer
 from users.serializers.user import UserRegistrationSerializer, UserEmailSerializer
 
 
-class UserRegister(mixins.CreateModelMixin,
-                       generics.GenericAPIView):
+class UserRegister(mixins.CreateModelMixin, generics.GenericAPIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = (AllowAny,)
     authentication_classes = []
@@ -20,7 +20,7 @@ class UserRegister(mixins.CreateModelMixin,
         """Creates a new User object and sends registration email."""
         super().perform_create(serializer)
         user = serializer.instance
-        user.send_registration_email()
+        user.send_registration_email(platform=Platform.API)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -58,6 +58,7 @@ class TokenReactivate(generics.GenericAPIView):
             user = serializer.retrieve()
             if not user:
                 raise EmailNotFound()
-            user.send_registration_email()
+            platform = request.GET.get("platform", Platform.API)
+            user.send_registration_email(platform=platform)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

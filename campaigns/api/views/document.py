@@ -7,7 +7,7 @@ from campaigns.models import Document, UserSource
 
 
 class DocumentList(generics.ListAPIView):
-    serializer_class = DocumentFullSerializer
+    serializer_class = DocumentSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):

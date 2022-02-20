@@ -6,3 +6,4 @@ from .output_field import OutputField
 from .query import Query
 from .record import Record
 from .document_data_field import DocumentDataField
+from .instituion import Institution

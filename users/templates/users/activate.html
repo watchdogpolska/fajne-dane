@@ -1,0 +1,33 @@
+{% extends "users/base.html" %}
+
+{% block main %}
+
+    <main class="form-signin">
+        {% if errors %}
+            <h1 class="h3 mb-3 fw-normal">Błąd aktywacji konta</h1>
+            <p>
+                Aktywacja konta zokończona niepowodzeniem. Podczas aktywacji napotkano na poniższe błędy:
+            </p>
+            <div class="text-danger">
+                {% for error in errors %}
+                    <p>
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h1 class="h3 mb-3 fw-normal">Konto zostało aktywowane</h1>
+            <p>
+                Proces aktywacji konta został zakończony powodzeniem. Naciśnij poniższy przycisk,
+                aby przejść do ekranu logowania.
+            </p>
+            <div>
+                <a href="{% url 'users:account-login' %}">Zaloguj się</a>
+            </div>
+        {% endif %}
+        <div>
+            <a href="{% url 'index' %}">Wróc do strony głównej</a>
+        </div>
+    </main>
+
+{% endblock %}

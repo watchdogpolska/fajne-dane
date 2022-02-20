@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from users.exceptions import ObjectNotFound
+
 
 class RetrieveModelSerializer(serializers.Serializer):
 
@@ -13,17 +15,26 @@ class RetrieveModelSerializer(serializers.Serializer):
     def key_fields(self):
         return getattr(self.Meta, 'key_fields', None)
 
-    def retrieve(self, **kwargs):
-        validated_data = {**self.validated_data, **kwargs}
+    def _load_instance(self, args):
+        validated_data = {**args}
         if self.key_fields:
-            validated_data = {k: validated_data[k] for k in self.key_fields}
+            validated_data = {k: args[k] for k in self.key_fields}
 
         model = self.get_model()
-        instance = model.objects.filter(**validated_data).first()
-        return instance
+        self.instance = model.objects.filter(**validated_data).first()
+
+    def retrieve(self):
+        return self.instance
 
     def create(self, validated_data):
         raise NotImplemented()
 
     def update(self, instance, validated_data):
         raise NotImplemented()
+
+    def validate(self, attrs):
+        self._load_instance(attrs)
+        if not self.instance:
+            raise ObjectNotFound()
+
+        return super().validate(attrs)

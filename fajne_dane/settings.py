@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from datetime import timedelta
 from corsheaders.defaults import default_headers
 
 import environ
@@ -129,6 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
+    "users/static"
 ]
 
 # Default primary key field type
@@ -163,6 +165,11 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 
+# URLS
+API_URL = os.environ.get('API_URL', '')
+PANEL_URL = os.environ.get('PANEL_URL', '')
+
+
 USER_ID_FIELD = "email"
 
 #AUTHENTICATION_BACKENDS = ('users.backends.EmailBackend',)
@@ -187,3 +194,13 @@ EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_EXPIRATION_HOURS = int(env('EMAIL_EXPIRATION_HOURS'))
+
+
+# JWT Tokens
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
+}

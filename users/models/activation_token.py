@@ -21,15 +21,19 @@ class ActivationToken(models.Model):
         return timezone.now() > expiration_time
 
     def activate(self):
-        if self.is_used:
-            raise ActivationTokenUsed()
-        if self.is_expired:
-            raise ActivationTokenExpired()
+        self.use()
+
         if self.user.is_active:
             raise UserAlreadyActive()
 
         self.user.is_active = True
         self.user.save()
+
+    def use(self):
+        if self.is_used:
+            raise ActivationTokenUsed()
+        if self.is_expired:
+            raise ActivationTokenExpired()
         self.is_used = True
         self.save()
 

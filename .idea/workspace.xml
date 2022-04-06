@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/campaigns/serializers/general.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/api/views/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/document_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document_query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_query.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +296,7 @@
       <workItem from="1648713677283" duration="626000" />
       <workItem from="1648822008313" duration="1000" />
       <workItem from="1648911658982" duration="103000" />
-      <workItem from="1649273660045" duration="3123000" />
+      <workItem from="1649273660045" duration="6096000" />
     </task>
     <servers />
   </component>

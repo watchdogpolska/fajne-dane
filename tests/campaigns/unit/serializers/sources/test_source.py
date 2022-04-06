@@ -15,6 +15,7 @@ class SourceSerializerTestCase(TestCase):
             {
                 'id': source.id,
                 'name': source.name,
+                'type': source.type
             }
         )
 

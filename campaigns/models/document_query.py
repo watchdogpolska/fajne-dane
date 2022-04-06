@@ -19,6 +19,7 @@ class DocumentQuery(models.Model):
     status = models.CharField(max_length=12,
                               choices=DocumentQueryStatus.choices,
                               default=DocumentQueryStatus.CREATED)
+
     accepted_record = models.OneToOneField("Record", on_delete=models.CASCADE, blank=True, null=True)
 
     @transaction.atomic
@@ -28,7 +29,7 @@ class DocumentQuery(models.Model):
         """
         last_status = self.status
         if self.status == DocumentQueryStatus.CREATED:  # check if at least one record added
-            if self.records.count():
+            if self.records.count() > 0:
                 self.status = DocumentQueryStatus.INITIALIZED
 
         if self.status == DocumentQueryStatus.INITIALIZED:  # check if the record was accepted

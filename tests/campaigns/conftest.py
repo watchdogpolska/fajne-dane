@@ -2,7 +2,7 @@ from typing import List, Dict
 
 from django.utils import timezone
 
-from campaigns.models import Campaign, DocumentQuery
+from campaigns.models import Campaign, DocumentQuery, Institution
 from campaigns.models import Document, Query, OutputField, FileSource, UserSource
 from campaigns.models.dto import DocumentDTO
 from campaigns.models.factory import campaign_factory
@@ -80,7 +80,8 @@ def basic_document():
     return Document.objects.create(
         campaign=campaign,
         source=basic_file_source(campaign),
-        data={"institution_id": 1}
+        data={"institution_id": 1},
+        institution=basic_institution()
     )
 
 
@@ -164,3 +165,6 @@ def basic_campaign_dtos() -> List[DocumentDTO]:
     parsing_report = parser.parse(basic_campaign_dataset())
     return parsing_report.documents
 
+
+def basic_institution() -> Institution:
+    return Institution.objects.create(key="1")

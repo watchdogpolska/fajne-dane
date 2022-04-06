@@ -5,50 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/api/views/doc_query.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/campaigns/models/instituion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fajne_dane/consts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_query.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/swagger/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/activate.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/change-password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/reset-password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/serializers/general.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/api/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/api/views/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/record.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/record.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/document_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document_query.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/record.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/record.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/serializers/campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/campaign.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/serializers/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/document_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/document_query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/serializers/sources/source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/serializers/sources/source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fajne_dane/core/emails/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/core/emails/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fajne_dane/core/serializers/retrieve_model_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/core/serializers/retrieve_model_serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fajne_dane/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fajne_dane/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fajne_dane/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/password.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api/views/registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api/views/registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/activation_token.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/activation_token.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models/user/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models/user/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/password.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_query.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +53,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/document_query.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_document_query.py" root0="FORCE_HIGHLIGHTING" />
@@ -109,6 +84,7 @@
     <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/campaign.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/output_field.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/parsing_report.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/urls.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/record.py" root0="FORCE_HIGHLIGHTING" />
@@ -127,17 +103,24 @@
     <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/validation.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_record.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/fajne_dane/core/exceptions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Procfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/users/unit/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Dockerfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/manage.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/requirements.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/tokens.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_registration.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_details.py" root0="FORCE_HIGHLIGHTING" />
@@ -148,6 +131,7 @@
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_record.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/general.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/api/views/template.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_data_field.py" root0="FORCE_HIGHLIGHTING" />
@@ -169,7 +153,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/campaigns/api/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../safariverse-nft" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -314,7 +298,21 @@
       <workItem from="1645231008616" duration="5238000" />
       <workItem from="1645298187120" duration="125000" />
       <workItem from="1645315216516" duration="3272000" />
-      <workItem from="1645379131762" duration="616000" />
+      <workItem from="1645379131762" duration="1227000" />
+      <workItem from="1645401667811" duration="14000" />
+      <workItem from="1645401946749" duration="2007000" />
+      <workItem from="1645404127557" duration="610000" />
+      <workItem from="1645648707721" duration="799000" />
+      <workItem from="1648334116734" duration="1117000" />
+      <workItem from="1648340586595" duration="2803000" />
+      <workItem from="1648460503432" duration="12000" />
+      <workItem from="1648478548722" duration="4361000" />
+      <workItem from="1648593714545" duration="3345000" />
+      <workItem from="1648667671789" duration="107000" />
+      <workItem from="1648713677283" duration="626000" />
+      <workItem from="1648822008313" duration="1000" />
+      <workItem from="1648911658982" duration="103000" />
+      <workItem from="1649273660045" duration="3123000" />
     </task>
     <servers />
   </component>

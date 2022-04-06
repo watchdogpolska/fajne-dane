@@ -8,3 +8,4 @@ from .parsing_report import DocumentParsingReportSerializer, ParsingReportSerial
 from .validation import ValidationErrorSerializer, ValidationReportSerializer
 from .template import TemplateContentSerializer
 from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer
+from .general import IdListSerializer

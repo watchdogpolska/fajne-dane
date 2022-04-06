@@ -1,10 +1,8 @@
 from django.test import TestCase
 
-from campaigns.models.consts import DocumentQueryStatus
 from campaigns.serializers import DocumentQuerySerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_document_query
-from tests.utils import serialize_date
 
 
 class DocumentQuerySerializerTestCase(TestCase):
@@ -16,13 +14,21 @@ class DocumentQuerySerializerTestCase(TestCase):
         self.assertEqual(
             serializer.data,
             {
-                'id': dq.id,
-                'status': dq.status.name,
-                'query': {
-
+                "id": dq.id,
+                "query": {
+                    "id": dq.query.id,
+                    "order": 0,
+                    "name": "question 1",
+                    "data": {
+                        "question": {
+                            "name": "question",
+                            "value": "What is it?",
+                            "type": "str",
+                            "widget": "label"
+                        }
+                    }
                 },
-                'created': serialize_date(dq.created),
-                'document_queries': []
+                "status": "CREATED"
             }
         )
 
@@ -31,21 +37,23 @@ class DocumentQuerySerializerTestCase(TestCase):
 
         serializer = DocumentQuerySerializer(
             instance,
-            status=DocumentQueryStatus.CREATED,
-            query_id=1,
-            document_id=1
+            data={
+                "query_id": 1,
+                "document_id": 1
+            }
         )
         serializer.is_valid()
-        serializer.save()
+        with self.assertRaises(NotSupported):
+            serializer.save()
 
-        instance.refresh_from_db()
-        self.assertEqual(instance.data, {"institution_id": "123"})
 
     def test_create(self):
         serializer = DocumentQuerySerializer(
-            status=DocumentQueryStatus.CREATED,
-            query_id=1,
-            document_id=1
+            data={
+                'status': "NONE",
+                'query_id': 1,
+                'document_queries': []
+            }
         )
         serializer.is_valid()
         with self.assertRaises(NotSupported):

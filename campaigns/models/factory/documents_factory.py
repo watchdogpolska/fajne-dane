@@ -1,15 +1,16 @@
 from dataclasses import dataclass
+from django.db import transaction
 from typing import List
 
 from fajne_dane.core.base.factory import BaseFactory
-from .. import Campaign, Document, Query, Record, FileSource, DocumentQuery, Institution
+from .. import Campaign, Document, Query, Record, DocumentQuery, Institution, Source
 from ..dto import DocumentDTO, RecordDTO
 
 
 @dataclass
 class DocumentsFactory(BaseFactory):
     campaign: Campaign
-    source: FileSource
+    source: Source
 
 
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
@@ -20,7 +21,7 @@ class DocumentsFactory(BaseFactory):
         )
 
         return Document(
-            campaign=self.source.campaign,
+            campaign=self.campaign,
             source=self.source,
             data=document_dto.data,
             institution=institution
@@ -40,6 +41,7 @@ class DocumentsFactory(BaseFactory):
             probability=record_dto.probability
         )
 
+    @transaction.atomic
     def bulk_create(self, document_dtos: List[DocumentDTO]) -> List[Document]:
         """
         Creates a list of Document and their Records in bulk, based on provided list of DocumentDTOs.
@@ -69,7 +71,7 @@ class DocumentsFactory(BaseFactory):
         records = []
         for document, dto in zip(documents, document_dtos):
             for query_name, query in queries.items():
-                records_dtos = dto.records.get(query_name)
+                records_dtos = dto.records.get(query_name, [])
                 document_query = document_queries[(document.id, query.id)]
                 for record_dto in records_dtos:
                     records.append(self._create_record(document_query, record_dto))
@@ -81,6 +83,7 @@ class DocumentsFactory(BaseFactory):
 
         return documents
 
+    @transaction.atomic
     def create(self, document_dto: DocumentDTO) -> Document:
         """
         Creates Document and its Records based on provided DocumentDTO
@@ -106,7 +109,7 @@ class DocumentsFactory(BaseFactory):
         # create records
         records = []
         for query_name, query in queries.items():
-            records_dtos = document_dto.records.get(query_name)
+            records_dtos = document_dto.records.get(query_name, [])
             document_query = document_queries[(document.id, query.id)]
             for record_dto in records_dtos:
                 records.append(self._create_record(document_query, record_dto))

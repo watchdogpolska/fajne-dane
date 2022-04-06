@@ -61,7 +61,8 @@ class CampaignFullSerializerTestCase(TestCase):
                 'name': campaign.name,
                 'status': campaign.status,
                 'created': serialize_date(campaign.created),
-                'template': campaign.template
+                'template': campaign.template,
+                'document_fields_objects': campaign.document_fields_objects
             }
         )
 

@@ -176,3 +176,44 @@ class DocumentCreateTestCase(TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 403)
+
+
+class DocumentBulkDeleteTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+
+    def test_document_delete_one(self):
+        campaign = basic_campaign_with_documents()
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+
+        assert campaign.documents.count() == 4
+
+        document = campaign.documents.first()
+        response = self.client.post(
+            f"/api/v1/campaigns/{campaign.id}/documents/delete/",
+            data={"ids": [document.id]},
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 204)
+
+        assert campaign.documents.count() == 3
+
+
+    def test_document_delete_many(self):
+        campaign = basic_campaign_with_documents()
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+
+        assert campaign.documents.count() == 4
+
+        documents = campaign.documents.all()[:2]
+        response = self.client.post(
+            f"/api/v1/campaigns/{campaign.id}/documents/delete/",
+            data={"ids": [doc.id for doc in documents]},
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 204)
+
+        assert campaign.documents.count() == 2

@@ -6,7 +6,7 @@ from campaigns.models.dto import DocumentDTO
 from campaigns.serializers import DocumentQuerySerializer
 from campaigns.serializers.sources import SourceSerializer
 from campaigns.serializers.sources.utils import get_source_serializer
-from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer
+from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer, ReadOnlySerializer
 
 
 def _validate_attrs(campaign: Campaign, attrs: Dict):

@@ -2,7 +2,8 @@ from django.test import TestCase
 
 from campaigns.models import Document
 from campaigns.models.consts import DocumentStatus
-from tests.campaigns.conftest import basic_campaign, basic_file_source, advanced_campaign_with_documents
+from tests.campaigns.conftest import basic_campaign, basic_file_source, advanced_campaign_with_documents, \
+    basic_institution
 
 
 class DocumentTestCase(TestCase):
@@ -11,7 +12,8 @@ class DocumentTestCase(TestCase):
         document = Document.objects.create(
             campaign=campaign,
             source=basic_file_source(campaign),
-            data={"institution_id": 1}
+            data={"institution_id": 1},
+            institution=basic_institution()
         )
         self.assertIsInstance(document, Document)
 

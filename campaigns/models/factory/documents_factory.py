@@ -75,9 +75,16 @@ class DocumentsFactory(BaseFactory):
                 document_query = document_queries[(document.id, query.id)]
                 for record_dto in records_dtos:
                     records.append(self._create_record(document_query, record_dto))
-        Record.objects.bulk_create(records)
+        records = Record.objects.bulk_create(records)
 
         # update status:
+        for dq in document_queries.values():
+            dq.update_status()
+
+        records = Record.objects.filter(id__in=[r.id for r in records])
+        for record in records.filter(probability__gt=0.5):
+            record.accept()
+
         for dq in document_queries.values():
             dq.update_status()
 
@@ -113,9 +120,16 @@ class DocumentsFactory(BaseFactory):
             document_query = document_queries[(document.id, query.id)]
             for record_dto in records_dtos:
                 records.append(self._create_record(document_query, record_dto))
-        Record.objects.bulk_create(records)
+        records = Record.objects.bulk_create(records)
 
         # update status:
+        for dq in document_queries.values():
+            dq.update_status()
+
+        records = Record.objects.filter(id__in=[r.id for r in records])
+        for record in records.filter(probability__gt=0.5):
+            record.accept()
+
         for dq in document_queries.values():
             dq.update_status()
 

@@ -67,17 +67,28 @@ class CampaignFactoryCreatingTestCase(TestCase):
     def _test_statuses(self, documents: List[Document]):
         for document in documents:
             if document.document_queries.count() > 0:
-                self.assertEqual(document.status, DocumentStatus.INITIALIZED)
+                if document.document_queries.exclude(status=DocumentQueryStatus.CLOSED).count() == 0:
+                    self.assertEqual(document.status, DocumentStatus.CLOSED)
+                elif document.document_queries.filter(status=DocumentQueryStatus.CLOSED).count() > 0:
+                    self.assertEqual(document.status, DocumentStatus.VALIDATING)
+                else:
+                    self.assertEqual(document.status, DocumentStatus.INITIALIZED)
             else:
                 self.assertEqual(document.status, DocumentStatus.CREATED)
 
             for dq in document.document_queries.all():
                 if dq.records.count() > 0:
-                    self.assertEqual(dq.status, DocumentQueryStatus.INITIALIZED)
+                    if dq.accepted_record:
+                        self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)
+                    else:
+                        self.assertEqual(dq.status, DocumentQueryStatus.INITIALIZED)
                 else:
                     self.assertEqual(dq.status, DocumentQueryStatus.CREATED)
 
                 for record in dq.records.all():
-                    self.assertEqual(record.status, RecordStatus.NONE)
+                    if record.probability > 0.5:
+                        self.assertEqual(record.status, RecordStatus.ACCEPTED)
+                    else:
+                        self.assertEqual(record.status, RecordStatus.NONE)
 
-        self.assertEqual(self.campaign.status, CampaignStatus.INITIALIZED)
+        self.assertEqual(self.campaign.status, CampaignStatus.VALIDATING)

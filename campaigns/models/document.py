@@ -31,7 +31,6 @@ class Document(models.Model):
         Updates document's status based on its document queries.
         """
         last_status = self.status
-
         if self.status == DocumentStatus.CREATED:  # check if there is at least one document query added
             if self.document_queries.filter(status__in=[
                 DocumentQueryStatus.INITIALIZED, DocumentQueryStatus.CLOSED]).count() > 0:

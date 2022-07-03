@@ -14,12 +14,7 @@ class DocumentsFactory(BaseFactory):
 
 
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
-        institution_id = document_dto.data['institution_id']
-        institution, _ = Institution.objects.get_or_create(
-            key=institution_id,
-            name=f"Instytucja_{institution_id}"
-        )
-
+        institution = Institution.objects.get(key=document_dto.data['institution_id'])
         return Document(
             campaign=self.campaign,
             source=self.source,

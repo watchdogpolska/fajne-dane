@@ -27,3 +27,9 @@ class RecordStatus(models.TextChoices):
     ACCEPTED = 'ACCEPTED', _('Accepted')
     REJECTED = 'REJECTED', _('Rejected')
 
+
+class CampaignStatus(models.TextChoices):
+    CREATED = 'CREATED', _('Created')
+    INITIALIZED = 'INITIALIZED', _('Initialized')
+    VALIDATING = 'VALIDATING', _('Validating')
+    CLOSED = 'CLOSED', _('Closed')

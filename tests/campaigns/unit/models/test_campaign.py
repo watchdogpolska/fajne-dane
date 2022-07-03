@@ -9,7 +9,7 @@ from campaigns.models.campaign import Campaign, CampaignStatus
 from campaigns.models.dto import DocumentDTO, RecordDTO
 from tests.conftest import basic_campaign_template
 from tests.campaigns.conftest import basic_campaign_with_queries, \
-    advanced_campaign_with_queries, advanced_campaign_with_documents, basic_campaign_with_documents
+    advanced_campaign_with_queries, basic_campaign_with_documents
 
 
 class CampaignTestCase(TestCase):

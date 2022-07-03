@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/campaigns/models/dto/institution.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/models/factory/institutions_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/models/institutions/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/models/institutions/instituion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/validators/institutions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/campaigns/validators/schemas/institutions_file-schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_institutions_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_institution.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_data/campaigns/institutions_file.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/dto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/dto/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/models/instituion.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/institutions/instituion_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaigns/validators/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/validators/template.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,93 +54,93 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/document_query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_document_query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/document_query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-template.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/api/urls.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/views/password.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/utils.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/parsers/base.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/urls.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/views/registration.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/api/views/auth.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/utils.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/api/views/__init__.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/campaign.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/validators/parsing_report.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/requirements.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/users/models/activation_token.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/api/views/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/urls.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/document_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/factory/documents_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_campaign_factory.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Procfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Dockerfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/document_data_field.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/manage.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/users/unit/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/institutions/instituion.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/document_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/utils.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/core/serializers/__init__.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/parsers/base.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_details.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_registration.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/validators/parsing_report.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_document_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_record.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/core/exceptions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.cache/JetBrains/PyCharm2021.2/remote_sources/1958950115/-109814386/rest_framework/serializers.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/exceptions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/utils.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/tokens.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_output_field.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_data_field.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/sources/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/record.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/validation.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/template.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/general.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/output_field.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/parsing_report.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/urls.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/record.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/record.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/__init__.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/document_data_field.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/document.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/document.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/campaign.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/sources/source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_document.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/user_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/core/serializers/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/campaigns/serializers/template.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/validators/test_template.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/conftest.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/file_source.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/validation.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_record.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/sources/source.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/core/exceptions.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Procfile" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/users/unit/models/test_activation_token.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Dockerfile" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/manage.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/requirements.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/encoding.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/fajne_dane/core/utils/tokens.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_registration.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_auth.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/users/integration/api/views/test_details.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.cache/JetBrains/PyCharm2021.2/remote_sources/1958950115/-109814386/rest_framework/serializers.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/__init__.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/test_record.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/models/sources/conftest.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/serializers/general.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/api/views/template.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document_data_field.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/campaigns/models/instituion.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_output_field.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_document.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_record.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/tests/campaigns/unit/serializers/test_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/serializers/campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/conftest.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/models/campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_record.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/users/models/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/campaign.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/campaigns/api/views/record.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/test_data/campaigns/advanced_campaign-template.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fajne_dane/settings.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1z6XqqBbfQN8XIfKxrEdtkK4Hav" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -139,7 +154,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../safariverse-nft" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/campaigns/validators" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -150,18 +165,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/campaigns/validators" />
+      <recent name="$PROJECT_DIR$/campaigns/validators/schemas" />
+      <recent name="$PROJECT_DIR$/campaigns/models" />
       <recent name="$PROJECT_DIR$/campaigns/api/views" />
       <recent name="$PROJECT_DIR$/users/templates/users" />
-      <recent name="$PROJECT_DIR$/campaigns/models" />
-      <recent name="$PROJECT_DIR$/tests/campaigns/unit/serializers" />
-      <recent name="$PROJECT_DIR$/campaigns/serializers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/campaigns/models/institutions" />
       <recent name="$PROJECT_DIR$/users" />
       <recent name="$PROJECT_DIR$/users/templates/swagger" />
       <recent name="$PROJECT_DIR$/users/templates/users" />
       <recent name="$PROJECT_DIR$/campaigns/serializers/sources" />
-      <recent name="$PROJECT_DIR$/campaigns/validators" />
     </key>
   </component>
   <component name="RunManager">
@@ -298,7 +313,10 @@
       <workItem from="1648713677283" duration="626000" />
       <workItem from="1648822008313" duration="1000" />
       <workItem from="1648911658982" duration="103000" />
-      <workItem from="1649273660045" duration="7876000" />
+      <workItem from="1649273660045" duration="8112000" />
+      <workItem from="1655669735557" duration="3623000" />
+      <workItem from="1655713534158" duration="16000" />
+      <workItem from="1656887355588" duration="3199000" />
     </task>
     <servers />
   </component>

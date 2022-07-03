@@ -2,11 +2,12 @@ from typing import List, Dict
 
 from django.utils import timezone
 
-from campaigns.models import Campaign, DocumentQuery, Institution
+from campaigns.models import Campaign, DocumentQuery, Institution, InstitutionGroup
 from campaigns.models import Document, Query, OutputField, FileSource, UserSource
 from campaigns.models.dto import DocumentDTO
 from campaigns.models.factory import campaign_factory
 from campaigns.models.factory.documents_factory import DocumentsFactory
+from campaigns.models.institutions import InstitutionTypes
 from campaigns.parsers.data_frame_parser import DataFrameParser
 from tests.conftest import (
     basic_campaign_template, advanced_campaign_template,
@@ -166,5 +167,15 @@ def basic_campaign_dtos() -> List[DocumentDTO]:
     return parsing_report.documents
 
 
+def basic_institution_group() -> InstitutionGroup:
+    return InstitutionGroup.objects.create(
+        name="test_group",
+        type=InstitutionTypes.ORGANIZATION
+    )
+
 def basic_institution() -> Institution:
-    return Institution.objects.create(key="1")
+    return Institution.objects.create(
+        key="1",
+        name="test_1",
+        group=basic_institution_group()
+    )

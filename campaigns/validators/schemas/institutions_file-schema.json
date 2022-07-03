@@ -1,0 +1,63 @@
+{
+   "version":{
+      "name":"mdJson",
+      "version":"1.0.0"
+   },
+   "contact":[
+      {
+         "contactId":"1",
+         "organizationName":"Watchdog"
+      }
+   ],
+   "metadata":{
+
+   },
+   "$schema":"http://json-schema.org/draft-07/schema",
+   "$id":"http://example.com/example.json",
+   "type":"array",
+   "title":"The root schema",
+   "description":"The root schema comprises the entire JSON document.",
+   "default":{
+
+   },
+   "definitions": {
+      "Welcome3Element": {
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "key": {
+               "type": "string",
+               "format": "integer"
+            },
+            "name": {
+               "type": "string"
+            },
+            "metadata": {
+               "$ref": "#/definitions/Metadata"
+            }
+         },
+         "required": [
+            "key",
+            "metadata",
+            "name"
+         ],
+         "title": "Welcome3Element"
+      },
+      "Metadata": {
+         "type": "object",
+         "title": "Metadata"
+      },
+      "Any": {
+         "anyOf": [
+            {
+               "type": "integer"
+            },
+            {
+               "type": "string",
+               "format": "integer"
+            }
+         ],
+         "title": "Any"
+      }
+   }
+}

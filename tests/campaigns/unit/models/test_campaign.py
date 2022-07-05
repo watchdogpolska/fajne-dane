@@ -119,7 +119,7 @@ class CampaignStatusTestCase(TestCase):
         document = self.campaign.documents.first()
         campaign = self.campaign
 
-        self.assertEqual(campaign.status, CampaignStatus.INITIALIZED)
+        self.assertEqual(campaign.status, CampaignStatus.VALIDATING)
         self._close_document(document)
         campaign.refresh_from_db()
         self.assertEqual(campaign.status, CampaignStatus.VALIDATING)
@@ -128,7 +128,7 @@ class CampaignStatusTestCase(TestCase):
     def test_close_all_documents(self):
         campaign = self.campaign
 
-        self.assertEqual(campaign.status, CampaignStatus.INITIALIZED)
+        self.assertEqual(campaign.status, CampaignStatus.VALIDATING)
         for document in campaign.documents.all():
             self._close_document(document)
         campaign.refresh_from_db()

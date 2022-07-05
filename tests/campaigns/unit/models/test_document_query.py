@@ -29,7 +29,7 @@ class DocumentQueryStatusTestCase(TestCase):
         dq = self.document.document_queries.get(query=self.query_single)
         record = dq.records.first()
 
-        self.assertEqual(dq.status, DocumentQueryStatus.INITIALIZED)
+        self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)
         record.accept()
         dq.refresh_from_db()
         self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)

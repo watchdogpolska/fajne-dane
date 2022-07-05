@@ -27,7 +27,7 @@ class RecordStatusTestCase(TestCase):
         dq = self.document.document_queries.get(query=self.query_single)
         record = dq.records.first()
 
-        self.assertEqual(record.status, RecordStatus.NONE)
+        self.assertEqual(record.status, RecordStatus.ACCEPTED)
         record.accept()
         record.refresh_from_db()
         self.assertEqual(record.status, RecordStatus.ACCEPTED)  # this record should be accepted

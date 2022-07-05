@@ -30,7 +30,7 @@ class DocumentAdvancedStatusTestCase(TestCase):
         record = dq.records.first()
 
         document = self.document
-        self.assertEqual(document.status, DocumentStatus.INITIALIZED)
+        self.assertEqual(document.status, DocumentStatus.VALIDATING)
         record.accept()
         document.refresh_from_db()
         self.assertEqual(document.status, DocumentStatus.VALIDATING)
@@ -40,14 +40,14 @@ class DocumentAdvancedStatusTestCase(TestCase):
         record = dq.records.first()
 
         document = self.document
-        self.assertEqual(document.status, DocumentStatus.INITIALIZED)
+        self.assertEqual(document.status, DocumentStatus.VALIDATING)
         record.accept()
         document.refresh_from_db()
         self.assertEqual(document.status, DocumentStatus.VALIDATING)
 
     def test_close_document(self):
         document = self.document
-        self.assertEqual(document.status, DocumentStatus.INITIALIZED)
+        self.assertEqual(document.status, DocumentStatus.VALIDATING)
 
         for dq in self.document.document_queries.all():
             record = dq.records.first()

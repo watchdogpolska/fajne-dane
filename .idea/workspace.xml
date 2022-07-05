@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76b1f57-155d-4a4c-bbd7-1099b655191b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/campaigns/parsers/institutions_file_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/campaigns/unit/parsers/test_institutions_file_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/api/views/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/api/views/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/factory/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/factory/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/models/sources/file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaigns/parsers/data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaigns/parsers/campaign_dataset_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_campaign.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/integration/api/views/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/factory/test_documents_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/sources/test_file_source.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/parsers/test_data_frame_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_data/campaigns/institutions_file.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_data/institutions/institutions_file.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/users/integration/api/views/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/users/integration/api/views/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/users/unit/models/user/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_campaign.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/campaigns/unit/models/test_document.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,7 +304,8 @@
       <workItem from="1656922041287" duration="4000" />
       <workItem from="1656923008517" duration="119000" />
       <workItem from="1656970348945" duration="1546000" />
-      <workItem from="1657021493239" duration="4845000" />
+      <workItem from="1657021493239" duration="4977000" />
+      <workItem from="1657061463797" duration="209000" />
     </task>
     <servers />
   </component>

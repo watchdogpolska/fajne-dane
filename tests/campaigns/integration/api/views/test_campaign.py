@@ -90,7 +90,8 @@ class CampaignDetailsTestCase(TestCase):
             "name": campaign.name,
             "status": campaign.status,
             "created": serialize_date(campaign.created),
-            "template": campaign.template
+            "template": campaign.template,
+            "document_fields_objects": campaign.document_fields_objects
         })
 
     def test_get_campaign_no_permission(self):

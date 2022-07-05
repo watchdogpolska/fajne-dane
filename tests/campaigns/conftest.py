@@ -5,14 +5,15 @@ from django.utils import timezone
 from campaigns.models import Campaign, DocumentQuery, Institution, InstitutionGroup
 from campaigns.models import Document, Query, OutputField, FileSource, UserSource
 from campaigns.models.dto import DocumentDTO
-from campaigns.models.factory import campaign_factory
+from campaigns.models.factory import campaign_factory, InstitutionsFactory
 from campaigns.models.factory.documents_factory import DocumentsFactory
 from campaigns.models.institutions import InstitutionTypes
-from campaigns.parsers.data_frame_parser import DataFrameParser
+from campaigns.parsers import institutions_file_parser
+from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
 from tests.conftest import (
     basic_campaign_template, advanced_campaign_template,
     basic_campaign_dataset, advanced_campaign_dataset,
-    user1
+    user1, basic_institutions_file
 )
 
 
@@ -43,6 +44,7 @@ def advanced_campaign_with_queries() -> Campaign:
 
 
 def basic_campaign_with_documents() -> Campaign:
+    setup_institutions()
     factory = basic_campaign_documents_factory()
     document_dtos = basic_campaign_dtos()
     factory.bulk_create(document_dtos)
@@ -50,6 +52,7 @@ def basic_campaign_with_documents() -> Campaign:
 
 
 def advanced_campaign_with_documents() -> Campaign:
+    setup_institutions()
     factory = advanced_campaign_documents_factory()
     document_dtos = advanced_campaign_dtos()
     factory.bulk_create(document_dtos)
@@ -133,14 +136,14 @@ def advanced_campaign_documents_factory() -> DocumentsFactory:
     )
 
 
-def basic_campaign_data_frame_parser() -> DataFrameParser:
-    return DataFrameParser(
+def basic_campaign_data_frame_parser() -> CampaignDatasetParser:
+    return CampaignDatasetParser(
         campaign=basic_campaign_with_queries()
     )
 
 
-def advanced_campaign_data_frame_parser() -> DataFrameParser:
-    return DataFrameParser(
+def advanced_campaign_data_frame_parser() -> CampaignDatasetParser:
+    return CampaignDatasetParser(
         campaign=advanced_campaign_with_queries()
     )
 
@@ -179,3 +182,13 @@ def basic_institution() -> Institution:
         name="test_1",
         group=basic_institution_group()
     )
+
+
+def setup_institutions() -> List[Institution]:
+    if Institution.objects.count():
+        return Institution.objects.all()
+    institutions_file = basic_institutions_file()
+    institutions_dtos = institutions_file_parser.parse(institutions_file)
+    group = basic_institution_group()
+    institutions = InstitutionsFactory(group).bulk_create(institutions_dtos)
+    return institutions

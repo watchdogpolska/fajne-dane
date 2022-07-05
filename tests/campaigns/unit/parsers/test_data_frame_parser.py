@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from campaigns.models.dto import DocumentDTO
-from campaigns.parsers.data_frame_parser import DataFrameParser
+from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
 from tests.conftest import (
     advanced_campaign_dataset, wrong_advanced_campaign_dataset, basic_campaign_dataset,
     basic_campaign_dataset_wrong_no_prob
@@ -13,14 +13,14 @@ from tests.campaigns.conftest import (
 )
 
 
-class CampaignFactoryTestCase(TestCase):
+class CampaignDatasetParserTestCase(TestCase):
 
     def test_creating_parser(self):
         campaign = advanced_campaign_with_queries()
-        parser = DataFrameParser(
+        parser = CampaignDatasetParser(
             campaign=campaign
         )
-        self.assertIsInstance(parser, DataFrameParser)
+        self.assertIsInstance(parser, CampaignDatasetParser)
         self.assertEqual(parser.campaign, campaign)
 
     def test_parse_basic_data_frame(self):

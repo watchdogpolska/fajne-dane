@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from campaigns.models import FileSource, Document, Campaign
 from campaigns.models.sources.utils import load_data_frame
-from campaigns.parsers.data_frame_parser import DataFrameParser
+from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
 from campaigns.serializers import DocumentParsingReportSerializer, ParsingReportSerializer
 from campaigns.serializers.sources import FileSourceSerializer, FileSourceCreateSerializer, FileSourceContentSerializer
 from campaigns.validators.parsing_report import ParsingReport
@@ -76,7 +76,7 @@ class FileSourceValidate(views.APIView):
             campaign = Campaign.objects.get(id=campaign_id)
             file = input_serializer.validated_data['file']
             df = load_data_frame(file)
-            report = DataFrameParser(campaign).parse(df)
+            report = CampaignDatasetParser(campaign).parse(df)
             serializer = self.serializer_class(data=report.to_json())
             serializer.is_valid()
             return Response(serializer.data, status=status.HTTP_200_OK)

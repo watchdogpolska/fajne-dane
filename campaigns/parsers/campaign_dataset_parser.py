@@ -4,11 +4,10 @@ from typing import List, Tuple, Text
 import pandas as pd
 from django.core.exceptions import ValidationError
 
-from django.utils.translation import gettext_lazy as _
 from campaigns.models import Campaign, Query
 from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
-from campaigns.parsers.base import Parser
+from campaigns.parsers.base import CampaignParser
 from campaigns.validators.data_frame import DataFrameValidator
 from campaigns.validators.parsing_report import ParsingReport, DocumentParsingReport
 from campaigns.validators.report import ValidationError as ParsingError
@@ -33,8 +32,7 @@ def _parse_records(query: Query, records_data: pd.DataFrame) -> List[RecordDTO]:
 
 
 @dataclass
-class DataFrameParser(Parser):
-    campaign: Campaign
+class CampaignDatasetParser(CampaignParser):
 
     def _parse_document(self, document_data: pd.DataFrame) -> DocumentDTO:
         first_row = document_data.iloc[0]

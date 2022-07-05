@@ -27,9 +27,9 @@ class FileSource(Source):
         super().__init__(*args, **kwargs)
 
     def parse_file(self) -> ParsingReport:
-        from campaigns.parsers.data_frame_parser import DataFrameParser
+        from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
         df = load_data_frame(self.file)
-        parser = DataFrameParser(campaign=self.campaign)
+        parser = CampaignDatasetParser(campaign=self.campaign)
         report = parser.parse(df)
         return report
 

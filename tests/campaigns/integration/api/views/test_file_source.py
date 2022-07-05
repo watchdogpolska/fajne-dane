@@ -3,7 +3,7 @@ from django.utils.datetime_safe import datetime
 
 from campaigns.models import FileSource
 from tests.campaigns.conftest import basic_campaign, basic_campaign_with_documents, advanced_campaign_with_documents, \
-    basic_campaign_with_queries, advanced_campaign_with_queries
+    basic_campaign_with_queries, advanced_campaign_with_queries, setup_institutions
 from tests.conftest import user1, basic_campaign_documents_file, wrong_advanced_campaign_documents_file
 from tests.utils import serialize_date
 
@@ -111,6 +111,7 @@ class FileSourceCreateTestCase(TestCase):
         user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
 
+        setup_institutions()
         campaign = basic_campaign_with_queries()
         with basic_campaign_documents_file() as fp:
             response = self.client.post(

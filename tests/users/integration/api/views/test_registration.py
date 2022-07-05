@@ -4,6 +4,7 @@ from unittest.mock import patch
 from django.test import Client, TestCase
 from django.utils import timezone
 
+from fajne_dane.consts import Platform
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from tests.conftest import user1
 from tests.users.integration.conftest import registration_payload
@@ -69,7 +70,7 @@ class UserRegistrationTestCase(TestCase):
         # check if email was sent
         user = User.objects.get(email="test@email.com")
         self.assertIsInstance(user, User)
-        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION))
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION), Platform.API)
 
     def test_post_invalid_payload(self):
         response = self.client.post('/api/v1/users/register/', registration_payload_missing_fields())
@@ -150,7 +151,7 @@ class TokenReactivationTestCase(TestCase):
         response = self.client.post('/api/v1/users/activate/resend/', user_email_payload(user))
         self.assertEqual(response.status_code, 204)
 
-        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION))
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION), Platform.API)
 
     def test_post_not_existing_user(self):
         payload = {
@@ -159,4 +160,4 @@ class TokenReactivationTestCase(TestCase):
 
         response = self.client.post('/api/v1/users/activate/resend/', payload)
         self.assertEqual(response.status_code, 400)
-        self.assertTrue("email not found" in str(response.data['detail']))
+        self.assertTrue("Object not found" in str(response.data['detail']))

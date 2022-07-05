@@ -70,7 +70,7 @@ class SendingTokenEmailsTestCase(TestCase):
     def test_sending_registration_email(self, mocked_sending):
         user = user1()
         user.send_registration_email(platform=Platform.API)
-        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION))
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.REGISTRATION), Platform.API)
 
     def test_sending_registration_email_already_active(self):
         user = user1(is_active=True)
@@ -81,4 +81,4 @@ class SendingTokenEmailsTestCase(TestCase):
     def test_sending_reset_password_email(self, mocked_sending):
         user = user1()
         user.send_reset_password_email(platform=Platform.API)
-        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.RESETTING_PASSWORD))
+        mocked_sending.assert_called_with(user, user.get_activation_token(ActionTypes.RESETTING_PASSWORD), Platform.API)

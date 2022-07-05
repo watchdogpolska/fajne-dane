@@ -10,7 +10,7 @@ from tests.campaigns.conftest import (
     advanced_campaign_dtos,
     advanced_campaign_with_queries,
     basic_file_source,
-    advanced_campaign_documents_factory
+    advanced_campaign_documents_factory, setup_institutions
 )
 
 
@@ -32,6 +32,7 @@ class CampaignFactoryTestCase(TestCase):
 
 class CampaignFactoryCreatingTestCase(TestCase):
     def setUp(self):
+        setup_institutions()
         self.factory = advanced_campaign_documents_factory()
         self.campaign = self.factory.campaign
 

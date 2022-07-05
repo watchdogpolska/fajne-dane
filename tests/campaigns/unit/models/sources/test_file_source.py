@@ -5,7 +5,8 @@ from django.utils import timezone
 from campaigns.models import Source, FileSource, Document
 from campaigns.models.sources.source import SourceTypes
 from campaigns.validators.parsing_report import ParsingReport
-from tests.campaigns.conftest import basic_campaign, basic_campaign_with_queries, advanced_campaign_with_queries
+from tests.campaigns.conftest import basic_campaign, basic_campaign_with_queries, advanced_campaign_with_queries, \
+    setup_institutions
 from tests.conftest import basic_campaign_documents_file, wrong_advanced_campaign_documents_file
 
 
@@ -32,7 +33,7 @@ def file_source_with_file() -> FileSource:
 def wrong_fake_file() -> SimpleUploadedFile:
     with wrong_advanced_campaign_documents_file(mode='rb') as f:
         return SimpleUploadedFile(
-            "input.txt",
+            "wrong_input.txt",
             f.read()
         )
 
@@ -88,6 +89,7 @@ class FileSourceTestCase(TestCase):
         self.assertEqual(len(report.file_errors), 0)
 
     def test_creating_documents(self):
+        setup_institutions()
         source = file_source_with_file()
         report = source.parse_file()
         documents = source.create_documents(report)

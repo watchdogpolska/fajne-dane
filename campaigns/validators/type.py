@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 TYPES_MAPPING = {
     "int": int,
     "str": str,
-    "float": float
+    "float": float,
+    "list": list
 }
 
 

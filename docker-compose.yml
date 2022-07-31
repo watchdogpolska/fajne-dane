@@ -21,7 +21,7 @@ services:
     command: >
       bash -c "./bin/wait-for-it.sh -t 360 ${POSTGRES_HOST}:${POSTGRES_PORT}
       && ./manage.py migrate --no-input
-      && gunicorn fajne_dane.wsgi --bind 0.0.0.0:80 --workers 2 --worker-class gevent --reload --access-logfile=-"
+      && gunicorn fajne_dane.wsgi --bind 0.0.0.0:80 --timeout 600 --workers 2 --worker-class gevent --reload --access-logfile=-"
 
   db:
     ports:

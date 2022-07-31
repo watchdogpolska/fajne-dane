@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . /app.
 
-CMD ["gunicorn", "fajne_dane.wsgi", "--bind", "0.0.0.0:80", "--workers", "2", "--worker-class", "gevent", "--access-logfile=-"]
+CMD ["gunicorn", "fajne_dane.wsgi", "--bind", "0.0.0.0:80", " --timeout", "120", "--workers", "2", "--worker-class", "gevent", "--access-logfile=-"]
 
 EXPOSE 80
 

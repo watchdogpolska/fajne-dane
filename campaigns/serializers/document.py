@@ -18,11 +18,12 @@ def _validate_attrs(campaign: Campaign, attrs: Dict):
 
 class DocumentSerializer(ReadUpdateOnlyModelSerializer):
     source = SourceSerializer()
+    institution = InstitutionSerializer(read_only=True)
 
     class Meta:
         model = Document
-        fields = ['id', 'source', 'status', 'created', 'data']
-        read_only_fields = ['id', 'source', 'status', 'created', 'data']
+        fields = ['id', 'source', 'status', 'institution', 'created', 'data']
+        read_only_fields = ['id', 'source', 'status', 'institution', 'created', 'data']
 
     def validate(self, attrs):
         if self.instance:

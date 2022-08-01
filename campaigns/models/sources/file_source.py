@@ -11,6 +11,13 @@ if TYPE_CHECKING:
 
 from campaigns.validators.parsing_report import ParsingReport
 
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
 class FileSource(Source):
     campaign = models.ForeignKey("Campaign",
                                  on_delete=models.CASCADE,
@@ -33,8 +40,9 @@ class FileSource(Source):
         report = parser.parse(df)
         return report
 
-    def create_documents(self, report: ParsingReport) -> List["Document"]:
+    def create_documents(self, report: ParsingReport, batch_size: int = 100) -> List["Document"]:
         from campaigns.models.factory.documents_factory import DocumentsFactory
         factory = DocumentsFactory(campaign=self.campaign, source=self)
-        documents = factory.bulk_create(report.documents)
-        return documents
+        for chunk in chunks(report.documents, batch_size):
+            print("processing chunk")
+            factory.bulk_create(chunk)

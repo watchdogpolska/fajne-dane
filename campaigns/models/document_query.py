@@ -1,3 +1,5 @@
+from typing import List
+
 from django.db import models, transaction
 
 from campaigns.models.consts import RecordStatus, DocumentQueryStatus
@@ -20,31 +22,26 @@ class DocumentQuery(models.Model):
                               choices=DocumentQueryStatus.choices,
                               default=DocumentQueryStatus.CREATED)
 
-    accepted_record = models.OneToOneField("Record", on_delete=models.CASCADE, blank=True, null=True)
-
     @transaction.atomic
     def update_status(self):
         """
         Updates the status based on its records.
         """
         last_status = self.status
-        if self.status == DocumentQueryStatus.CREATED:  # check if at least one record added
-            if self.records.count() > 0:
-                self.status = DocumentQueryStatus.INITIALIZED
-
-        if self.status == DocumentQueryStatus.INITIALIZED:  # check if the record was accepted
-            if self.accepted_record:
-                self.status = DocumentQueryStatus.CLOSED
+        if self.accepted_records.count() > 0:
+            self.status = DocumentQueryStatus.CLOSED
 
         if last_status != self.status:  # check if status has changed
             self.save()
 
         self.document.update_status()  # update document status
 
-    def accept_record(self, record: "Record"):
-        self.records.exclude(id=record.id).update(status=RecordStatus.REJECTED)
-        record.status = RecordStatus.ACCEPTED
-        record.save()
-        self.accepted_record = record
-        self.save()
+    @property
+    def accepted_records(self) -> List["Record"]:
+        return self.records.filter(status=RecordStatus.ACCEPTED)
+
+    def accept_records(self, records: List["Record"]):
+        records_ids = [r.id for r in records]
+        self.records.exclude(id__in=records_ids).update(status=RecordStatus.REJECTED)
+        self.records.filter(id__in=records_ids).update(status=RecordStatus.ACCEPTED)
         self.update_status()

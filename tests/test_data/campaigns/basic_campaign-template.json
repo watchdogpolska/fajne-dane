@@ -22,7 +22,7 @@
             ],
             "output_field": {
                 "name": "answer",
-                "widget": "radio",
+                "widget": "ChoiceField",
                 "answers": [
                     "yes",
                     "no"

@@ -22,6 +22,11 @@ class DocumentFullSerializerTestCase(TestCase):
                 'id': document.id,
                 'data': document.data,
                 'status': document.status.name,
+                'institution': {
+                    'id': document.institution.id,
+                    'key': document.institution.key,
+                    'name': document.institution.name
+                },
                 'source': {
                     'id': source.id,
                     'name': source.name,

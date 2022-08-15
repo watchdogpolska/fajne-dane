@@ -1,9 +1,10 @@
 from django.test import TestCase
 
 from campaigns.models import Document
-from campaigns.models.consts import DocumentStatus
-from tests.campaigns.conftest import basic_campaign, basic_file_source, advanced_campaign_with_documents, \
-    basic_institution
+from campaigns.models.consts import DocumentStatus, RecordStatus
+from tests.campaigns.conftest import (
+    basic_campaign, basic_file_source, advanced_campaign_with_documents, basic_institution
+)
 
 
 class DocumentTestCase(TestCase):
@@ -25,13 +26,17 @@ class DocumentAdvancedStatusTestCase(TestCase):
         self.query_single = self.campaign.queries.get(order=0)
         self.query_multiple = self.campaign.queries.get(order=2)
 
+        # reject all records
+        for dq in self.document.document_queries.all():
+            dq.records.update(status=RecordStatus.REJECTED)
+
     def test_accepting_single_records(self):
         dq = self.document.document_queries.get(query=self.query_single)
         record = dq.records.first()
 
         document = self.document
         self.assertEqual(document.status, DocumentStatus.VALIDATING)
-        record.accept()
+        dq.accept_records([record])
         document.refresh_from_db()
         self.assertEqual(document.status, DocumentStatus.VALIDATING)
 
@@ -41,9 +46,9 @@ class DocumentAdvancedStatusTestCase(TestCase):
 
         document = self.document
         self.assertEqual(document.status, DocumentStatus.VALIDATING)
-        record.accept()
+        dq.accept_records([record])
         document.refresh_from_db()
-        self.assertEqual(document.status, DocumentStatus.VALIDATING)
+        self.assertEqual(document.status, DocumentStatus.CLOSED)
 
     def test_close_document(self):
         document = self.document
@@ -51,7 +56,7 @@ class DocumentAdvancedStatusTestCase(TestCase):
 
         for dq in self.document.document_queries.all():
             record = dq.records.first()
-            record.accept()
+            dq.accept_records([record])
 
         document.refresh_from_db()
         self.assertEqual(document.status, DocumentStatus.CLOSED)

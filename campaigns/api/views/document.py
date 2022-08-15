@@ -1,21 +1,51 @@
+from rest_framework import filters
 from rest_framework import generics, status, views
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
+from campaigns.models import Document, UserSource, Campaign
+from campaigns.models.consts import DocumentStatus
 from campaigns.models.dto import DocumentDTO
 from campaigns.models.factory.documents_factory import DocumentsFactory
-from campaigns.serializers import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, IdListSerializer
-from campaigns.models import Document, UserSource, Institution, Campaign
+from campaigns.serializers import (
+    DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, IdListSerializer, DocumentIdSerializer
+)
+
+
+class StandardResultsSetPagination(LimitOffsetPagination):
+    page_size = 10
+    page_size_query_param = 'limit'
+    max_page_size = 100
+
+
+class CustomFilterBackend(filters.BaseFilterBackend):
+    """
+    Filter that only allows users to see their own objects.
+    """
+    def filter_queryset(self, request, queryset, view):
+        _query = request.query_params.get("query")
+        _order = request.query_params.get("order", "created")
+        _status = request.query_params.get("status")
+
+        queryset = queryset.order_by(_order)
+        if _query:
+            queryset = queryset.filter(institution__name__icontains=_query)
+        if _status:
+            queryset = queryset.filter(status=_status)
+        return queryset
 
 
 class DocumentList(generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = (AllowAny,)
+    filter_backends = [CustomFilterBackend]
+    search_fields = ['query', 'order', 'status']
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
-        documents = Document.objects.filter(campaign_id=campaign_id)
-        return documents
+        return Document.objects.filter(campaign_id=campaign_id)
 
 
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -59,3 +89,14 @@ class DocumentBulkDelete(views.APIView):
             documents.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+class GetUnsolvedDocument(generics.RetrieveAPIView):
+    permission_classes = (IsAdminUser,)
+    serializer_class = DocumentIdSerializer
+
+    def get_object(self):
+        campaign_id = self.kwargs.get("pk")
+        return Document.objects \
+            .filter(campaign_id=campaign_id) \
+            .exclude(status__in=[DocumentStatus.CLOSED]).first()

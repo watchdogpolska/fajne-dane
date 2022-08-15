@@ -11,14 +11,12 @@ class CampaignStatus(models.TextChoices):
 
 class DocumentStatus(models.TextChoices):
     CREATED = 'CREATED', _('Created')
-    INITIALIZED = 'INITIALIZED', _('Initialized')
     VALIDATING = 'VALIDATING', _('Validating')
     CLOSED = 'CLOSED', _('Closed')
 
 
 class DocumentQueryStatus(models.TextChoices):
     CREATED = 'CREATED', _('Created')
-    INITIALIZED = 'INITIALIZED', _('Initialized')
     CLOSED = 'CLOSED', _('Closed')
 
 

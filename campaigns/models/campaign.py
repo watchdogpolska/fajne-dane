@@ -43,10 +43,6 @@ class Campaign(models.Model):
 
         if self.status == CampaignStatus.CREATED:
             if self.documents.count() > 0:  # check if at least one document added
-                self.status = CampaignStatus.INITIALIZED
-
-        if self.status == CampaignStatus.INITIALIZED:  # at least one document was checked
-            if self.documents.exclude(status__in=[DocumentStatus.CREATED, DocumentStatus.INITIALIZED]).count() > 0:
                 self.status = CampaignStatus.VALIDATING
 
         if self.status != CampaignStatus.CREATED:  # all documents are closed

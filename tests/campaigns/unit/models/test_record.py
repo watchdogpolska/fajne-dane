@@ -28,15 +28,14 @@ class RecordStatusTestCase(TestCase):
         record = dq.records.first()
 
         self.assertEqual(record.status, RecordStatus.ACCEPTED)
-        record.accept()
+        dq.accept_records([record])
         record.refresh_from_db()
         self.assertEqual(record.status, RecordStatus.ACCEPTED)  # this record should be accepted
 
     def test_accepting_multiple_records(self):
         dq = self.document.document_queries.get(query=self.query_multiple)
         record = dq.records.first()
-
-        record.accept()
+        dq.accept_records([record])
 
         # only one record should be accepted
         self.assertEqual(dq.records.filter(status=RecordStatus.ACCEPTED).count(), 1)

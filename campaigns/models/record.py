@@ -22,10 +22,3 @@ class Record(models.Model):
                               default=RecordStatus.NONE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    @transaction.atomic
-    def accept(self):
-        """
-        Accepts selected record as a final record for given query and document.
-        """
-        self.parent.accept_record(self)

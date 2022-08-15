@@ -61,7 +61,7 @@ class FileSourceCreate(generics.CreateAPIView):
         if not report.is_valid:
             return Response(output_serializer.data, status=status.HTTP_400_BAD_REQUEST, headers=headers)
 
-        # instance.create_documents(report)
+        instance.create_documents(report)
         return Response(output_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 

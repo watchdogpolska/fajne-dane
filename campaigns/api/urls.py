@@ -3,14 +3,13 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from .views import (
     CampaignList, CampaignDetail, CampaignCreate,
-    DocumentList, DocumentDetail, DocumentCreate,
+    DocumentList, DocumentDetail, DocumentCreate, GetUnsolvedDocument,
     QueryList, QueryDetail,
     RecordList, RecordCreate, RecordDetail,
     FileSourceList, FileSourceCreate, FileSourceDetail, FileSourceValidate,
     GetMetaTemplate, ValidateCampaignTemplate,
     DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete
 )
-
 
 urlpatterns = [
     path('', CampaignList.as_view(), name="campaigns_list"),
@@ -23,6 +22,7 @@ urlpatterns = [
     path('<int:campaign_id>/sources/create/', FileSourceCreate.as_view(), name="file_source_create"),
     path('<int:campaign_id>/sources/<int:pk>/', FileSourceDetail.as_view(), name="file_source_detail"),
     path('<int:campaign_id>/documents/', DocumentList.as_view(), name="campaigns_documents_list"),
+    path('<int:pk>/documents/next/', GetUnsolvedDocument.as_view(), name="get_unsolved_document"),
     path('<int:campaign_id>/documents/create/', DocumentCreate.as_view(), name="document_create"),
     path('<int:campaign_id>/documents/delete/', DocumentBulkDelete.as_view(), name="document_bulk_delete"),
     path('documents/<int:pk>/', DocumentDetail.as_view(), name="documents_details"),

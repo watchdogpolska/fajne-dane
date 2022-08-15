@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
 from campaigns.serializers import RecordSerializer
-from campaigns.models import Record, UserSource
+from campaigns.models import Record, UserSource, DocumentQuery
 
 
 class RecordList(generics.ListAPIView):
@@ -27,13 +27,15 @@ class RecordCreate(generics.CreateAPIView):
     permission_classes = (IsAdminUser,)
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
 
+        dq = DocumentQuery.objects.get(id=self.kwargs['doc_query_id'])
         source, _ = UserSource.objects.get_or_create(user=request.user)
-        serializer.save(parent_id=self.kwargs['doc_query_id'], source_id=source.id)
-        instance = serializer.instance
-        instance.accept()
-        output_serializer = self.get_serializer(instance)
+        serializer.save(parent_id=dq.id, source_id=source.id)
+        instances = serializer.instance
+        dq.accept_records(instances)
+
+        output_serializer = self.get_serializer(instances, many=True)
         headers = self.get_success_headers(output_serializer.data)
         return Response(output_serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 
 from campaigns.models import Document
+from campaigns.models.consts import DocumentStatus
 from tests.campaigns.conftest import (
     basic_campaign_with_documents, advanced_campaign_with_documents, basic_campaign
 )
@@ -24,7 +25,7 @@ class DocumentListTestCase(TestCase):
         self.assertEqual(len(response.data), campaign.documents.count())
         self.assertTrue(len(response.data) < Document.objects.count())
 
-        response_document_ids = set([d['id'] for d in response.data])
+        response_document_ids = {d['id'] for d in response.data}
         expected_document_ids = set(campaign.documents.values_list('id', flat=True))
         self.assertEqual(expected_document_ids, response_document_ids)
 
@@ -65,6 +66,11 @@ class DocumentDetailsTestCase(TestCase):
                 'id': source.id,
                 'name': source.name,
                 'type': source.type
+            },
+            'institution': {
+                'id': document.institution.id,
+                'key': document.institution.key,
+                'name': document.institution.name
             },
             'document_queries': [
                 {
@@ -217,3 +223,20 @@ class DocumentBulkDeleteTestCase(TestCase):
         self.assertEqual(response.status_code, 204)
 
         assert campaign.documents.count() == 2
+
+
+class GetUnsolvedDocumentTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_document_get(self):
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+        campaign = basic_campaign_with_documents()
+        response = self.client.get(f"/api/v1/campaigns/{campaign.id}/documents/next/")
+        document = campaign.documents.exclude(status__in=[DocumentStatus.CLOSED]).first()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            "id": document.id
+        })

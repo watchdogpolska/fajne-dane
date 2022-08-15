@@ -43,3 +43,10 @@ class QueryDataSerializer(ReadOnlyModelSerializer):
         model = Query
         fields = ('id', 'order', 'name', 'data')
         read_only_fields = ['id']
+
+
+class QueryOrderSerializer(ReadOnlyModelSerializer):
+    class Meta:
+        model = Query
+        fields = ('id', 'order')
+        read_only_fields = ['id', 'order']

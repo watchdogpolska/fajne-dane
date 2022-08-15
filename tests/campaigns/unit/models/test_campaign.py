@@ -109,7 +109,7 @@ class CampaignStatusTestCase(TestCase):
     def _close_document(self, document: Document):
         for dq in document.document_queries.all():
             record = dq.records.first()
-            record.accept()
+            dq.accept_records([record])
 
     def setUp(self):
         self.campaign = basic_campaign_with_documents()

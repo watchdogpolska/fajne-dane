@@ -48,7 +48,7 @@ class CampaignDatasetParserTestCase(TestCase):
 
         self.assertEqual(len(document_dtos), 4)
         for document_dto, expected_records_values_count in \
-                zip(document_dtos, [[1, 0, 0], [1, 1, 2], [1, 1, 1], [1, 1, 1]]):
+                zip(document_dtos, [[1, 0, 0], [1, 2, 2], [1, 1, 1], [1, 1, 1]]):
             self.assertIsInstance(document_dto, DocumentDTO)
 
             records_values_counts = [len(v) for v in document_dto.records.values()]

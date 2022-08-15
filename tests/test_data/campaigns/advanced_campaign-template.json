@@ -27,7 +27,7 @@
             ],
             "output_field": {
                 "name": "answer",
-                "widget": "radio",
+                "widget": "ChoiceField",
                 "answers": [
                     "tak",
                     "nie (w tym odmowa lub wydłużenie terminu odpowiedzi)",
@@ -52,7 +52,7 @@
             ],
             "output_field": {
                 "name": "answer",
-                "widget": "multi_with_other",
+                "widget": "CheckboxField",
                 "answers": [
                     "informacyjną",
                     "promocyjną",
@@ -64,7 +64,7 @@
                     "other_label": "inną, jaką?",
                     "other_position": 4
                 },
-                "type": "str",
+                "type": "list",
                 "validation": false,
                 "default_answer": 4
             }
@@ -82,7 +82,7 @@
             ],
             "output_field": {
                 "name": "answer",
-                "widget": "radio",
+                "widget": "ChoiceField",
                 "answers": [
                     "umieszczane są tylko informacje, które znalazły się wcześniej w BIP lub na stronie internetowej urzędu.",
                     "facebook to pierwsze i najszybsze miejsce umieszczania informacji, tam informacje trafiają w pierwszej kolejności.",

@@ -92,8 +92,7 @@ class FileSourceTestCase(TestCase):
         setup_institutions()
         source = file_source_with_file()
         report = source.parse_file()
-        documents = source.create_documents(report)
+        source.create_documents(report)
 
-        self.assertIsInstance(documents[0], Document)
-        self.assertEqual(len(documents), 4)
+        self.assertEqual(Document.objects.count(), 4)
         self.assertEqual(source.campaign.documents.count(), 4)

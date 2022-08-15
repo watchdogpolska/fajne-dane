@@ -1,6 +1,6 @@
 from django.db import models, transaction
 
-from campaigns.models.consts import DocumentStatus, RecordStatus, DocumentQueryStatus
+from campaigns.models.consts import DocumentStatus, DocumentQueryStatus
 
 
 class Document(models.Model):
@@ -32,12 +32,7 @@ class Document(models.Model):
         """
         last_status = self.status
         if self.status == DocumentStatus.CREATED:  # check if there is at least one document query added
-            if self.document_queries.filter(status__in=[
-                DocumentQueryStatus.INITIALIZED, DocumentQueryStatus.CLOSED]).count() > 0:
-                self.status = DocumentStatus.INITIALIZED
-
-        if self.status == DocumentStatus.INITIALIZED:  # check if one of document query has been closed
-            if self.document_queries.filter(status=DocumentQueryStatus.CLOSED).count() > 0:
+            if self.document_queries.filter(status__in=[DocumentQueryStatus.CLOSED]).count() > 0:
                 self.status = DocumentStatus.VALIDATING
 
         if self.status == DocumentStatus.VALIDATING:  # every document query has been closed

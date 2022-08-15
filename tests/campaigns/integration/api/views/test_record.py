@@ -139,21 +139,28 @@ class RecordCreateTestCase(TestCase):
 
         response = self.client.post(
             f"/api/v1/campaigns/doc-queries/{dq.id}/records/create/",
-            data={
-                "parent": dq.id,
-                "value": "yes",
-                "probability": 0.3
-            },
+            data=[
+                {
+                    "parent": dq.id,
+                    "value": "yes",
+                    "probability": 1.0
+                },
+                {
+                    "parent": dq.id,
+                    "value": "no",
+                    "probability": 1.0
+                }
+            ],
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 201)
-
-        record = Record.objects.get(id=response.data['id'])
-        source = record.source.to_child()
-        self.assertEqual(source.user, user)
-        self.assertEqual(record.value, "yes")
-        self.assertEqual(record.probability, 0.3)
-        self.assertEqual(record.parent, dq)
+        for result in response.data:
+            record = Record.objects.get(id=result['id'])
+            source = record.source.to_child()
+            self.assertEqual(source.user, user)
+            self.assertEqual(record.probability, 1.0)
+            self.assertEqual(record.parent, dq)
+        self.assertEqual(dq.accepted_records.count(), 2)
 
     def test_record_create_wrong_value(self):
         user = user1(is_active=True, is_staff=True)
@@ -165,16 +172,19 @@ class RecordCreateTestCase(TestCase):
 
         response = self.client.post(
             f"/api/v1/campaigns/doc-queries/{dq.id}/records/create/",
-            data={
-                "parent": dq.id,
-                "value": "other",
-                "probability": 0.3
-            },
+            data=[
+                {
+                    "parent": dq.id,
+                    "value": "other",
+                    "probability": 0.3
+                }
+            ],
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(len(response.data['value']), 1),
-        self.assertEqual(str(response.data['value'][0]),
+        self.assertEqual(len(response.data), 1),
+        self.assertEqual(len(response.data[0]['value']), 1),
+        self.assertEqual(str(response.data[0]['value'][0]),
                          "Record value: 'other' not found in the list of accepted answers.")
 
     def test_record_no_permission(self):

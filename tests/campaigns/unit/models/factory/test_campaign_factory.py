@@ -34,7 +34,7 @@ class CampaignFactoryTestCase(TestCase):
 
         output_field = query.output_field
         self.assertEqual(output_field.name, "answer")
-        self.assertEqual(output_field.widget, "radio")
+        self.assertEqual(output_field.widget, "ChoiceField")
         self.assertEqual(output_field.answers, ["yes", "no"])
         self.assertEqual(output_field.metadata, {})
         self.assertEqual(output_field.type, "str")

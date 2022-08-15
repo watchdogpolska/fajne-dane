@@ -37,12 +37,10 @@ class FileSource(Source):
         from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
         df = load_data_frame(self.file)
         parser = CampaignDatasetParser(campaign=self.campaign)
-        report = parser.parse(df)
-        return report
+        return parser.parse(df)
 
     def create_documents(self, report: ParsingReport, batch_size: int = 100) -> List["Document"]:
         from campaigns.models.factory.documents_factory import DocumentsFactory
         factory = DocumentsFactory(campaign=self.campaign, source=self)
         for chunk in chunks(report.documents, batch_size):
-            print("processing chunk")
             factory.bulk_create(chunk)

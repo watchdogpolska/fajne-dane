@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from campaigns.models import DocumentQuery
-from campaigns.models.consts import DocumentQueryStatus
+from campaigns.models.consts import DocumentQueryStatus, RecordStatus
 from tests.campaigns.conftest import basic_document, basic_query, advanced_campaign_with_documents
 
 
@@ -25,12 +25,16 @@ class DocumentQueryStatusTestCase(TestCase):
         self.query_single = self.campaign.queries.get(order=0)
         self.query_multiple = self.campaign.queries.get(order=2)
 
+        # reject all records
+        for dq in self.document.document_queries.all():
+            dq.records.update(status=RecordStatus.REJECTED)
+
     def test_accepting_single_records(self):
         dq = self.document.document_queries.get(query=self.query_single)
         record = dq.records.first()
 
         self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)
-        record.accept()
+        dq.accept_records([record])
         dq.refresh_from_db()
         self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)
 
@@ -38,7 +42,7 @@ class DocumentQueryStatusTestCase(TestCase):
         dq = self.document.document_queries.get(query=self.query_multiple)
         record = dq.records.first()
 
-        self.assertEqual(dq.status, DocumentQueryStatus.INITIALIZED)
-        record.accept()
+        self.assertEqual(dq.status, DocumentQueryStatus.CREATED)
+        dq.accept_records([record])
         dq.refresh_from_db()
         self.assertEqual(dq.status, DocumentQueryStatus.CLOSED)

@@ -1,3 +1,6 @@
+from collections import OrderedDict
+
+from django.db.models import Count
 from rest_framework import filters
 from rest_framework import generics, status, views
 from rest_framework.pagination import LimitOffsetPagination
@@ -11,6 +14,16 @@ from campaigns.models.factory.documents_factory import DocumentsFactory
 from campaigns.serializers import (
     DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, IdListSerializer, DocumentIdSerializer
 )
+
+
+def get_frequency_list(queryset, column):
+    frequency = queryset.values(column) \
+        .order_by(column) \
+        .annotate(count=Count(column))
+    return {
+        r[column]: r['count']
+        for r in frequency
+    }
 
 
 class StandardResultsSetPagination(LimitOffsetPagination):
@@ -46,6 +59,21 @@ class DocumentList(generics.ListAPIView):
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
         return Document.objects.filter(campaign_id=campaign_id)
+
+
+class DocumentsStatusList(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    filter_backends = [CustomFilterBackend]
+    search_fields = ['query']
+
+    def get_queryset(self):
+        campaign_id = self.kwargs.get("campaign_id")
+        return Document.objects.filter(campaign_id=campaign_id)
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        frequency = get_frequency_list(queryset, "status")
+        return Response(frequency, status=status.HTTP_201_CREATED)
 
 
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):

@@ -8,7 +8,7 @@ from .views import (
     RecordList, RecordCreate, RecordDetail,
     FileSourceList, FileSourceCreate, FileSourceDetail, FileSourceValidate,
     GetMetaTemplate, ValidateCampaignTemplate,
-    DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete
+    DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList
 )
 
 urlpatterns = [
@@ -25,6 +25,7 @@ urlpatterns = [
     path('<int:pk>/documents/next/', GetUnsolvedDocument.as_view(), name="get_unsolved_document"),
     path('<int:campaign_id>/documents/create/', DocumentCreate.as_view(), name="document_create"),
     path('<int:campaign_id>/documents/delete/', DocumentBulkDelete.as_view(), name="document_bulk_delete"),
+    path('<int:campaign_id>/documents/status/', DocumentsStatusList.as_view(), name="documents_status_list"),
     path('documents/<int:pk>/', DocumentDetail.as_view(), name="documents_details"),
     path('documents/<int:pk>/statuses/', DocumentQueryStatusList.as_view(), name="document_query_status_list"),
     path('<int:campaign_id>/queries/', QueryList.as_view(), name="campaign_queries_list"),

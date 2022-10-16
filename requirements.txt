@@ -13,6 +13,7 @@ jsonschema==3.2.0
 drf-yasg==1.20.0
 django-storages==1.11.1
 django==3.2.5
+xlsxwriter
 pandas
 numpy
 ipython

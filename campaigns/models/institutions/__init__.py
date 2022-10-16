@@ -1,2 +1,2 @@
 from .instituion import Institution
-from .instituion_group import InstitutionGroup, InstitutionTypes
+from .instituion_group import InstitutionGroup

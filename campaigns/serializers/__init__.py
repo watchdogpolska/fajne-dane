@@ -9,3 +9,4 @@ from .validation import ValidationErrorSerializer, ValidationReportSerializer
 from .template import TemplateContentSerializer
 from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, DocumentIdSerializer
 from .general import IdListSerializer
+from .institution import InstitutionSerializer

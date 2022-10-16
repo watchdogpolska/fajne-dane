@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 ] + [
     'users.apps.UsersConfig',
     'campaigns.apps.CampaignsConfig',
+    'reports.apps.ReportsConfig',
 ]
 
 MIDDLEWARE = [

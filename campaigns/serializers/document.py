@@ -4,8 +4,8 @@ from rest_framework import serializers
 
 from campaigns.models import Document, Campaign
 from campaigns.models.dto import DocumentDTO
-from campaigns.serializers import DocumentQuerySerializer
-from campaigns.serializers.institutions import InstitutionSerializer
+from campaigns.serializers.document_query import DocumentQuerySerializer
+from campaigns.serializers.institution import InstitutionSerializer
 from campaigns.serializers.sources import SourceSerializer
 from campaigns.serializers.sources.utils import get_source_serializer
 from fajne_dane.core.serializers import (

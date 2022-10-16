@@ -1,8 +1,6 @@
-from typing import Text
-
 from django.db import models
 
-from campaigns.models.institutions.instituion_group import InstitutionTypes
+from campaigns.exceptions import InstitutionParentGroupMissmatch, InstitutionGroupHasNoParent
 
 
 class Institution(models.Model):
@@ -11,11 +9,21 @@ class Institution(models.Model):
     group = models.ForeignKey("InstitutionGroup",
                              on_delete=models.CASCADE,
                              related_name="institutions")
+
+    parent = models.ForeignKey("Institution",
+                               on_delete=models.CASCADE,
+                               null=True,
+                               blank=True,
+                               related_name="children")
+
     key = models.CharField(max_length=64, unique=True)
     name = models.CharField(max_length=64)
     link = models.CharField(max_length=64)
     address = models.CharField(max_length=64)
 
-    @property
-    def type(self) -> Text:
-        return self.group.type
+    def set_parent(self, parent: "Institution"):
+        if not self.parent.parent:
+            raise InstitutionGroupHasNoParent()
+        if parent.group != self.parent.parent:
+            raise InstitutionParentGroupMissmatch()
+        self.parent = parent

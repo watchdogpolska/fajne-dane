@@ -17,6 +17,7 @@ class Query(models.Model):
     order = models.IntegerField()
     name = models.CharField(max_length=20)
     data = models.JSONField(default=dict)
+    main_question_index = models.IntegerField(default=0)
 
     output_field = models.OneToOneField(OutputField,
                                         on_delete=models.CASCADE)

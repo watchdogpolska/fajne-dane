@@ -1,32 +1,37 @@
 from dataclasses import dataclass
-from typing import List, Text
+from typing import List, Text, Dict
 
 
 @dataclass
 class InstitutionData:
+    group_id: int
     name: Text
     key: Text
-    parent_id: int
 
 
 @dataclass
 class InstitutionGroupData:
     id: int
     name: Text
+    depth: int
 
 
 @dataclass
-class InstitutionReport:
-    data: List[InstitutionData]
+class QueryData:
+    id: int
+    value: Text
 
 
 @dataclass
 class DocumentReport:
     id: int
-    institution: InstitutionReport
-    data: List[Text]
-    answers: List[Text]
+    institutions: List[InstitutionData]
+    data: Dict[Text, Text]
+    answers: Dict[int, List[Text]]
+
 
 @dataclass
 class Report:
+    queries: Dict[int, QueryData]
+    institutions_groups: Dict[int, InstitutionGroupData]
     documents: List[DocumentReport]

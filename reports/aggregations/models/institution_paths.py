@@ -12,13 +12,15 @@ InstitutionGroupPath = List[InstitutionGroup]
 class InstitutionGroupPaths:
     _paths: List[InstitutionGroupPath] = field(default_factory=list)
     _mapping: Dict[int, InstitutionGroup] = field(default_factory=dict)
+    _depth: Dict[int, int] = field(default_factory=dict)
     _max_length: int = field(init=False, default=None)
 
     def add_path(self, path: InstitutionGroupPath):
         self._paths.append(path)
-        for institution in path:
+        for depth, institution in enumerate(path):
             if institution not in self._mapping:
-               self._mapping[institution.id] = institution
+                self._depth[institution.id] = max(self._depth.get(institution.id, 0), depth)
+                self._mapping[institution.id] = institution
         self._max_length = max(map(len, self._paths))
 
     @property
@@ -33,6 +35,10 @@ class InstitutionGroupPaths:
     def mapping(self) -> Dict[int, InstitutionGroup]:
         return self._mapping
 
+    @property
+    def depth(self) -> Dict[int, int]:
+        return self._depth
+
 
 def get_group_path(group: InstitutionGroup) -> List[InstitutionGroup]:
     _group = group
@@ -40,7 +46,7 @@ def get_group_path(group: InstitutionGroup) -> List[InstitutionGroup]:
     while _group:
         _path.append(_group)
         _group = _group.parent
-    return _path
+    return list(reversed(_path))
 
 
 def create_institution_group_paths(groups_ids: List[int]) -> InstitutionGroupPaths:

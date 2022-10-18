@@ -12,18 +12,15 @@ from ...aggregations.models.institution_paths import (
 
 
 def _get_institution_fields(max_length: int) -> List[Text]:
-    core_parts = [
-        "".join(['parent__'] * index)
-        for index in range(max_length)
-    ]
-
+    core_parts = ["".join(['parent__'] * index) for index in range(max_length)]
     fields = []
     for core in core_parts:
-        fields.append(f'parent__document__institution__{core}group')
-        fields.append(f'parent__document__institution__{core}key')
-        fields.append(f'parent__document__institution__{core}name')
+        fields.extend((
+            f'parent__document__institution__{core}group',
+            f'parent__document__institution__{core}key',
+            f'parent__document__institution__{core}name'
+        ))
     return fields
-
 
 
 class CampaignDataSource(DataSource):
@@ -33,7 +30,6 @@ class CampaignDataSource(DataSource):
         if 'type' not in kwargs:
             kwargs['type'] = DataSourceTypes.CAMPAIGN
         super().__init__(*args, **kwargs)
-
 
     @property
     def records(self) -> QuerySet:
@@ -54,7 +50,6 @@ class CampaignDataSource(DataSource):
 
     def _get_document_field(self) -> List[Text]:
         # można zmienić to tak, żeby wybierać tylko niektóre pola
-        # parent__document__institution
         return [
             f"parent__document__data__{field.name}"
             for field in self.campaign.document_fields.all()

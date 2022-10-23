@@ -7,6 +7,7 @@ from django.db import models
 
 from reports.generators import FileReportBuilder
 from .report import Report
+from ...renderers.campaign_file_report.renderer import CampaignFileReportRenderer
 
 
 class FileReport(Report):
@@ -17,12 +18,7 @@ class FileReport(Report):
 
     def _generate(self):
         builder = FileReportBuilder(self)
-        df = builder.generate()
-
-        output = BytesIO()
-        writer = pd.ExcelWriter(output, engine='xlsxwriter')
-        df.to_excel(writer)
-        writer.save()
-
+        renderer = CampaignFileReportRenderer(builder.generate())
+        output = renderer.render()
         output_file = ContentFile(output.getvalue())
         self.file.save(f"{self.name}.xlsx", output_file)

@@ -19,6 +19,7 @@ class InstitutionGroupData:
 @dataclass
 class QueryData:
     id: int
+    order: int
     value: Text
 
 

@@ -1,6 +1,5 @@
 from collections import defaultdict
 from dataclasses import dataclass, field
-from functools import cache
 from itertools import groupby
 from typing import Iterable, List, Dict, Text, Any, Tuple
 
@@ -66,7 +65,8 @@ def get_queries_data(queries: List[Query]) -> Dict[int, QueryData]:
     return {
         q.id: QueryData(
             id=q.id,
-            value=q.data[q.main_question_index]
+            order=q.order,
+            value=q.data[q.main_question_index]['value']
         )
         for q in queries
     }

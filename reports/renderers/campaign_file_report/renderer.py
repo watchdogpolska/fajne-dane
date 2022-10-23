@@ -109,7 +109,6 @@ class CampaignFileReportRenderer:
             max_answers = max(max_answers, len(answers))
             for index, answer in enumerate(answers):
                 self._write_value(row_index + index, _mapping, answer, 'text')
-
         self._write_value(row_index, self._columns_mapping['document']['id'], document.id, 'text', rows=max_answers)
 
         for name, value in document.data.items():
@@ -125,7 +124,7 @@ class CampaignFileReportRenderer:
 
     def render(self) -> BytesIO:
         output = BytesIO()
-        self._workbook = Workbook("shared/test.xlsx")
+        self._workbook = Workbook(output)
         self._worksheet = self._workbook.add_worksheet()
         self._setup_formats()
         self._setup_header()

@@ -15,7 +15,7 @@ class Query(models.Model):
                                  on_delete=models.CASCADE,
                                  related_name="queries")
     order = models.IntegerField()
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=40)
     data = models.JSONField(default=dict)
     main_question_index = models.IntegerField(default=0)
 

@@ -31,3 +31,9 @@ class CampaignStatus(models.TextChoices):
     INITIALIZED = 'INITIALIZED', _('Initialized')
     VALIDATING = 'VALIDATING', _('Validating')
     CLOSED = 'CLOSED', _('Closed')
+
+
+class FileSourceStatus(models.TextChoices):
+    CREATED = 'CREATED', _('Created')
+    PROCESSING = 'PROCESSING', _('Processing')
+    FINISHED = 'FINISHED', _('Finished')

@@ -114,7 +114,9 @@ class DocumentBulkDelete(views.APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             documents = Document.objects.filter(id__in=serializer.validated_data['ids'])
+            campaign =  documents.first().campaign
             documents.delete()
+            campaign.update_status()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

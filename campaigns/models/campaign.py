@@ -41,13 +41,13 @@ class Campaign(models.Model):
         """
         last_status = self.status
 
-        if self.status == CampaignStatus.CREATED:
-            if self.documents.count() > 0:  # check if at least one document added
-                self.status = CampaignStatus.VALIDATING
+        if self.status == CampaignStatus.CREATED \
+                and self.documents.count() > 0:
+            self.status = CampaignStatus.VALIDATING
 
-        if self.status != CampaignStatus.CREATED:  # all documents are closed
-            if self.documents.exclude(status=DocumentStatus.CLOSED).count() == 0:
-                self.status = CampaignStatus.CLOSED
+        if self.status != CampaignStatus.CREATED \
+                    and self.documents.exclude(status=DocumentStatus.CLOSED).count() == 0:
+            self.status = CampaignStatus.CLOSED
 
         if last_status != self.status:
             self.save()

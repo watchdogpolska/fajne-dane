@@ -11,3 +11,7 @@ class InstitutionGroup(models.Model):
                                null=True,
                                blank=True,
                                related_name="children")
+
+    @property
+    def institutions_count(self):
+        return self.institutions.count()

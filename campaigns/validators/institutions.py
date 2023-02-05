@@ -15,8 +15,7 @@ validate_json_meta_schema(CAMPAIGN_SCHEMA)
 
 def validate_institutions_file(template: Dict):
     validator = Draft7Validator(CAMPAIGN_SCHEMA)
-    errors = sorted(validator.iter_errors(template), key=lambda e: e.path)
-    if errors:
+    if errors := sorted(validator.iter_errors(template), key=lambda e: e.path):
         raise ValidationError(errors)
 
 

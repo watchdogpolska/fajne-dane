@@ -71,7 +71,7 @@ class RegisterView(View):
             if serializer.is_valid():
                 serializer.save()
                 user = serializer.instance
-                user.send_registration_email()
+                user.send_registration_email(Platform.API)
                 return redirect('/')
             else:
                 print(serializer.errors)

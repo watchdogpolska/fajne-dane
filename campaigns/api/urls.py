@@ -8,7 +8,9 @@ from .views import (
     RecordList, RecordCreate, RecordDetail,
     FileSourceList, FileSourceCreate, FileSourceDetail, FileSourceValidate,
     GetMetaTemplate, ValidateCampaignTemplate,
-    DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList
+    DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList,
+    InstitutionGroupList, InstitutionGroupDetail,
+    InstitutionList, InstitutionDetail,
 )
 
 urlpatterns = [
@@ -20,7 +22,7 @@ urlpatterns = [
     path('<int:campaign_id>/sources/', FileSourceList.as_view(), name="file_sources_list"),
     path('<int:campaign_id>/sources/validate/', FileSourceValidate.as_view(), name="file_source_validate"),
     path('<int:campaign_id>/sources/create/', FileSourceCreate.as_view(), name="file_source_create"),
-    path('<int:campaign_id>/sources/<int:pk>/', FileSourceDetail.as_view(), name="file_source_detail"),
+    path('<int:campaign_id>/sources/<int:pk>/', FileSourceDetail.as_view(), name="file_source_details"),
     path('<int:campaign_id>/documents/', DocumentList.as_view(), name="campaigns_documents_list"),
     path('<int:pk>/documents/next/', GetUnsolvedDocument.as_view(), name="get_unsolved_document"),
     path('<int:campaign_id>/documents/create/', DocumentCreate.as_view(), name="document_create"),
@@ -34,6 +36,10 @@ urlpatterns = [
     path('doc-queries/<int:pk>/', DocumentQueryDetail.as_view(), name="document_query_details"),
     path('doc-queries/<int:doc_query_id>/records/', RecordList.as_view(), name="record_list"),
     path('doc-queries/<int:doc_query_id>/records/create/', RecordCreate.as_view(), name="record_create"),
+    path('institution-groups/', InstitutionGroupList.as_view(), name="institution_group_list"),
+    path('institution-groups/<int:pk>/', InstitutionGroupDetail.as_view(), name="institution_group_details"),
+    path('institution-groups/<int:group_id>/institutions/', InstitutionList.as_view(), name="institution_list"),
+    path('institution/<int:pk>/', InstitutionDetail.as_view(), name="institution_details"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

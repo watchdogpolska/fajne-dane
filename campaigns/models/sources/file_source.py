@@ -5,6 +5,7 @@ from django.db import models
 
 from .source import Source, SourceTypes
 from .utils import load_data_frame
+from ..consts import FileSourceStatus
 
 if TYPE_CHECKING:
     from campaigns.models import Document
@@ -27,6 +28,9 @@ class FileSource(Source):
     description = models.TextField(default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     file = models.FileField(upload_to='resources')  # uploads to S3
+    status = models.CharField(max_length=12,
+                              choices=FileSourceStatus.choices,
+                              default=FileSourceStatus.CREATED)
 
     def __init__(self, *args, **kwargs):
         if 'type' not in kwargs:

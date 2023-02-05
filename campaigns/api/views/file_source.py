@@ -18,18 +18,16 @@ class FileSourceList(generics.ListAPIView):
 
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
-        sources = FileSource.objects.filter(campaign_id=campaign_id)
-        return sources
+        return FileSource.objects.filter(campaign_id=campaign_id)
 
 
 class FileSourceDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FileSourceSerializer
     permission_classes = (IsAdminUser,)
 
-    def get_queryset(self):
+    def get_queryset(self):  # TODO: is this needed?
         campaign_id = self.kwargs.get("campaign_id")
-        sources = FileSource.objects.filter(campaign_id=campaign_id)
-        return sources
+        return FileSource.objects.filter(campaign_id=campaign_id)
 
     def delete(self, request, *args, **kwargs):
         Document.objects.filter(source_id=kwargs['pk']).delete()

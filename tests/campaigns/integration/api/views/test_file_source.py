@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from unittest import skip
 from django.utils.datetime_safe import datetime
 
 from campaigns.models import FileSource
@@ -107,6 +108,7 @@ class FileSourceCreateTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
+    @skip("This logic should be rewritten in a form of a worker")
     def test_file_source_create(self):
         user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)

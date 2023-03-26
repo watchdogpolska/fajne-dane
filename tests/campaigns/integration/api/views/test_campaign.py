@@ -106,7 +106,7 @@ class CampaignDetailsTestCase(TestCase):
         user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
 
-        response = self.client.get(f"/api/v1/campaigns/1/")
+        response = self.client.get("/api/v1/campaigns/1/")
         self.assertEqual(response.status_code, 404)
 
     def test_get_campaign_update(self):

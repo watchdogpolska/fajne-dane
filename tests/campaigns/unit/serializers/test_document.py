@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from campaigns.models import UserSource
-from campaigns.models.consts import DocumentStatus
 from campaigns.serializers import DocumentFullSerializer
 from fajne_dane.core.exceptions import NotSupported
 from tests.campaigns.conftest import basic_document
@@ -25,7 +24,7 @@ class DocumentFullSerializerTestCase(TestCase):
                 'institution': {
                     'id': document.institution.id,
                     'key': document.institution.key,
-                    'name': document.institution.name
+                    'name': document.institution.name,
                 },
                 'source': {
                     'id': source.id,

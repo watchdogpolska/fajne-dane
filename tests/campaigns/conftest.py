@@ -7,7 +7,6 @@ from campaigns.models import Document, Query, OutputField, FileSource, UserSourc
 from campaigns.models.dto import DocumentDTO
 from campaigns.models.factory import campaign_factory, InstitutionsFactory
 from campaigns.models.factory.documents_factory import DocumentsFactory
-from campaigns.models.institutions import InstitutionTypes
 from campaigns.parsers import institutions_file_parser
 from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
 from tests.conftest import (
@@ -171,17 +170,28 @@ def basic_campaign_dtos() -> List[DocumentDTO]:
 
 
 def basic_institution_group() -> InstitutionGroup:
-    return InstitutionGroup.objects.create(
+    group, _ = InstitutionGroup.objects.get_or_create(
         name="test_group",
-        type=InstitutionTypes.ORGANIZATION
     )
+    return group
 
 def basic_institution() -> Institution:
-    return Institution.objects.create(
+    institution, _ = Institution.objects.get_or_create(
         key="1",
         name="test_1",
         group=basic_institution_group()
     )
+    return institution
+
+
+def child_institution() -> Institution:
+    institution, _ = Institution.objects.get_or_create(
+        key="2",
+        parent=basic_institution(),
+        name="test_2",
+        group=basic_institution_group()
+    )
+    return institution
 
 
 def setup_institutions() -> List[Institution]:
@@ -190,5 +200,4 @@ def setup_institutions() -> List[Institution]:
     institutions_file = basic_institutions_file()
     institutions_dtos = institutions_file_parser.parse(institutions_file)
     group = basic_institution_group()
-    institutions = InstitutionsFactory(group).bulk_create(institutions_dtos)
-    return institutions
+    return InstitutionsFactory(group).bulk_create(institutions_dtos)

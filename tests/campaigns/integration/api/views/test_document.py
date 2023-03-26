@@ -70,7 +70,7 @@ class DocumentDetailsTestCase(TestCase):
             'institution': {
                 'id': document.institution.id,
                 'key': document.institution.key,
-                'name': document.institution.name
+                'name': document.institution.name,
             },
             'document_queries': [
                 {

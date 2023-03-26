@@ -4,12 +4,12 @@ from rest_framework import serializers
 
 from campaigns.models import Document, Campaign
 from campaigns.models.dto import DocumentDTO
+from campaigns.serializers.institutions import InstitutionMinimalSerializer
 from campaigns.serializers.document_query import DocumentQuerySerializer
-from campaigns.serializers.institutions.institution import InstitutionSerializer
 from campaigns.serializers.sources import SourceSerializer
 from campaigns.serializers.sources.utils import get_source_serializer
 from fajne_dane.core.serializers import (
-    ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer, ReadOnlyModelSerializer
+    ReadCreateModelSerializer, ReadUpdateModelSerializer, ReadOnlyModelSerializer
 )
 
 
@@ -19,9 +19,9 @@ def _validate_attrs(campaign: Campaign, attrs: Dict):
         campaign.validate_document(document_dto)
 
 
-class DocumentSerializer(ReadUpdateOnlyModelSerializer):
+class DocumentSerializer(ReadUpdateModelSerializer):
     source = SourceSerializer()
-    institution = InstitutionSerializer(read_only=True)
+    institution = InstitutionMinimalSerializer(read_only=True)
 
     class Meta:
         model = Document
@@ -34,10 +34,10 @@ class DocumentSerializer(ReadUpdateOnlyModelSerializer):
         return super().validate(attrs)
 
 
-class DocumentFullSerializer(ReadUpdateOnlyModelSerializer):
+class DocumentFullSerializer(ReadUpdateModelSerializer):
     source = serializers.SerializerMethodField()
     document_queries = DocumentQuerySerializer(many=True, read_only=True)
-    institution = InstitutionSerializer(read_only=True)
+    institution = InstitutionMinimalSerializer(read_only=True)
 
     class Meta:
         model = Document
@@ -55,7 +55,7 @@ class DocumentFullSerializer(ReadUpdateOnlyModelSerializer):
         return super().validate(attrs)
 
 
-class DocumentCreateSerializer(ReadCreateOnlyModelSerializer):
+class DocumentCreateSerializer(ReadCreateModelSerializer):
     class Meta:
         model = Document
         fields = ['id', 'data', 'campaign', 'status']

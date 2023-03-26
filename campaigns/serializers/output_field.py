@@ -1,9 +1,9 @@
 from campaigns.models import OutputField
 from fajne_dane.core.exceptions import NotSupported
-from fajne_dane.core.serializers import ReadCreateOnlyModelSerializer
+from fajne_dane.core.serializers import ReadCreateModelSerializer
 
 
-class OutputFieldSerializer(ReadCreateOnlyModelSerializer):
+class OutputFieldSerializer(ReadCreateModelSerializer):
 
     class Meta:
         model = OutputField

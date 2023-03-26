@@ -1,11 +1,13 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
 
-from campaigns.models import Institution
-from campaigns.serializers import InstitutionSerializer
+from campaigns.api.exceptions import InstitutionHasDocuments
+from campaigns.models import Institution, Document
+from campaigns.serializers import InstitutionSerializer, InstitutionCreateSerializer, InstitutionDetailsSerializer
 
 
-class InstitutionList(generics.ListAPIView):
+class InstitutionList(generics.ListCreateAPIView):
     serializer_class = InstitutionSerializer
     permission_classes = (IsAdminUser,)
 
@@ -15,11 +17,27 @@ class InstitutionList(generics.ListAPIView):
 
 
 class InstitutionDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = InstitutionSerializer
+    serializer_class = InstitutionDetailsSerializer
     permission_classes = (IsAdminUser,)
     queryset = Institution.objects.all()
 
     def delete(self, request, *args, **kwargs):
-        # TODO: check if no documents left
-        Institution.objects.filter(source_id=kwargs['pk']).delete()
-        raise NotImplemented()
+        documents = Document.objects.filter(institution__id=kwargs['pk'])
+        if documents.count():
+            raise InstitutionHasDocuments()
+        return super().delete(request)
+
+
+class InstitutionCreate(generics.CreateAPIView):
+    serializer_class = InstitutionCreateSerializer
+    permission_classes = (IsAdminUser,)
+    queryset = Institution.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save(group_id=self.kwargs['group_id'])
+            output_serializer = self.get_serializer(instance)
+            headers = self.get_success_headers(output_serializer.data)
+            return Response(output_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

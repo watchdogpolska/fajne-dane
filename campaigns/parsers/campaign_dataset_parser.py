@@ -85,6 +85,8 @@ class CampaignDatasetParser(CampaignParser):
             ('data_fields', f.name)
             for f in self.campaign.document_fields.all()
         ]
+        if len(document_fields_columns) == 1:  # pandas strange requirement to not pass one element lists
+            document_fields_columns = document_fields_columns[0]
 
         for _, document_rows in df.groupby(document_fields_columns, dropna=False):
             document_index, document_data = document_rows.index[0], None

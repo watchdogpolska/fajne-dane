@@ -11,7 +11,7 @@ class ReadOnlySerializer(serializers.Serializer):
         raise NotSupported()
 
 
-class ReadCreateOnlySerializer(serializers.Serializer):
+class ReadCreateSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         raise NotSupported()
 
@@ -19,7 +19,7 @@ class ReadCreateOnlySerializer(serializers.Serializer):
         return super().create(validated_data)
 
 
-class ReadUpdateOnlySerializer(serializers.Serializer):
+class ReadUpdateSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         return super().update(instance, validated_data)
 
@@ -36,7 +36,7 @@ class ReadOnlyModelSerializer(serializers.ModelSerializer):
         raise NotSupported()
 
 
-class ReadCreateOnlyModelSerializer(serializers.ModelSerializer):
+class ReadCreateModelSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         raise NotSupported()
 
@@ -44,7 +44,7 @@ class ReadCreateOnlyModelSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class ReadUpdateOnlyModelSerializer(serializers.ModelSerializer):
+class ReadUpdateModelSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         return super().update(instance, validated_data)
 

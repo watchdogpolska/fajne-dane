@@ -11,8 +11,7 @@ class QueryList(generics.ListAPIView):
 
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
-        queries = Query.objects.filter(campaign_id=campaign_id)
-        return queries
+        return Query.objects.filter(campaign_id=campaign_id)
 
 
 class QueryDetail(generics.RetrieveUpdateDestroyAPIView):

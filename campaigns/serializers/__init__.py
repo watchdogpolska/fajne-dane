@@ -9,5 +9,7 @@ from .validation import ValidationErrorSerializer, ValidationReportSerializer
 from .template import TemplateContentSerializer
 from .document import DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, DocumentIdSerializer
 from .general import IdListSerializer
-from .institutions import InstitutionSerializer, InstitutionGroupSerializer
-
+from .institutions import (
+    InstitutionSerializer, InstitutionDetailsSerializer, InstitutionCreateSerializer, InstitutionMinimalSerializer,
+    InstitutionGroupSerializer, InstitutionGroupCreateSerializer, InstitutionGroupDetailsSerializer
+)

@@ -1,11 +1,11 @@
 from campaigns.models import Query
 from campaigns.serializers.output_field import OutputFieldSerializer
 from fajne_dane.core.serializers import (
-    ReadCreateOnlyModelSerializer, ReadUpdateOnlyModelSerializer, ReadOnlyModelSerializer
+    ReadCreateModelSerializer, ReadUpdateModelSerializer, ReadOnlyModelSerializer
 )
 
 
-class QueryCreateSerializer(ReadCreateOnlyModelSerializer):
+class QueryCreateSerializer(ReadCreateModelSerializer):
     output_field = OutputFieldSerializer()
 
     class Meta:
@@ -29,7 +29,7 @@ class QueryCreateSerializer(ReadCreateOnlyModelSerializer):
         return query
 
 
-class QuerySerializer(ReadUpdateOnlyModelSerializer):
+class QuerySerializer(ReadUpdateModelSerializer):
     output_field = OutputFieldSerializer(read_only=True)
 
     class Meta:

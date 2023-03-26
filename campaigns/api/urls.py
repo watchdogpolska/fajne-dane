@@ -9,8 +9,8 @@ from .views import (
     FileSourceList, FileSourceCreate, FileSourceDetail, FileSourceValidate,
     GetMetaTemplate, ValidateCampaignTemplate,
     DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList,
-    InstitutionGroupList, InstitutionGroupDetail,
-    InstitutionList, InstitutionDetail,
+    InstitutionGroupList, InstitutionGroupDetail, InstitutionGroupCreate,
+    InstitutionList, InstitutionDetail, InstitutionCreate,
 )
 
 urlpatterns = [
@@ -37,8 +37,11 @@ urlpatterns = [
     path('doc-queries/<int:doc_query_id>/records/', RecordList.as_view(), name="record_list"),
     path('doc-queries/<int:doc_query_id>/records/create/', RecordCreate.as_view(), name="record_create"),
     path('institution-groups/', InstitutionGroupList.as_view(), name="institution_group_list"),
+    path('institution-groups/create/', InstitutionGroupCreate.as_view(), name="institution_group_create"),
     path('institution-groups/<int:pk>/', InstitutionGroupDetail.as_view(), name="institution_group_details"),
     path('institution-groups/<int:group_id>/institutions/', InstitutionList.as_view(), name="institution_list"),
+    path('institution-groups/<int:group_id>/institutions/create/', InstitutionCreate.as_view(),
+                                                                  name="institution_create"),
     path('institution/<int:pk>/', InstitutionDetail.as_view(), name="institution_details"),
 ]
 

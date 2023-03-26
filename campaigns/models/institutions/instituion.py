@@ -18,8 +18,8 @@ class Institution(models.Model):
 
     key = models.CharField(max_length=64, unique=True)
     name = models.CharField(max_length=64)
-    link = models.CharField(max_length=64)
-    address = models.CharField(max_length=64)
+    link = models.CharField(max_length=64, default=None, null=True, blank=True)
+    address = models.CharField(max_length=64, default=None, null=True, blank=True)
 
     def set_parent(self, parent: "Institution"):
         if not self.parent.parent:

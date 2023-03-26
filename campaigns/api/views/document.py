@@ -91,6 +91,7 @@ class DocumentCreate(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         campaign = Campaign.objects.get(id=self.kwargs['campaign_id'])
+        # TODO: create a helper function for this
         source, created = UserSource.objects.get_or_create(user=request.user)
         if created:
             source.name = f"{request.user.first_name} {request.user.last_name}"

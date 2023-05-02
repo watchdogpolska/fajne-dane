@@ -5,11 +5,14 @@ from rest_framework.response import Response
 from campaigns.api.exceptions import InstitutionHasDocuments
 from campaigns.models import Institution, Document
 from campaigns.serializers import InstitutionSerializer, InstitutionCreateSerializer, InstitutionDetailsSerializer
+from rest_framework import filters
 
 
 class InstitutionList(generics.ListCreateAPIView):
     serializer_class = InstitutionSerializer
     permission_classes = (IsAdminUser,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'key']
 
     def get_queryset(self):
         group_id = self.kwargs.get("group_id")

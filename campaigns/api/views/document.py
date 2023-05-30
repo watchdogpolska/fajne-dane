@@ -3,10 +3,10 @@ from collections import OrderedDict
 from django.db.models import Count
 from rest_framework import filters
 from rest_framework import generics, status, views
-from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
+from campaigns.api.views.config import StandardResultsSetPagination
 from campaigns.models import Document, UserSource, Campaign
 from campaigns.models.consts import DocumentStatus
 from campaigns.models.dto import DocumentDTO
@@ -26,16 +26,7 @@ def get_frequency_list(queryset, column):
     }
 
 
-class StandardResultsSetPagination(LimitOffsetPagination):
-    page_size = 10
-    page_size_query_param = 'limit'
-    max_page_size = 100
-
-
-class CustomFilterBackend(filters.BaseFilterBackend):
-    """
-    Filter that only allows users to see their own objects.
-    """
+class CustomDocumentFilterBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         _query = request.query_params.get("query")
         _order = request.query_params.get("order", "created")
@@ -52,7 +43,7 @@ class CustomFilterBackend(filters.BaseFilterBackend):
 class DocumentList(generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = (AllowAny,)
-    filter_backends = [CustomFilterBackend]
+    filter_backends = [CustomDocumentFilterBackend]
     search_fields = ['query', 'order', 'status']
     pagination_class = StandardResultsSetPagination
 
@@ -63,7 +54,7 @@ class DocumentList(generics.ListAPIView):
 
 class DocumentsStatusList(generics.ListAPIView):
     permission_classes = (AllowAny,)
-    filter_backends = [CustomFilterBackend]
+    filter_backends = [CustomDocumentFilterBackend]
     search_fields = ['query']
 
     def get_queryset(self):

@@ -1,22 +1,36 @@
 from rest_framework import generics, status
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from campaigns.api.exceptions import InstitutionHasDocuments
+from campaigns.api.views.config import StandardResultsSetPagination
 from campaigns.models import Institution, Document
 from campaigns.serializers import InstitutionSerializer, InstitutionCreateSerializer, InstitutionDetailsSerializer
 from rest_framework import filters
 
 
-class InstitutionList(generics.ListCreateAPIView):
+class CustomInstitutionFilterBackend(filters.BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        _query = request.query_params.get("query")
+        _order = request.query_params.get("order", "name")
+
+        queryset = queryset.order_by(_order)
+        if _query:
+            queryset = queryset.filter(name__icontains=_query)
+        return queryset
+
+
+class InstitutionList(generics.ListAPIView):
     serializer_class = InstitutionSerializer
-    permission_classes = (IsAdminUser,)
-    filter_backends = [filters.SearchFilter]
+    permission_classes = (AllowAny,)
+    filter_backends = [CustomInstitutionFilterBackend]
     search_fields = ['name', 'key']
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         group_id = self.kwargs.get("group_id")
         return Institution.objects.filter(group_id=group_id)
+
 
 
 class InstitutionDetail(generics.RetrieveUpdateDestroyAPIView):

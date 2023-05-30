@@ -35,7 +35,30 @@ class InstitutionListTestCase(TestCase):
                 'name': institution.name,
                 'link': institution.link,
             })
+    def test_institutions_list_search(self):
+        institution = child_institution()
+        institutions_group = institution.group
 
+        user = user1(is_active=True, is_staff=True)
+        self.client.force_login(user)
+
+        response = self.client.get(
+            f"/api/v1/campaigns/institution-groups/{institutions_group.id}/institutions/?search=2")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 1)
+
+        self.assertEqual(response.data[0], {
+                'id': institution.id,
+                "parent": {
+                    "id": institution.parent.id,
+                    "key": institution.parent.key,
+                    "name": institution.parent.name
+                },
+                'key': institution.key,
+                'name': institution.name,
+                'link': institution.link,
+            })
 
     def test_institution_create(self):
         institutions_group = basic_institution_group()
@@ -46,7 +69,7 @@ class InstitutionListTestCase(TestCase):
         self.assertEqual(Institution.objects.count(), 0)
 
         response = self.client.post(
-            f"/api/v1/campaigns/institution-groups/{institutions_group.id}/institutions/create/",
+                f"/api/v1/campaigns/institution-groups/{institutions_group.id}/institutions/create/",
             data={
                 "key": "234234",
                 "name": "institution name",

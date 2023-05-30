@@ -95,7 +95,8 @@ class InstitutionGroupDetailsTestCase(TestCase):
             "id": institutions_group.id,
             "name": institutions_group.name,
             "institutions_count": institutions_group.institutions.count(),
-            "fields": institutions_group.fields
+            "fields": institutions_group.fields,
+            "parent": institutions_group.parent
         })
 
     def test_institution_group_patch(self):

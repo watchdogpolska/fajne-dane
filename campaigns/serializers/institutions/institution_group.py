@@ -10,10 +10,17 @@ class InstitutionGroupSerializer(ReadOnlyModelSerializer):
         fields = ["id", "parent_id", "name", "institutions_count"]
 
 
-class InstitutionGroupDetailsSerializer(ReadUpdateModelSerializer):
+class InstitutionGroupMinimalSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = InstitutionGroup
-        fields = ["id", "name", "fields", "institutions_count"]
+        fields = ["id", "name"]
+
+
+class InstitutionGroupDetailsSerializer(ReadUpdateModelSerializer):
+    parent = InstitutionGroupMinimalSerializer(read_only=True)
+    class Meta:
+        model = InstitutionGroup
+        fields = ["id", "name", "fields", "institutions_count", "parent"]
 
 
 class InstitutionGroupCreateSerializer(ReadCreateModelSerializer):

@@ -14,7 +14,8 @@ class DocumentsFactory(BaseFactory):
 
 
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
-        institution = Institution.objects.get(key=document_dto.data['institution_id'])
+        # TODO: institution_id should be stored in data, instead it should be a main field
+        institution = Institution.objects.get(id=document_dto.data['institution_id'])
         return Document(
             campaign=self.campaign,
             source=self.source,

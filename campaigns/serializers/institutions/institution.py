@@ -10,6 +10,12 @@ class InstitutionMinimalSerializer(ReadOnlyModelSerializer):
         fields = ["id", "key", "name"]
 
 
+class InstitutionDataSerializer(ReadOnlyModelSerializer):
+    class Meta:
+        model = Institution
+        fields = ["id", "key", "name", "link", "address"]
+
+
 class InstitutionSerializer(ReadOnlyModelSerializer):
     parent = InstitutionMinimalSerializer(read_only=True)
     class Meta:

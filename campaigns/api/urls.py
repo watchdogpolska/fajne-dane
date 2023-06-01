@@ -10,7 +10,7 @@ from .views import (
     GetMetaTemplate, ValidateCampaignTemplate,
     DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList,
     InstitutionGroupList, InstitutionGroupDetail, InstitutionGroupCreate,
-    InstitutionList, InstitutionDetail, InstitutionCreate,
+    InstitutionList, InstitutionDetail, InstitutionCreate, InstitutionBulkDelete,
 )
 
 urlpatterns = [
@@ -42,6 +42,8 @@ urlpatterns = [
     path('institution-groups/<int:group_id>/institutions/', InstitutionList.as_view(), name="institution_list"),
     path('institution-groups/<int:group_id>/institutions/create/', InstitutionCreate.as_view(),
                                                                   name="institution_create"),
+    path('institution-groups/<int:group_id>/institutions/delete/', InstitutionBulkDelete.as_view(),
+         name="institution_delete"),
     path('institution/<int:pk>/', InstitutionDetail.as_view(), name="institution_details"),
 ]
 

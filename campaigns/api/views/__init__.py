@@ -8,4 +8,4 @@ from .file_source import FileSourceList, FileSourceDetail, FileSourceCreate, Fil
 from .template import GetMetaTemplate, ValidateCampaignTemplate
 from .doc_query import DocumentQueryDetail, DocumentQueryStatusList
 from .institution_group import InstitutionGroupDetail, InstitutionGroupList, InstitutionGroupCreate
-from .institution import InstitutionList, InstitutionDetail, InstitutionCreate
+from .institution import InstitutionList, InstitutionDetail, InstitutionCreate, InstitutionBulkDelete

@@ -19,4 +19,3 @@ numpy
 ipython
 boto3
 
-# development requirements

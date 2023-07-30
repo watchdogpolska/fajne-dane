@@ -1,0 +1,1 @@
+dj-inmemorystorage>=2.1.0

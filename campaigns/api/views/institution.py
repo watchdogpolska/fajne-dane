@@ -15,11 +15,13 @@ from campaigns.serializers.institutions import InstitutionDataSerializer
 class CustomInstitutionFilterBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         _query = request.query_params.get("query")
+        _key = request.query_params.get("key")
         _order = request.query_params.get("order", "name")
-
         queryset = queryset.order_by(_order)
         if _query:
             queryset = queryset.filter(name__icontains=_query)
+        if _key:
+            queryset = queryset.filter(key__icontains=_key)
         return queryset
 
 
@@ -27,7 +29,6 @@ class InstitutionList(generics.ListAPIView):
     serializer_class = InstitutionDataSerializer
     permission_classes = (AllowAny,)
     filter_backends = [CustomInstitutionFilterBackend]
-    search_fields = ['name', 'key']
     pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):

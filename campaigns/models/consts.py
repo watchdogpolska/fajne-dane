@@ -37,3 +37,4 @@ class FileSourceStatus(models.TextChoices):
     CREATED = 'CREATED', _('Created')
     PROCESSING = 'PROCESSING', _('Processing')
     FINISHED = 'FINISHED', _('Finished')
+    FAILED = 'FAILED', _('Failed')

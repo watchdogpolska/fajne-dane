@@ -5,14 +5,14 @@ from django.test import TestCase, Client
 
 from campaigns.models import Campaign
 from tests.campaigns.conftest import basic_campaign
-from tests.conftest import user1, basic_campaign_template
+from tests.conftest import user1, advanced_campaign_template
 from tests.utils import serialize_date
 
 
 def campaign_payload() -> Dict:
     return {
         "name": "Test campaign",
-        "template": json.dumps(basic_campaign_template())
+        "template": json.dumps(advanced_campaign_template())
     }
 
 
@@ -34,7 +34,7 @@ class CampaignCreateTestCase(TestCase):
         campaign = Campaign.objects.get(name=payload['name'])
         self.assertIsInstance(campaign, Campaign)
         self.assertEqual(len(campaign.document_fields_objects), 1)
-        self.assertEqual(len(campaign.queries_objects), 1)
+        self.assertEqual(len(campaign.queries_objects), 3)
 
     def test_create_campaign_no_permission(self):
         user = user1(is_active=True)

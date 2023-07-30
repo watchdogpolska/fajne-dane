@@ -4,7 +4,7 @@ from .document import (
 )
 from .query import QueryList, QueryDetail
 from .record import RecordList, RecordDetail, RecordCreate
-from .file_source import FileSourceList, FileSourceDetail, FileSourceCreate, FileSourceValidate
+from .file_source import FileSourceList, FileSourceDetail, FileSourceCreate, FileSourceValidate, FileSourceReport
 from .template import GetMetaTemplate, ValidateCampaignTemplate
 from .doc_query import DocumentQueryDetail, DocumentQueryStatusList
 from .institution_group import InstitutionGroupDetail, InstitutionGroupList, InstitutionGroupCreate

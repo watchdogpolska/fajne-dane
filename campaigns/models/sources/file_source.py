@@ -1,16 +1,18 @@
-from typing import List
+from typing import List, Tuple
 from typing import TYPE_CHECKING
 
-from django.db import models
+from django.db import models, transaction
+from django.db.transaction import atomic
 
 from .source import Source, SourceTypes
 from .utils import load_data_frame
 from ..consts import FileSourceStatus
+from ..dto import DocumentDTO
 
 if TYPE_CHECKING:
     from campaigns.models import Document
 
-from campaigns.validators.parsing_report import ParsingReport
+from campaigns.validators.parsing_report import ParsingReport, ParsingValidationReport
 
 
 def chunks(lst, n):
@@ -31,20 +33,53 @@ class FileSource(Source):
     status = models.CharField(max_length=12,
                               choices=FileSourceStatus.choices,
                               default=FileSourceStatus.CREATED)
+    raw_report = models.JSONField(default=dict)
 
     def __init__(self, *args, **kwargs):
         if 'type' not in kwargs:
             kwargs['type'] = SourceTypes.FILE
         super().__init__(*args, **kwargs)
 
-    def parse_file(self) -> ParsingReport:
+    def validate_file(self) -> ParsingValidationReport:
+        from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
+        df = load_data_frame(self.file)
+        parser = CampaignDatasetParser(campaign=self.campaign)
+        return parser.validate(df)
+
+    def parse_file(self) -> Tuple[ParsingReport, List[DocumentDTO]]:
         from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
         df = load_data_frame(self.file)
         parser = CampaignDatasetParser(campaign=self.campaign)
         return parser.parse(df)
 
-    def create_documents(self, report: ParsingReport, batch_size: int = 100) -> List["Document"]:
+
+    @transaction.atomic()
+    def create_documents(self, documents: List[DocumentDTO], batch_size: int = 100) -> List["Document"]:
         from campaigns.models.factory.documents_factory import DocumentsFactory
         factory = DocumentsFactory(campaign=self.campaign, source=self)
-        for chunk in chunks(report.documents, batch_size):
+        for chunk in chunks(documents, batch_size):
             factory.bulk_create(chunk)
+
+    def process(self):
+        self.update_status(FileSourceStatus.PROCESSING)
+
+        report, documents = self.parse_file()
+        self.raw_report = report.to_json()
+        self.save()
+
+        if report.is_valid:
+            self.create_documents(documents)
+            new_status = FileSourceStatus.FINISHED
+        else:
+            new_status = FileSourceStatus.FAILED
+
+        self.update_status(new_status)
+
+    def update_status(self, status: FileSourceStatus, save: bool = True):
+        self.status = status
+        if save:
+            self.save()
+
+    @property
+    def report(self) -> ParsingReport:
+        return ParsingReport.from_json(self.raw_report)

@@ -63,7 +63,7 @@ class FileSourceSerializerTestCase(TestCase):
                 'source_date': serialize_date(source.source_date),
                 'created': serialize_date(source.created),
                 'type': source.type,
-                'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
+                'file': source.file.url
             }
         )
 
@@ -128,7 +128,7 @@ class FileSourceCreateSerializerTestCase(TestCase):
                 'description': source.description,
                 'source_link': source.source_link,
                 'source_date': serialize_date(source.source_date),
-                'file': 'https://fajne-dane.s3.amazonaws.com/resources/input.txt'
+                'file': source.file.url
             }
         )
 

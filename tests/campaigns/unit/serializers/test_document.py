@@ -41,13 +41,13 @@ class DocumentFullSerializerTestCase(TestCase):
 
         serializer = DocumentFullSerializer(
             instance,
-            data={"data": {"institution_id": "123"}}
+            data={"data": {"document_url": "other"}}
         )
         serializer.is_valid()
         serializer.save()
 
         instance.refresh_from_db()
-        self.assertEqual(instance.data, {"institution_id": "123"})
+        self.assertEqual(instance.data, {"document_url": "other"})
 
     def test_create(self):
         source, _ = UserSource.objects.get_or_create(user=user1())

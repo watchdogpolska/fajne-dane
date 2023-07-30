@@ -15,7 +15,7 @@ from fajne_dane.core.serializers import (
 
 def _validate_attrs(campaign: Campaign, attrs: Dict):
     if 'data' in attrs:
-        document_dto = DocumentDTO(data=attrs['data'])
+        document_dto = DocumentDTO(data=attrs['data'], institution=None)
         campaign.validate_document(document_dto)
 
 
@@ -58,7 +58,7 @@ class DocumentFullSerializer(ReadUpdateModelSerializer):
 class DocumentCreateSerializer(ReadCreateModelSerializer):
     class Meta:
         model = Document
-        fields = ['id', 'data', 'campaign', 'status']
+        fields = ['id', 'data', 'campaign', 'status', 'institution']
         read_only_fields = ['id', 'status']
 
     def validate(self, attrs):

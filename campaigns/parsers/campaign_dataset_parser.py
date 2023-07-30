@@ -5,13 +5,14 @@ import pandas as pd
 from django.core.exceptions import ValidationError
 
 from campaigns.models import Campaign, Query
+from campaigns.models.dto.institution import InstitutionDTO
 from campaigns.models.dto.document import DocumentDTO
 from campaigns.models.dto.record import RecordDTO
 from campaigns.parsers.base import CampaignParser
 from campaigns.validators.data_frame import DataFrameValidator
-from campaigns.validators.parsing_report import ParsingReport, DocumentParsingReport
+from campaigns.validators.parsing_report import ParsingReport, DocumentParsingReport, ParsingValidationReport
 from campaigns.validators.report import ValidationError as ParsingError
-from fajne_dane.core.utils import encoding
+from fajne_dane.core.utils import encoding, sanitize_group_by_args
 
 
 def _parse_records(query: Query, records_data: pd.DataFrame) -> List[RecordDTO]:
@@ -42,8 +43,7 @@ class CampaignDatasetParser(CampaignParser):
         data = {}
         for field in self.campaign.document_fields_objects:
             value = first_row[('data_fields', field.name)]
-            if pd.isnull(value):
-                continue
+            if pd.isnull(value): continue
             data[field.name] = encoding.decode_numpy(value)
 
         # read queries
@@ -60,12 +60,18 @@ class CampaignDatasetParser(CampaignParser):
         if errors:
             raise ValidationError({"data": errors})
 
+        # read core fields
+        institution_id = first_row.get(('core_fields', 'institution_id'))
+        institution_key = first_row.get(('core_fields', 'institution_key'))
+        institution = InstitutionDTO(id=institution_id, key=institution_key)
+
         return DocumentDTO(
             data=data,
+            institution=institution,
             records=records
         )
 
-    def _validate_data_frame(self, df: pd.DataFrame) -> List[ParsingError]:
+    def validate(self, df: pd.DataFrame) -> ParsingValidationReport:
         file_errors = []
         try:
             DataFrameValidator(campaign=self.campaign).validate(df)
@@ -77,19 +83,22 @@ class CampaignDatasetParser(CampaignParser):
                 )
                 for error in e.error_dict['data']
             ]
-        return file_errors
+        return ParsingValidationReport(file_errors=file_errors)
 
     def _parse_documents(self, df: pd.DataFrame) -> Tuple[List[DocumentDTO], List[DocumentParsingReport]]:
         documents, documents_errors = [], []
+        core_fields = [
+            ('core_fields', f)
+            for f in df['core_fields'].columns
+        ]
         document_fields_columns = [
             ('data_fields', f.name)
             for f in self.campaign.document_fields.all()
         ]
-        if len(document_fields_columns) == 1:  # pandas strange requirement to not pass one element lists
-            document_fields_columns = document_fields_columns[0]
 
-        for _, document_rows in df.groupby(document_fields_columns, dropna=False):
-            document_index, document_data = document_rows.index[0], None
+        agg_columns = sanitize_group_by_args(core_fields + document_fields_columns)
+        for _, document_rows in df.groupby(agg_columns, dropna=False):
+            document_index, document_data, document = document_rows.index[0], None, None
             try:
                 document = self._parse_document(document_rows)
                 self.campaign.validate_document(document)
@@ -110,9 +119,15 @@ class CampaignDatasetParser(CampaignParser):
                 )
         return documents, documents_errors
 
-    def parse(self, df: pd.DataFrame) -> ParsingReport:
-        file_errors = self._validate_data_frame(df)
-        documents, documents_errors = [], []
-        if not file_errors:
-            documents, documents_errors = self._parse_documents(df)
-        return ParsingReport(file_errors, documents, documents_errors)
+    def parse(self, df: pd.DataFrame, deep: bool = True) -> Tuple[ParsingReport, List[DocumentDTO]]:
+        validation_report = self.validate(df)
+        documents, documents_errors = None, None
+        if deep:
+            documents, documents_errors = (
+                ([], []) if validation_report.file_errors else self._parse_documents(df)
+            )
+        return ParsingReport(
+            file_errors=validation_report.file_errors,
+            valid_documents_count=len(documents),
+            documents_errors=documents_errors
+        ), documents

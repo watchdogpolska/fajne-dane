@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from campaigns.api.views.config import StandardResultsSetPagination
 from campaigns.models import Document, UserSource, Campaign
 from campaigns.models.consts import DocumentStatus
-from campaigns.models.dto import DocumentDTO
+from campaigns.models.dto import DocumentDTO, InstitutionDTO
 from campaigns.models.factory.documents_factory import DocumentsFactory
 from campaigns.serializers import (
     DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, IdListSerializer, DocumentIdSerializer
@@ -88,7 +88,12 @@ class DocumentCreate(generics.CreateAPIView):
             source.name = f"{request.user.first_name} {request.user.last_name}"
             source.save()
 
-        dto = DocumentDTO(data=serializer.validated_data['data'])
+        dto = DocumentDTO(
+            data=serializer.validated_data['data'],
+            institution=InstitutionDTO(
+                id=serializer.validated_data['institution'].id
+            )
+        )
 
         factory = DocumentsFactory(campaign=campaign, source=source)
         document = factory.create(dto)

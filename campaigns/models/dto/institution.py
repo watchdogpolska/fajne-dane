@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Text, Dict
+from typing import Text, Dict, Optional
 
 
 @dataclass
 class InstitutionDTO:
-    key: Text
-    name: Text
+    id: Optional[int] = None
+    key: Optional[Text] = None
+    name: Optional[Text] = None
     metadata: Dict = field(default_factory=dict)

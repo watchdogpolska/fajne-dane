@@ -10,7 +10,7 @@ from .views import (
     GetMetaTemplate, ValidateCampaignTemplate,
     DocumentQueryDetail, DocumentQueryStatusList, DocumentBulkDelete, DocumentsStatusList,
     InstitutionGroupList, InstitutionGroupDetail, InstitutionGroupCreate,
-    InstitutionList, InstitutionDetail, InstitutionCreate, InstitutionBulkDelete,
+    InstitutionList, InstitutionDetail, InstitutionCreate, InstitutionBulkDelete, FileSourceReport,
 )
 
 urlpatterns = [
@@ -22,7 +22,8 @@ urlpatterns = [
     path('<int:campaign_id>/sources/', FileSourceList.as_view(), name="file_sources_list"),
     path('<int:campaign_id>/sources/validate/', FileSourceValidate.as_view(), name="file_source_validate"),
     path('<int:campaign_id>/sources/create/', FileSourceCreate.as_view(), name="file_source_create"),
-    path('<int:campaign_id>/sources/<int:pk>/', FileSourceDetail.as_view(), name="file_source_details"),
+    path('sources/<int:pk>/report/', FileSourceReport.as_view(), name="file_source_report"),
+    path('sources/<int:pk>/', FileSourceDetail.as_view(), name="file_source_details"),
     path('<int:campaign_id>/documents/', DocumentList.as_view(), name="campaigns_documents_list"),
     path('<int:pk>/documents/next/', GetUnsolvedDocument.as_view(), name="get_unsolved_document"),
     path('<int:campaign_id>/documents/create/', DocumentCreate.as_view(), name="document_create"),

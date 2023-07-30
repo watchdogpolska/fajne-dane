@@ -1,4 +1,5 @@
 from typing import Optional, List
+from django.utils.translation import gettext_lazy as _
 from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
@@ -74,11 +75,23 @@ class Campaign(models.Model):
         :raises: ValidationError
         """
         errors = []
+
+        valid_names = set()
         for field in self.document_fields_objects:
             try:
                 field.validate(document)
+                valid_names.add(field.name)
             except ValidationError as e:
-               errors.append(e)
+                errors.append(e)
+
+        if additional_fields := set(document.data.keys()) - valid_names:
+            errors.append(
+                ValidationError(
+                    _("Found invalid fields in the document: %(value)s"),
+                    code="invalid-fields",
+                    params={"value": additional_fields},
+                )
+            )
 
         if validate_records:
             for query in self.queries_objects:

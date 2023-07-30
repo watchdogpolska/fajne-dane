@@ -6,13 +6,24 @@ from django.test import TestCase
 
 from campaigns.models import Document
 from campaigns.models.campaign import Campaign, CampaignStatus
-from campaigns.models.dto import DocumentDTO, RecordDTO
+from campaigns.models.dto import DocumentDTO, RecordDTO, InstitutionDTO
 from tests.conftest import basic_campaign_template
 from tests.campaigns.conftest import basic_campaign_with_queries, \
     advanced_campaign_with_queries, basic_campaign_with_documents
 
 
 class CampaignTestCase(TestCase):
+
+    def test_validating_wrong_document(self):
+        campaign = basic_campaign_with_queries()
+        with self.assertRaises(ValidationError):
+            campaign.validate_document(
+                DocumentDTO(
+                    institution=InstitutionDTO(),
+                    data={"project_id": 1}
+                )
+            )
+
     def test_creating(self):
         campaign, _ = Campaign.objects.get_or_create(
             name="test1",
@@ -53,7 +64,8 @@ class CampaignTestCase(TestCase):
         try:
             campaign.validate_document(
                 DocumentDTO(
-                    data={"institution_id": 1}
+                    institution=InstitutionDTO(id=1),
+                    data={},
                 )
             )
         except ValidationError:
@@ -64,7 +76,8 @@ class CampaignTestCase(TestCase):
         try:
             campaign.validate_document(
                 DocumentDTO(
-                    data={"institution_id": 1},
+                    institution=InstitutionDTO(id=1),
+                    data={},
                     records={
                         "question": [
                             RecordDTO(
@@ -83,6 +96,7 @@ class CampaignTestCase(TestCase):
         with self.assertRaises(ValidationError):
             campaign.validate_document(
                 DocumentDTO(
+                    institution=InstitutionDTO(),
                     data={"project_id": 1}
                 )
             )
@@ -92,7 +106,8 @@ class CampaignTestCase(TestCase):
         with self.assertRaises(ValidationError):
             campaign.validate_document(
                 DocumentDTO(
-                    data={"institution_id": 1},
+                    institution=InstitutionDTO(id=1),
+                    data={},
                     records={
                         "Question 0": [
                             RecordDTO(
@@ -113,7 +128,7 @@ class CampaignStatusTestCase(TestCase):
 
     def setUp(self):
         self.campaign = basic_campaign_with_documents()
-        self.document = self.campaign.documents.get(data__institution_id=1425011)
+        self.document = self.campaign.documents.get(institution__key="1425011")
 
     def test_close_one_document(self):
         document = self.campaign.documents.first()

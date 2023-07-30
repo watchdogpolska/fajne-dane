@@ -10,6 +10,13 @@ class ValidationError:
     def to_json(self):
         return { "code": self.code, "message": self.message }
 
+    @staticmethod
+    def from_json(data: dict) -> "ValidationError":
+        return ValidationError(
+            code=data["code"],
+            message=data["message"]
+        )
+
 
 @dataclass
 class ValidationReport:
@@ -24,3 +31,12 @@ class ValidationReport:
             "is_valid": self.is_valid,
             "errors": [e.to_json() for e in self.errors]
         }
+
+    @staticmethod
+    def from_json(data: dict) -> "ValidationReport":
+        return ValidationReport(
+            errors=[
+                ValidationError.from_json(error_data)
+                for error_data in data["errors"]
+            ]
+        )

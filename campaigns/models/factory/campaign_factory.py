@@ -14,7 +14,7 @@ def _create_campaign(name: str, template: Dict) -> Campaign:
 
 
 def _create_document_fields(campaign: Campaign, document_template: Dict):
-    for field_template in document_template['data_fields']:
+    for field_template in document_template.get('data_fields', []):
         serializer = DocumentDataFieldCreateSerializer(data=field_template)
         serializer.is_valid()
         serializer.save(campaign=campaign)

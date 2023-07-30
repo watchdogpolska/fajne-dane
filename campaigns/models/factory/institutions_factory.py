@@ -26,5 +26,4 @@ class InstitutionsFactory(BaseFactory):
             Institution(key=dto.key, name=dto.name,group=self.group)
             for dto in institution_dtos
         ]
-        institutions = Institution.objects.bulk_create(_institutions)
-        return institutions
+        return Institution.objects.bulk_create(_institutions)

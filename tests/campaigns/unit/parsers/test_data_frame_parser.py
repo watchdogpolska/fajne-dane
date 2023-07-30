@@ -26,10 +26,10 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_basic_data_frame(self):
         parser = basic_campaign_data_frame_parser()
         df = basic_campaign_dataset()
-        report = parser.parse(df)
+        report, documents = parser.parse(df)
 
         self.assertTrue(report.is_valid)
-        document_dtos = report.documents
+        document_dtos = documents
 
         self.assertEqual(len(document_dtos), 4)
         for document_dto, expected_records_values_count in zip(document_dtos, [[1], [2], [1], [1]]):
@@ -41,10 +41,10 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_advanced_data_frame(self):
         parser = advanced_campaign_data_frame_parser()
         df = advanced_campaign_dataset()
-        report = parser.parse(df)
+        report, documents = parser.parse(df)
 
         self.assertTrue(report.is_valid)
-        document_dtos = report.documents
+        document_dtos = documents
 
         self.assertEqual(len(document_dtos), 4)
         for document_dto, expected_records_values_count in \
@@ -57,7 +57,7 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_wrong_data_frame(self):
         parser = advanced_campaign_data_frame_parser()
         df = wrong_advanced_campaign_dataset()
-        report = parser.parse(df)
+        report, _ = parser.parse(df)
 
         self.assertFalse(report.is_valid)
         self.assertEqual(len(report.file_errors), 0)
@@ -78,7 +78,7 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_wrong_columns_data_frame(self):
         parser = basic_campaign_data_frame_parser()
         df = advanced_campaign_dataset()
-        report = parser.parse(df)
+        report, _ = parser.parse(df)
 
         self.assertFalse(report.is_valid)
         self.assertEqual(len(report.file_errors), 3)
@@ -90,7 +90,7 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_unmatching_data_frame(self):
         parser = advanced_campaign_data_frame_parser()
         df = basic_campaign_dataset()
-        report = parser.parse(df)
+        report, _ = parser.parse(df)
 
         self.assertFalse(report.is_valid)
         self.assertEqual(len(report.file_errors), 10)
@@ -102,7 +102,7 @@ class CampaignDatasetParserTestCase(TestCase):
     def test_parse_no_prob_data_frame(self):
         parser = basic_campaign_data_frame_parser()
         df = basic_campaign_dataset_wrong_no_prob()
-        report = parser.parse(df)
+        report, _ = parser.parse(df)
 
         self.assertFalse(report.is_valid)
         self.assertEqual(len(report.file_errors), 1)

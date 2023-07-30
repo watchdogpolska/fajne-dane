@@ -1,11 +1,12 @@
 {
     "document": {
-        "data_fields": [
+        "core_fields": [
             {
                 "name": "institution_id",
-                "widget": "hidden",
-                "type": "str"
-            },
+                "type": "int"
+            }
+        ],
+        "data_fields": [
             {
                 "name": "document_url",
                 "widget": "pdf",

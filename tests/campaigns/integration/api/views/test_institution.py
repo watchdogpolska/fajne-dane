@@ -23,17 +23,12 @@ class InstitutionListTestCase(TestCase):
 
         for institution_data in response.data:
             if institution_data['id'] != institution.id: continue
-
             self.assertEqual(institution_data, {
                 'id': institution.id,
-                "parent": {
-                    "id": institution.parent.id,
-                    "key": institution.parent.key,
-                    "name": institution.parent.name
-                },
                 'key': institution.key,
                 'name': institution.name,
                 'link': institution.link,
+                'address': institution.address
             })
     def test_institutions_list_search(self):
         institution = child_institution()
@@ -43,21 +38,17 @@ class InstitutionListTestCase(TestCase):
         self.client.force_login(user)
 
         response = self.client.get(
-            f"/api/v1/campaigns/institution-groups/{institutions_group.id}/institutions/?search=2")
+            f"/api/v1/campaigns/institution-groups/{institutions_group.id}/institutions/?key=2")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 1)
 
         self.assertEqual(response.data[0], {
                 'id': institution.id,
-                "parent": {
-                    "id": institution.parent.id,
-                    "key": institution.parent.key,
-                    "name": institution.parent.name
-                },
                 'key': institution.key,
                 'name': institution.name,
                 'link': institution.link,
+                'address': institution.address,
             })
 
     def test_institution_create(self):

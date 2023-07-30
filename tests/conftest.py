@@ -53,5 +53,9 @@ def wrong_advanced_campaign_documents_file(mode='r'):
     return get_test_file("campaigns", "advanced_campaign_wrong-dataset.csv", mode=mode)
 
 
+def wrong_schema_advanced_campaign_documents_file(mode='r'):
+    return get_test_file("campaigns", "advanced_campaign_wrong_schema-dataset.csv", mode=mode)
+
+
 def basic_institutions_file() -> pd.DataFrame:
     return get_csv_data("institutions", "institutions_file.csv")

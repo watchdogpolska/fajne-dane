@@ -1,10 +1,9 @@
 {
     "document": {
-        "data_fields": [
+        "core_fields": [
             {
                 "name": "institution_id",
-                "widget": "hidden",
-                "type": "str"
+                "type": "int"
             }
         ]
     },

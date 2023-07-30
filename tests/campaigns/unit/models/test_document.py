@@ -13,7 +13,7 @@ class DocumentTestCase(TestCase):
         document = Document.objects.create(
             campaign=campaign,
             source=basic_file_source(campaign),
-            data={"institution_id": 1},
+            data={"meta": 1},
             institution=basic_institution()
         )
         self.assertIsInstance(document, Document)
@@ -22,7 +22,7 @@ class DocumentTestCase(TestCase):
 class DocumentAdvancedStatusTestCase(TestCase):
     def setUp(self):
         self.campaign = advanced_campaign_with_documents()
-        self.document = self.campaign.documents.get(data__institution_id=1425011)
+        self.document = self.campaign.documents.get(institution__key="1425011")
         self.query_single = self.campaign.queries.get(order=0)
         self.query_multiple = self.campaign.queries.get(order=2)
 

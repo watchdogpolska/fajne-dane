@@ -1,5 +1,6 @@
 from typing import List, Dict
 
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
 
 from campaigns.models import Campaign, DocumentQuery, Institution, InstitutionGroup
@@ -12,7 +13,7 @@ from campaigns.parsers.campaign_dataset_parser import CampaignDatasetParser
 from tests.conftest import (
     basic_campaign_template, advanced_campaign_template,
     basic_campaign_dataset, advanced_campaign_dataset,
-    user1, basic_institutions_file
+    user1, basic_institutions_file, basic_campaign_documents_file, wrong_advanced_campaign_documents_file
 )
 
 
@@ -79,11 +80,11 @@ def basic_file_source(campaign: Campaign) -> FileSource:
 
 
 def basic_document():
-    campaign = basic_campaign()
+    campaign = advanced_campaign_with_queries()
     return Document.objects.create(
         campaign=campaign,
         source=basic_file_source(campaign),
-        data={"institution_id": 1},
+        data={},
         institution=basic_institution()
     )
 
@@ -154,8 +155,8 @@ def advanced_campaign_dtos() -> List[DocumentDTO]:
     :return: A list of DocumentDTOs parsed from the test dataset.
     """
     parser = advanced_campaign_data_frame_parser()
-    parsing_report = parser.parse(advanced_campaign_dataset())
-    return parsing_report.documents
+    _, documents = parser.parse(advanced_campaign_dataset())
+    return documents
 
 
 def basic_campaign_dtos() -> List[DocumentDTO]:
@@ -165,8 +166,8 @@ def basic_campaign_dtos() -> List[DocumentDTO]:
     :return: A list of DocumentDTOs parsed from the test dataset.
     """
     parser = basic_campaign_data_frame_parser()
-    parsing_report = parser.parse(basic_campaign_dataset())
-    return parsing_report.documents
+    _, documents = parser.parse(basic_campaign_dataset())
+    return documents
 
 
 def basic_institution_group() -> InstitutionGroup:
@@ -201,3 +202,41 @@ def setup_institutions() -> List[Institution]:
     institutions_dtos = institutions_file_parser.parse(institutions_file)
     group = basic_institution_group()
     return InstitutionsFactory(group).bulk_create(institutions_dtos)
+
+
+def fake_file() -> SimpleUploadedFile:
+    with basic_campaign_documents_file(mode='rb') as f:
+        return SimpleUploadedFile(
+            "input.txt",
+            f.read()
+        )
+
+
+def file_source_with_file() -> FileSource:
+    return FileSource.objects.create(
+        name="file source",
+        description="this is a file",
+        campaign=basic_campaign_with_queries(),
+        source_link="http://source.link",
+        source_date=timezone.now(),
+        file=fake_file(),
+    )
+
+
+def file_source_with_wrong_data_file() -> FileSource:
+    return FileSource.objects.create(
+        name="file source",
+        description="this is a file",
+        campaign=basic_campaign_with_queries(),
+        source_link="http://source.link",
+        source_date=timezone.now(),
+        file=wrong_data_fake_file(),
+    )
+
+
+def wrong_data_fake_file() -> SimpleUploadedFile:
+    with wrong_advanced_campaign_documents_file(mode='rb') as f:
+        return SimpleUploadedFile(
+            "wrong_input.txt",
+            f.read()
+        )

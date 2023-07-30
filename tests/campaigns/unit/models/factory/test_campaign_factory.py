@@ -12,13 +12,8 @@ class CampaignFactoryTestCase(TestCase):
         """Tests creating a campaign with a correct template."""
         campaign = campaign_factory.create("test", basic_campaign_template())
         self.assertIsInstance(campaign, Campaign)
-        self.assertTrue(campaign.document_fields.count() == 1)
+        self.assertTrue(campaign.document_fields.count() == 0)
         self.assertTrue(campaign.queries.count() == 1)
-
-        document_field = campaign.document_fields.first()
-        self.assertEqual(document_field.name, "institution_id")
-        self.assertEqual(document_field.widget, "hidden")
-        self.assertEqual(document_field.type, "str")
 
         query = campaign.queries.first()
         self.assertEqual(query.order, 0)

@@ -10,6 +10,16 @@ class DocumentParsingReportSerializer(ReadOnlySerializer):
     errors = ValidationErrorSerializer(many=True)
 
 
+class ParsingValidationReportSerializer(ReadOnlySerializer):
+    is_valid = serializers.BooleanField()
+    file_errors = ValidationErrorSerializer(many=True)
+
+
+class ParsingValidationReport(ReadOnlySerializer):
+    is_valid = serializers.BooleanField()
+    file_errors = ValidationErrorSerializer(many=True)
+
+
 class ParsingReportSerializer(ReadOnlySerializer):
     is_valid = serializers.BooleanField()
     file_errors = ValidationErrorSerializer(many=True)

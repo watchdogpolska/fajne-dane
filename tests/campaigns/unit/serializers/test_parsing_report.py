@@ -10,14 +10,14 @@ from tests.conftest import wrong_advanced_campaign_dataset, advanced_campaign_da
 def failed_parsing_report() -> ParsingReport:
     parser = advanced_campaign_data_frame_parser()
     df = wrong_advanced_campaign_dataset()
-    report = parser.parse(df)
+    report, _ = parser.parse(df)
     return report
 
 
 def valid_parsing_report() -> ParsingReport:
     parser = advanced_campaign_data_frame_parser()
     df = advanced_campaign_dataset()
-    report = parser.parse(df)
+    report, _ = parser.parse(df)
     return report
 
 
@@ -51,7 +51,7 @@ class DocumentErrorSerializerTestCase(TestCase):
 
         self.assertEqual(serializer.data, {
             'index': 3,
-            'data': {'institution_id': 28012},
+            'data': {},
             'errors': [
                 {
                     'code': 'missing-field',
@@ -80,7 +80,7 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
             'documents_errors': [
                 {
                     'index': 3,
-                    'data': {'institution_id': 28012},
+                    'data': {},
                     'errors': [
                         {
                             'code': 'missing-field',
@@ -95,7 +95,6 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
                 {
                     'index': 2,
                     'data': {
-                        'institution_id': 1425011,
                         'document_url': 'https://funcrowd-documents.sprawdzamyjakjest.pl/static/pdf/monitoring42/34181.pdf'
                     },
                     'errors': [
@@ -107,7 +106,7 @@ class DocumentFactoryReportSerializerTestCase(TestCase):
                 },
                 {
                     'index': 1,
-                    'data': {'institution_id': 1428022},
+                    'data': {},
                     'errors': [
                         {
                             'code': 'missing-field',

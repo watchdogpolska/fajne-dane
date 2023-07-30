@@ -1,9 +1,9 @@
 from django.test import TestCase, Client
 
-from campaigns.models import Document
+from campaigns.models import Document, Institution
 from campaigns.models.consts import DocumentStatus
 from tests.campaigns.conftest import (
-    basic_campaign_with_documents, advanced_campaign_with_documents, basic_campaign
+    basic_campaign_with_documents, advanced_campaign_with_documents, basic_campaign, basic_institution
 )
 from tests.conftest import user1
 from tests.utils import serialize_date
@@ -106,18 +106,18 @@ class DocumentDetailsTestCase(TestCase):
     def test_document_put(self):
         user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
-        basic_campaign_with_documents()
+        advanced_campaign_with_documents()
 
         document = Document.objects.first()
         response = self.client.put(
             f"/api/v1/campaigns/documents/{document.id}/",
-            data={"data": {"institution_id": "value"}},
+            data={"data": {"document_url": "value"}},
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 200)
 
         document.refresh_from_db()
-        self.assertEqual(document.data, {"institution_id": "value"})
+        self.assertEqual(document.data, {"document_url": "value"})
 
     def test_document_put_validation(self):
         user = user1(is_active=True, is_staff=True)
@@ -127,13 +127,13 @@ class DocumentDetailsTestCase(TestCase):
         document = Document.objects.first()
         response = self.client.put(
             f"/api/v1/campaigns/documents/{document.id}/",
-            data={"data": {"value": "value"}},
+            data={"data": {"institution_id": "value"}},
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(len(response.data['data']), 1),
         self.assertEqual(str(response.data['data'][0]),
-                         "Field: 'institution_id' not found in the document data.")
+                         "Found invalid fields in the document: {'institution_id'}")
 
     def test_document_delete(self):
         user = user1(is_active=True, is_staff=True)
@@ -154,11 +154,13 @@ class DocumentCreateTestCase(TestCase):
         user = user1(is_active=True, is_staff=True)
         self.client.force_login(user)
 
-        campaign = basic_campaign_with_documents()
+        campaign = advanced_campaign_with_documents()
+        institution = Institution.objects.first()
         response = self.client.post(
             f"/api/v1/campaigns/{campaign.id}/documents/create/",
             data={
-                "data": {"institution_id": "1"},
+                "institution": institution.id,
+                "data": {"document_url": "1"},
                 "campaign": campaign.id
             },
             content_type='application/json'
@@ -168,7 +170,7 @@ class DocumentCreateTestCase(TestCase):
         document = Document.objects.get(id=response.data['id'])
         source = document.source.to_child()
         self.assertEqual(source.user, user)
-        self.assertEqual(document.data, {"institution_id": '1'})
+        self.assertEqual(document.data, {"document_url": '1'})
         self.assertEqual(document.campaign, campaign)
 
     def test_document_create_no_permission(self):

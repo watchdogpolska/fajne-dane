@@ -1,5 +1,5 @@
-data_fields,Question 0,Question 0,Question 0
-institution_id,question,answer,answer__probability
+core_fields,Question 0,Question 0,Question 0
+institution_key,question,answer,answer__probability
 3216034,What is it?,yes,0.8
 1428022,What is it?,yes,1
 1425011,What is it?,yes,0.5

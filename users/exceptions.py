@@ -67,8 +67,13 @@ class UserAlreadyActive(APIException):
     default_detail = 'User is already active'
     default_code = 'user_active'
 
-
 class ObjectNotFound(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Object not found'
     default_code = 'object_not_found'
+
+
+class WrongTokenType(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Wrong token type'
+    default_code = 'wrong_token_type'

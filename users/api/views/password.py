@@ -34,7 +34,6 @@ class PasswordReset(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             token = serializer.retrieve()
-            token.activate()
             serializer.update(token.user, serializer.validated_data)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -18,6 +18,11 @@ class PasswordResetSerializer(serializers.Serializer):
         model = User
         key_fields = ("token", )
 
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password_confirmation']:
+            raise PasswordsNotMatch()
+        return super().validate(attrs)
+
     def update(self, instance: User, validated_data: Dict):
         instance.set_password(validated_data['password'])
         instance.save()

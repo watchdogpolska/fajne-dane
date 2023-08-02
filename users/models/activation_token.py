@@ -3,7 +3,7 @@ from django.utils import timezone
 
 from fajne_dane.settings import EMAIL_EXPIRATION_HOURS
 from fajne_dane.core.utils import generate_uuid_token
-from users.exceptions import ActivationTokenUsed, UserAlreadyActive, ActivationTokenExpired
+from users.exceptions import ActivationTokenUsed, UserAlreadyActive, ActivationTokenExpired, WrongTokenType
 from users.models.user import ActionTypes, User
 
 
@@ -21,6 +21,9 @@ class ActivationToken(models.Model):
         return timezone.now() > expiration_time
 
     def activate(self):
+        if self.action_type != ActionTypes.REGISTRATION:
+            raise WrongTokenType()
+
         self.use()
 
         if self.user.is_active:

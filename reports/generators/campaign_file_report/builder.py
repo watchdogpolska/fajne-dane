@@ -7,7 +7,7 @@ from campaigns.models import Query
 from reports.aggregations.models.institution_paths import InstitutionGroupPaths
 from reports.generators.campaign_file_report.models import Report, InstitutionData, DocumentReport, \
     InstitutionGroupData, QueryData
-from reports.models import CampaignDataSource
+from reports.models import DataSource
 
 document_key_func = lambda x: x['parent__document']
 document_query_key_func = lambda x: x['parent__query']
@@ -19,9 +19,9 @@ def get_documents_institutions(group_data: Dict[Text, Any]) -> List[InstitutionD
         if not key.startswith('parent__document__institution'):
             continue
         key_parts = key.split('__')
-        index = "__".join(key_parts[:-1])
-        field = key_parts[-1]
         if value:
+            index = "__".join(key_parts[:-1])
+            field = key_parts[-1]
             _data[index][field] = value
 
     return [
@@ -78,7 +78,7 @@ class FileReportBuilder:
     _queries_mapping: Dict[int, Query] = field(init=False, default_factory=dict)
 
     @property
-    def data_source(self) -> CampaignDataSource:
+    def data_source(self) -> DataSource:
         return self.file_report.data_source
 
     @property

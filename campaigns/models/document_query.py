@@ -44,4 +44,5 @@ class DocumentQuery(models.Model):
         records_ids = [r.id for r in records]
         self.records.exclude(id__in=records_ids).update(status=RecordStatus.REJECTED)
         self.records.filter(id__in=records_ids).update(status=RecordStatus.ACCEPTED)
+        self.document.campaign.mark_data_source()
         self.update_status()

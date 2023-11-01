@@ -9,7 +9,8 @@ from campaigns.models.campaign import Campaign, CampaignStatus
 from campaigns.models.dto import DocumentDTO, RecordDTO, InstitutionDTO
 from tests.conftest import basic_campaign_template
 from tests.campaigns.conftest import basic_campaign_with_queries, \
-    advanced_campaign_with_queries, basic_campaign_with_documents
+    advanced_campaign_with_queries, basic_campaign_with_documents, basic_institution_group, setup_institutions, \
+    child_institution_group
 
 
 class CampaignTestCase(TestCase):
@@ -27,6 +28,7 @@ class CampaignTestCase(TestCase):
     def test_creating(self):
         campaign, _ = Campaign.objects.get_or_create(
             name="test1",
+            institution_group=basic_institution_group(),
             template=basic_campaign_template()
         )
         self.assertIsInstance(campaign, Campaign)
@@ -34,6 +36,7 @@ class CampaignTestCase(TestCase):
         self.assertIsInstance(campaign.template, dict)
 
     def test_data_field_objects_cache(self):
+        # sourcery skip: extract-duplicate-method
         campaign = advanced_campaign_with_queries()
         fields = list(campaign.document_fields.all())
 
@@ -47,6 +50,7 @@ class CampaignTestCase(TestCase):
             self.assertEqual(mock_method.call_count, 1)
 
     def test_data_queries_cache(self):
+        # sourcery skip: extract-duplicate-method
         campaign = advanced_campaign_with_queries()
         fields = list(campaign.queries.all())
 
@@ -91,15 +95,21 @@ class CampaignTestCase(TestCase):
         except ValidationError:
             self.fail()
 
-    def test_validating_wrong_document(self):
+    def test_institution_groups_path(self):
         campaign = basic_campaign_with_queries()
-        with self.assertRaises(ValidationError):
-            campaign.validate_document(
-                DocumentDTO(
-                    institution=InstitutionDTO(),
-                    data={"project_id": 1}
-                )
-            )
+        self.assertEqual(campaign.institution_groups_path, [campaign.institution_group.id])
+
+
+    def test_institution_groups_path_nested(self):
+        setup_institutions()
+        campaign, _ = Campaign.objects.get_or_create(
+            name="test2",
+            institution_group=child_institution_group(),
+            template=basic_campaign_template()
+        )
+        self.assertEqual(campaign.institution_groups_path,
+                         [campaign.institution_group.id, campaign.institution_group.parent.id])
+
 
     def test_validating_correct_document_wrong_record(self):
         campaign = basic_campaign_with_queries()
@@ -144,6 +154,7 @@ class CampaignStatusTestCase(TestCase):
         campaign = self.campaign
 
         self.assertEqual(campaign.status, CampaignStatus.VALIDATING)
+        # sourcery skip: no-loop-in-tests
         for document in campaign.documents.all():
             self._close_document(document)
         campaign.refresh_from_db()

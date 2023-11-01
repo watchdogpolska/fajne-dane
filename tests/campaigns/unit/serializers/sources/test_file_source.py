@@ -44,6 +44,7 @@ class FileSourceSerializerTestCase(TestCase):
                 'source_link': source.source_link,
                 'source_date': serialize_date(source.source_date),
                 'created': serialize_date(source.created),
+                'status': source.status,
                 'type': source.type,
                 'file': None
             }
@@ -62,6 +63,7 @@ class FileSourceSerializerTestCase(TestCase):
                 'source_link': source.source_link,
                 'source_date': serialize_date(source.source_date),
                 'created': serialize_date(source.created),
+                'status': source.status,
                 'type': source.type,
                 'file': source.file.url
             }

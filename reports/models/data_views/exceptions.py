@@ -1,0 +1,3 @@
+
+class DataViewError(Exception):
+    ...

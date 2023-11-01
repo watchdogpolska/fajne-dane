@@ -13,6 +13,7 @@ class Report(models.Model):
     status = models.CharField(max_length=12,
                               choices=ReportStatus.choices,
                               default=ReportStatus.EMPTY)
+    # layout = models.JSONField(default={})
 
     def update(self):
         self.status = ReportStatus.IN_PROGRESS

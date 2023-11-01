@@ -1,21 +1,16 @@
 from unittest.mock import patch
 
-from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
 
 from campaigns.models import Campaign, Query, OutputField
 from campaigns.models.dto import RecordDTO
-from tests.conftest import basic_campaign_template
-from tests.campaigns.conftest import basic_query
+from tests.campaigns.conftest import basic_query, basic_campaign
 
 
 class QueryTestCase(TestCase):
     def setUp(self):
-        Campaign.objects.create(
-            name="test1",
-            template=basic_campaign_template()
-        )
+        basic_campaign()
         OutputField.objects.create(
             name="test_field",
             widget="text_label",

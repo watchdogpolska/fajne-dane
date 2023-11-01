@@ -1,12 +1,7 @@
 from django.test import TestCase
 
 from campaigns.models.institutions import Institution, InstitutionGroup
-
-
-def basic_institution_group() -> InstitutionGroup:
-    return InstitutionGroup.objects.create(
-        name="test_group",
-    )
+from tests.campaigns.conftest import basic_institution_group
 
 
 class InstitutionGroupTestCase(TestCase):

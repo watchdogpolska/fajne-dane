@@ -5,6 +5,7 @@ from typing import List
 from fajne_dane.core.base.factory import BaseFactory
 from .. import Campaign, Document, Query, Record, DocumentQuery, Institution, Source
 from ..dto import DocumentDTO, RecordDTO, InstitutionDTO
+from ...exceptions import DocumentInstitutionMissmatch
 
 
 def get_institution(dto: InstitutionDTO):
@@ -21,6 +22,8 @@ class DocumentsFactory(BaseFactory):
 
     def _create_campaign_document(self, document_dto: DocumentDTO) -> Document:
         institution = get_institution(document_dto.institution)
+        if institution.group.id not in self.campaign.institution_groups_path:
+            raise DocumentInstitutionMissmatch()
         return Document(
             campaign=self.campaign,
             source=self.source,
@@ -88,6 +91,9 @@ class DocumentsFactory(BaseFactory):
             if selected_records and ((dq.query.output_field.type == 'list') or (selected_records.count() == 1)):
                 dq.accept_records(selected_records)
             dq.update_status()
+
+        # update data source
+        self.campaign.update_data_source()
         return documents
 
     @transaction.atomic

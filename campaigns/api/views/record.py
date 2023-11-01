@@ -12,8 +12,7 @@ class RecordList(generics.ListAPIView):
 
     def get_queryset(self):
         doc_query_id = self.kwargs.get("doc_query_id")
-        records = Record.objects.filter(parent_id=doc_query_id)
-        return records
+        return Record.objects.filter(parent_id=doc_query_id)
 
 
 class RecordDetail(generics.RetrieveUpdateDestroyAPIView):

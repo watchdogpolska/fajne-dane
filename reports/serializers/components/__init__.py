@@ -1,0 +1,1 @@
+from .utils import get_report_component_serializer

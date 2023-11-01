@@ -20,6 +20,7 @@ class Institution(models.Model):
     name = models.CharField(max_length=64)
     link = models.CharField(max_length=64, default=None, null=True, blank=True)
     address = models.CharField(max_length=64, default=None, null=True, blank=True)
+    metadata = models.JSONField(default=dict)
 
     def set_parent(self, parent: "Institution"):
         if not self.parent.parent:

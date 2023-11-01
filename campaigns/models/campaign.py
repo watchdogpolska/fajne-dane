@@ -1,15 +1,25 @@
 from typing import Optional, List
-from django.utils.translation import gettext_lazy as _
 from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
 from django.db import models, transaction
+from django.utils.translation import gettext_lazy as _
 
 from campaigns.models.consts import CampaignStatus, DocumentStatus
 from campaigns.models.dto import DocumentDTO
 
 if TYPE_CHECKING:
     from campaigns.models import DocumentDataField, Query
+
+
+def get_institution_groups_path(group_id: int) -> List[int]:
+    import campaigns.models.institutions.instituion_group as g
+    mapping = {i['id']: i['parent_id'] for i in g.InstitutionGroup.objects.values("id", "parent_id")}
+    path = [group_id]
+    while group_id:
+        group_id = mapping[group_id]
+        path.append(group_id)
+    return path[:-1]
 
 
 class Campaign(models.Model):
@@ -30,10 +40,17 @@ class Campaign(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    institution_group = models.ForeignKey("InstitutionGroup",
+                                          on_delete=models.CASCADE,
+                                          null=True,
+                                          related_name="campaigns")
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._document_fields_objects = None
         self._queries_objects = None
+        self._institution_groups_path = None
 
     @transaction.atomic
     def update_status(self):
@@ -53,6 +70,11 @@ class Campaign(models.Model):
         if last_status != self.status:
             self.save()
 
+    def update_data_source(self):
+        self.datasource.update()
+
+    def mark_data_source(self):
+        self.datasource.mark()
 
     @property
     def document_fields_objects(self) -> List["DocumentDataField"]:
@@ -67,6 +89,14 @@ class Campaign(models.Model):
         if not self._queries_objects:
             self._queries_objects = list(self.queries.all())
         return self._queries_objects
+
+    @property
+    def institution_groups_path(self) -> List[int]:
+        """Prepares a list containing a full path of institution groups path"""
+        if not self._institution_groups_path:
+            self._institution_groups_path = get_institution_groups_path(self.institution_group.id)
+        return self._institution_groups_path
+
 
     def validate_document(self, document: DocumentDTO, validate_records: Optional[bool]=True):
         """
@@ -83,6 +113,8 @@ class Campaign(models.Model):
                 valid_names.add(field.name)
             except ValidationError as e:
                 errors.append(e)
+
+        # check if document institution is in the right group
 
         if additional_fields := set(document.data.keys()) - valid_names:
             errors.append(

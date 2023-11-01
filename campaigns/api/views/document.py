@@ -52,7 +52,8 @@ class DocumentList(generics.ListAPIView):
         return Document.objects.filter(campaign_id=campaign_id)
 
 
-class DocumentsStatusList(generics.ListAPIView):
+class DocumentsStatusList(views.APIView):
+    #class DocumentsStatusList(generics.ListAPIView):
     permission_classes = (AllowAny,)
     filter_backends = [CustomDocumentFilterBackend]
     search_fields = ['query']
@@ -60,6 +61,11 @@ class DocumentsStatusList(generics.ListAPIView):
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
         return Document.objects.filter(campaign_id=campaign_id)
+
+    def filter_queryset(self, queryset):
+        for backend in list(self.filter_backends):
+            queryset = backend().filter_queryset(self.request, queryset, view=self)
+        return queryset
 
     def get(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

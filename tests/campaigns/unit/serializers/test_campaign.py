@@ -3,7 +3,7 @@ from django.test import TestCase
 from campaigns.models import Campaign
 from campaigns.serializers import CampaignSerializer, CampaignCreateSerializer, CampaignFullSerializer
 from fajne_dane.core.exceptions import NotSupported
-from tests.campaigns.conftest import basic_campaign
+from tests.campaigns.conftest import basic_campaign, basic_institution_group
 from tests.conftest import basic_campaign_template
 from tests.utils import serialize_date
 
@@ -19,6 +19,10 @@ class CampaignSerializerTestCase(TestCase):
                 'id': campaign.id,
                 'name': campaign.name,
                 'status': campaign.status,
+                'institution_group': {
+                    "id": campaign.institution_group.id,
+                    "name": campaign.institution_group.name
+                },
                 'created': serialize_date(campaign.created)
             }
         )
@@ -62,6 +66,10 @@ class CampaignFullSerializerTestCase(TestCase):
                 'status': campaign.status,
                 'created': serialize_date(campaign.created),
                 'template': campaign.template,
+                'institution_group': {
+                    "id": campaign.institution_group.id,
+                    "name": campaign.institution_group.name
+                },
                 'document_fields_objects': campaign.document_fields_objects
             }
         )
@@ -103,6 +111,7 @@ class CampaignCreateSerializerTestCase(TestCase):
                 'id': campaign.id,
                 'name': campaign.name,
                 'template': campaign.template,
+                'institution_group': campaign.institution_group.id,
                 'status': campaign.status
             }
         )
@@ -125,6 +134,7 @@ class CampaignCreateSerializerTestCase(TestCase):
         serializer = CampaignCreateSerializer(
             data={
                 "name": "new",
+                "institution_group": basic_institution_group().id,
                 "template": basic_campaign_template()
             }
         )

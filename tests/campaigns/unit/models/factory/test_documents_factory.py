@@ -70,10 +70,8 @@ class CampaignFactoryCreatingTestCase(TestCase):
             if document.document_queries.count() > 0:
                 if document.document_queries.exclude(status=DocumentQueryStatus.CLOSED).count() == 0:
                     self.assertEqual(document.status, DocumentStatus.CLOSED)
-                elif document.document_queries.filter(status=DocumentQueryStatus.CLOSED).count() > 0:
-                    self.assertEqual(document.status, DocumentStatus.VALIDATING)
                 else:
-                    self.assertEqual(document.status, DocumentStatus.INITIALIZED)
+                    self.assertEqual(document.status, DocumentStatus.VALIDATING)
             else:
                 self.assertEqual(document.status, DocumentStatus.CREATED)
 
@@ -86,10 +84,9 @@ class CampaignFactoryCreatingTestCase(TestCase):
                 for record in dq.records.all():
                     if record.probability > 0.5:
                         self.assertEqual(record.status, RecordStatus.ACCEPTED)
+                    elif dq.accepted_records.count():
+                        self.assertEqual(record.status, RecordStatus.REJECTED)
                     else:
-                        if dq.accepted_records.count():
-                            self.assertEqual(record.status, RecordStatus.REJECTED)
-                        else:
-                            self.assertEqual(record.status, RecordStatus.NONE)
+                        self.assertEqual(record.status, RecordStatus.NONE)
 
         self.assertEqual(self.campaign.status, CampaignStatus.VALIDATING)

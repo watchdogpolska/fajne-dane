@@ -3,6 +3,7 @@ from django.test import TestCase
 
 from campaigns.models import Campaign
 from campaigns.models.factory import campaign_factory
+from tests.campaigns.conftest import basic_institution_group
 from tests.conftest import basic_campaign_template, advanced_campaign_template
 
 
@@ -10,7 +11,7 @@ class CampaignFactoryTestCase(TestCase):
 
     def test_creating_basic_campaign(self):
         """Tests creating a campaign with a correct template."""
-        campaign = campaign_factory.create("test", basic_campaign_template())
+        campaign = campaign_factory.create("test", basic_institution_group(), basic_campaign_template())
         self.assertIsInstance(campaign, Campaign)
         self.assertTrue(campaign.document_fields.count() == 0)
         self.assertTrue(campaign.queries.count() == 1)
@@ -39,11 +40,11 @@ class CampaignFactoryTestCase(TestCase):
     def test_creating_campaign_wrong_template(self):
         """Tests creating a campaign with a wrong template."""
         with self.assertRaises(ValidationError):
-            campaign_factory.create("test", {})
+            campaign_factory.create("test", basic_institution_group(), {})
 
     def test_creating_advanced_campaign(self):
         """Tests creating a campaign with an advanced template."""
         try:
-            campaign_factory.create("test", advanced_campaign_template())
+            campaign_factory.create("test", basic_institution_group(), advanced_campaign_template())
         except ValidationError:
             self.fail()

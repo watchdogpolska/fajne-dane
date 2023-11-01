@@ -24,6 +24,7 @@ def invalid_campaign_template() -> Dict:
 def basic_campaign() -> Campaign:
     campaign, _ = Campaign.objects.get_or_create(
         name="test1",
+        institution_group=basic_institution_group(),
         template=basic_campaign_template()
     )
     return campaign
@@ -32,14 +33,22 @@ def basic_campaign() -> Campaign:
 def basic_campaign_with_queries() -> Campaign:
     campaign = Campaign.objects.filter(name="basic").first()
     if not campaign:
-        campaign = campaign_factory.create("basic", basic_campaign_template())
+        campaign = campaign_factory.create(
+            "basic",
+            basic_institution_group(),
+            basic_campaign_template()
+        )
     return campaign
 
 
 def advanced_campaign_with_queries() -> Campaign:
     campaign = Campaign.objects.filter(name="advanced").first()
     if not campaign:
-        campaign = campaign_factory.create("advanced", advanced_campaign_template())
+        campaign = campaign_factory.create(
+            "advanced",
+            basic_institution_group(),
+            advanced_campaign_template()
+        )
     return campaign
 
 
@@ -175,6 +184,15 @@ def basic_institution_group() -> InstitutionGroup:
         name="test_group",
     )
     return group
+
+
+def child_institution_group() -> InstitutionGroup:
+    group, _ = InstitutionGroup.objects.get_or_create(
+        name="test_group",
+        parent=basic_institution_group()
+    )
+    return group
+
 
 def basic_institution() -> Institution:
     institution, _ = Institution.objects.get_or_create(

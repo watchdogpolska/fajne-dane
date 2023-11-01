@@ -12,7 +12,7 @@ class DocumentParsingReport(ValidationReport):
 
     def to_json(self):
         return {
-            "index": self.index,
+            "index": int(self.index),
             "data": self.data,
             **super().to_json()
         }

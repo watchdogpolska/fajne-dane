@@ -39,7 +39,7 @@ urlpatterns += [
     path('accounts/', include('users.urls')),
     path('api/v1/users/', include('users.api.urls')),
     path('api/v1/campaigns/', include('campaigns.api.urls')),
-    #path('api/v1/reports/', include('reports.api.urls')),
+    path('api/v1/reports/', include('reports.api.urls')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', users.views.index_view, name='index')

@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from jsonschema import Draft7Validator
 
 from campaigns.validators.report import ValidationReport, ValidationError as TemplateValidationError
-from campaigns.validators.utils import validate_json_meta_schema
+from fajne_dane.core.utils.validators import validate_json_meta_schema
 
 
 CAMPAIGN_SCHEMA = json.load(open(Path(__file__).resolve().parent / "./schemas/campaign_template-schema.json"))

@@ -64,19 +64,20 @@ def _get_campaign_documents_data(source: "DataSource") -> pd.DataFrame:
     return df
 
 
-def _get_campaign_report_data(source: "DataSource") -> pd.DataFrame:
+def _get_campaign_report_data(source: "DataSource", merge_type='left') -> pd.DataFrame:
     return pd.merge(
         _get_campaign_institutions_data(source.campaign),
         _get_campaign_documents_data(source),
         left_on='institution_id',
         right_on='parent__document__institution_id',
-        how='left'
+        how=merge_type
     )
 
 
 class DataSource(models.Model):
     campaign = models.OneToOneField(Campaign, on_delete=models.CASCADE)
     file = models.FileField(upload_to='data_sources', null=True, blank=True)
+    include_all_institutions = models.BooleanField(default=True)
     dirty = models.BooleanField(default=True)
 
     def mark(self):
@@ -105,7 +106,8 @@ class DataSource(models.Model):
         return self.records.values(*self._get_value_fields())
 
     def update(self) -> None:
-        _df = _get_campaign_report_data(self)
+        report_merge_type = "left" if self.include_all_institutions else "inner"
+        _df = _get_campaign_report_data(self, merge_type=report_merge_type)
         output_file = ContentFile(_df.to_csv(index=False).encode('utf-8'))
         self.file.save(f"data_source_{self.id}.csv", output_file)
         self.dirty = False

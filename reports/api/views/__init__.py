@@ -1,8 +1,15 @@
 from .reports import (
     ReportDetails,
     ReportRender,
-    ReportList
+    ReportList,
 )
 from .data_source import (
-    DataSourceList
+    DataSourceList,
+    DataSourceDetails,
+)
+from .components import (
+    HTMLComponentCreate,
+    ReportComponentDetails,
+    BarPlotComponentCreate,
+    HeaderComponentCreate
 )

@@ -1,13 +1,18 @@
 from functools import cache
 from io import StringIO
-from typing import List, Text
+from typing import List, Dict
 
 import pandas as pd
 from django.core.files.base import ContentFile
 from django.db import models
 from django.db.models import QuerySet
 
-from campaigns.models import Campaign, Record, Institution
+from campaigns.models import (
+    Campaign,
+    Record,
+    Institution,
+    InstitutionGroup,
+)
 
 
 def _get_campaign_institutions_data(campaign: Campaign) -> pd.DataFrame:
@@ -92,13 +97,13 @@ class DataSource(models.Model):
             status="ACCEPTED",
             parent__query__campaign=self.campaign)
 
-    def _get_document_field(self) -> List[Text]:
+    def _get_document_field(self) -> List[str]:
         return [
             f"parent__document__data__{field.name}"
             for field in self.campaign.document_fields.all()
         ]
 
-    def _get_value_fields(self) -> List[Text]:
+    def _get_value_fields(self) -> List[str]:
         return ["value", "parent__query", "parent__document", "parent__document__institution_id"] +  \
             self._get_document_field()
 
@@ -113,6 +118,7 @@ class DataSource(models.Model):
         self.dirty = False
         self.save()
         DataSource.data.fget.cache_clear()  # noqa
+        DataSource.query_labels.fget.cache_clear()  # noqa
 
     def _load_data(self):
         _df = pd.read_csv(StringIO(self.file.read().decode('utf-8')))
@@ -123,3 +129,20 @@ class DataSource(models.Model):
     @cache
     def data(self) -> pd.DataFrame:
         return self._load_data()
+
+    @property
+    @cache
+    def query_labels(self) -> Dict[str, str]:
+        return {
+            f"query_{row['id']}__{row['output_field__name']}": row['data__0__value']
+            for row in self.campaign.queries.values("id", "data__0__value", "output_field__name")
+        }
+
+    @property
+    def available_keys(self) -> Dict[str, str]:
+        groups_path = InstitutionGroup.objects.filter(id__in=self.campaign.institution_groups_path)  \
+                                              .values_list('name', flat=True)
+        return {
+            f"institution_key_{depth}": label
+            for (depth, label) in enumerate(groups_path)
+        }

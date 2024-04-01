@@ -10,7 +10,7 @@ class FileSourceSerializer(ReadUpdateModelSerializer):
     class Meta:
         model = FileSource
         fields = ['id', 'name', 'description', 'file', 'source_link', 'source_date', 'created', 'type', 'status']
-        read_only_field = ['id', 'file', 'created', 'type', 'status']
+        read_only_fields = ['id', 'file', 'created', 'type', 'status']
 
         extra_kwargs = {
             'file': {'required': False},
@@ -21,14 +21,14 @@ class FileSourceMinimalSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = FileSource
         fields = ['id', 'name', 'type']
-        read_only_field = ['id', 'name', 'type']
+        read_only_fields = ['id', 'name', 'type']
 
 
 class FileSourceCreateSerializer(ReadCreateModelSerializer):
     class Meta:
         model = FileSource
         fields = ['id', 'name', 'description', 'file', 'source_link', 'source_date']
-        read_only_field = ['id']
+        read_only_fields = ['id']
 
 
 class FileSourceContentSerializer(ReadOnlySerializer):

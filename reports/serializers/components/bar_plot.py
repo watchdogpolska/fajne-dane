@@ -1,10 +1,13 @@
-from fajne_dane.core.serializers import ReadOnlyModelSerializer
+from fajne_dane.core.serializers import ReadCreateModelSerializer
 from reports.models import BarPlotComponent
+from reports.serializers.data_view import DataViewSerializer
 
 
-class BarPlotComponentSerializer(ReadOnlyModelSerializer):
+class BarPlotComponentSerializer(ReadCreateModelSerializer):
+    data_view = DataViewSerializer(required=False)
+
     class Meta:
         model = BarPlotComponent
-        fields = ['id', 'name', 'type', 'data_url', 'title', 'index', 'value']
-        read_only_field = ['id', 'name', 'type', 'data_url', 'title', 'index', 'value']
+        fields = ['id', 'name', 'type', 'title', 'index', 'value', 'data_view']
+        read_only_fields = ['id', 'data_view']
 

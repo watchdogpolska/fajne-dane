@@ -13,9 +13,6 @@ class ReportComponent(models.Model):
                             choices=ReportComponentTypes.choices,
                             default=ReportComponentTypes.TABLE)
 
-    class Meta:
-        unique_together = ('name', 'report',)
-
     def to_child(self) -> "ReportComponent":
         """
         Used to get an object of a child type object.

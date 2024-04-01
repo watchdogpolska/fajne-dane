@@ -9,4 +9,4 @@ class UserSourceSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = UserSource
         fields = ['id', 'user', 'type']
-        read_only_field = ['id', 'user', 'type']
+        read_only_fields = ['id', 'user', 'type']

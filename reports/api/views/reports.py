@@ -1,23 +1,23 @@
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
 
+from fajne_dane.core import IsAdminOrReadOnly
 from reports.models import Report
 from reports.serializers.report import ReportFullSerializer, ReportSerializer, ReportDetailsSerializer
 
 
-class ReportList(generics.ListAPIView):
-    permission_classes = (AllowAny,)
+class ReportList(generics.ListCreateAPIView):
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
 
 
-class ReportDetails(generics.RetrieveUpdateAPIView):
-    permission_classes = (AllowAny,)
+class ReportDetails(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Report.objects.all()
     serializer_class = ReportDetailsSerializer
 
 
 class ReportRender(generics.RetrieveAPIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Report.objects.all()
     serializer_class = ReportFullSerializer

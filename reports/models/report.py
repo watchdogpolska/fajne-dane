@@ -21,10 +21,10 @@ class Report(models.Model):
     def clean(self):
         validate_report_layout(self.layout)
 
-        names = set(self.components.values_list('name', flat=True))
-        wrong_names = set(self.layout.keys()) - names
-        if len(wrong_names):
-            raise ValidationError(f"Wrong components found in the layout: {wrong_names}")
+        ids = set(self.components.values_list('id', flat=True))
+        wrong_ids = set(map(int, self.layout.keys())) - ids
+        if len(wrong_ids):
+            raise ValidationError(f"Wrong components found in the layout: {wrong_ids}")
 
     def save(self, *args, **kwargs):
         self.clean()

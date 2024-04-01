@@ -33,8 +33,8 @@ class DataView(models.Model):
                             default=DataViewTypes.BASE)
 
     # used to do group-by aggregation
-    keys = ArrayField(models.CharField(max_length=30))
-    values = ArrayField(models.CharField(max_length=30))
+    keys = ArrayField(models.CharField(max_length=30), blank=True)
+    values = ArrayField(models.CharField(max_length=30), blank=True)
     aggregation = models.CharField(max_length=30,
                                    choices=AggregationTypes.choices)
 
@@ -80,6 +80,13 @@ class DataView(models.Model):
         _df = pd.read_csv(StringIO(self.file.read().decode('utf-8')))
         self.file.close()
         return _df
+
+    @property
+    def values_labels(self):
+        return {
+            value: self.data_source.query_labels[value]
+            for value in self.values
+        }
 
     @property
     @cache

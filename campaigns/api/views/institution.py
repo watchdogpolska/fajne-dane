@@ -1,15 +1,15 @@
 from rest_framework import generics, status, views
-from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from campaigns.api.exceptions import InstitutionHasDocuments
 from campaigns.api.views.config import StandardResultsSetPagination
 from campaigns.models import Institution, Document
-from campaigns.serializers import InstitutionSerializer, InstitutionCreateSerializer, InstitutionDetailsSerializer, \
+from campaigns.serializers import InstitutionCreateSerializer, InstitutionDetailsSerializer, \
     IdListSerializer
 from rest_framework import filters
 
 from campaigns.serializers.institutions import InstitutionDataSerializer
+from fajne_dane.core import IsAdminOrReadOnly
 
 
 class CustomInstitutionFilterBackend(filters.BaseFilterBackend):
@@ -27,7 +27,7 @@ class CustomInstitutionFilterBackend(filters.BaseFilterBackend):
 
 class InstitutionList(generics.ListAPIView):
     serializer_class = InstitutionDataSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = [CustomInstitutionFilterBackend]
     pagination_class = StandardResultsSetPagination
 
@@ -38,7 +38,7 @@ class InstitutionList(generics.ListAPIView):
 
 class InstitutionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = InstitutionDetailsSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Institution.objects.all()
 
     def delete(self, request, *args, **kwargs):
@@ -50,7 +50,7 @@ class InstitutionDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class InstitutionCreate(generics.CreateAPIView):
     serializer_class = InstitutionCreateSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Institution.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -64,7 +64,7 @@ class InstitutionCreate(generics.CreateAPIView):
 
 
 class InstitutionBulkDelete(views.APIView):
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = IdListSerializer
 
     def post(self, request, *args, **kwargs):
@@ -76,5 +76,3 @@ class InstitutionBulkDelete(views.APIView):
             institutions.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

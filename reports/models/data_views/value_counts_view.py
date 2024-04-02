@@ -11,7 +11,7 @@ def _compute_values_counts(df: pd.DataFrame, values: List[str], threshold: int) 
     if len(values) == 1: values = values[0]
     _counts = df[values].value_counts()
     _df = _counts[_counts > threshold].to_frame("count")
-    _df.loc['Other'] = _counts[_counts <= threshold].sum()
+    _df.loc['Inne'] = _counts[_counts <= threshold].sum()
     return _df.reset_index()
 
 

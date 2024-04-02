@@ -83,10 +83,11 @@ class DataView(models.Model):
 
     @property
     def values_labels(self):
-        return {
-            value: self.data_source.query_labels[value]
-            for value in self.values
-        }
+        return self.data_source.query_labels
+
+    @property
+    def keys_labels(self):
+        return self.data_source.available_keys
 
     @property
     @cache

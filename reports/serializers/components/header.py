@@ -7,5 +7,5 @@ class HeaderComponentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HeaderComponent
-        fields = ['id', 'name', 'type', 'title', 'subtitle']
+        fields = ['id', 'name', 'type', 'title', 'subtitle', 'metadata']
         read_only_fields = ['id', 'type']

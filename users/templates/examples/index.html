@@ -1,0 +1,122 @@
+{% extends "users/base.html" %}
+
+{% block header %}
+  <header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img">
+        <title>Bootstrap</title><path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path></svg>
+        <span class="fs-4">Fajne Dane</span>
+      </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'schema-swagger-ui' %}">Dokumentacja API</a>
+      </nav>
+    </div>
+  </header>
+{% endblock %}
+
+{% block main %}
+  <main>
+      <div class="p-3 pb-md-4 mx-auto text-center">
+          <h2 class="fw-normal">Przykłady użycia</h2>
+          <p class="fs-6 text-muted">
+              Poniżej zamieszczone zostały podstawowe przykłady wykorzystania API w celu pobrania udostępnionych danych.
+              Szczegółowa dokumentacja API dostepna jest Tutaj.
+          </p>
+      </div>
+      <div>
+          <h3 class="fw-normal">Rejestracja i logowanie</h3>
+          Dostep do API jest ograniczony dla niezalogowanych użytkowników (200/dziennie). Dlatego aby uzyskać dostęp do danych pierwszym krokiem jest rejestracja do api.
+          Rejestracja możliwa jest za pomocą niniejszej strony internetowej (przejdź Tutaj), lub przy pomocy API.
+
+          Po rejestracji na email przesłany zostanie link który ostatecznie aktywuje stworzone konto.
+          Po zakończeniu rejestracji możliwe jest zalogowanie do systemu i dostęp dodanych ze zwiększocnym limitem (200/godzina).
+
+          <div class="card mt-3">
+              <div class="card-body">
+                  Rejestracaj
+
+                  <pre>
+                      <code>
+/users/register/
+{
+  "email": "user@example.com",
+  "first_name": "string",
+  "last_name": "string",
+  "password": "string",
+  "password_confirmation": "string"
+}
+                      </code>
+                  </pre>
+                  Logowanie na stronie lub przy pomocy api.
+                  Jednak
+
+              </div>
+          </div>
+
+      </div>
+      <div class="mt-5">
+          <h3 class="fw-normal">Autoryzacja</h3>
+          <p>
+              Dostęp do api autoryzowany jest przez token JWT. Token aktywny jest przez 30 minut, to znaczy że trzeba go reaktywać po upływie 30 minut.
+
+              Zaczymany /token/ w formie logowania przy pomocy emaila i hasła użytego do logowania.
+              W odpowiedzi od systemu otrzymujemy dwa tokeny: access i refresh.
+              Ten pierwszy to nasz aktualny token, który możemy użyć przy odpytywaniu api.
+              Drugi token używany jest do odświeżenia dokenu access, kiedy jego ważność już wygaśnie.
+          </p>
+          <div class="card">
+              <div class="card-body">
+
+              <pre>
+                  <code>
+/token/
+{
+  "email": "string",
+  "password": "string"
+}
+                  </code>
+              </pre>
+              </div>
+          </div>
+          Odświeżenie tokenu odbywa się poprzez użycie endpointu:
+          W odpowiedzi od systemu dostaniemy nowy token access, ze zresetowanym limitem czasu do 30 minut.
+
+          <div class="card">
+              <div class="card-body">
+
+              <pre>
+                  <code>
+/token/refresh
+{
+"refresh": "string",
+}
+                  </code>
+              </pre>
+              </div>
+          </div>
+      </div>
+      <div class="mt-5">
+          <h3 class="fw-normal">Zbiory danych</h3>
+          <p>
+              Wszystkie zbiory danych dostępne są w dwóch formach:
+              - dane surowe, w których możemy oprócz finalnych oznaczeń dokumentu dostępne są również odrzucone odpowiedzi.
+              - dane zaagregowane, zawierają jedynie zaakceptowane oznaczenia dokumentów.
+
+              Najprostrzym sposobem dostepu do danych jest użycie danych zaagregowanych. Aby pobrać listę wszystkich dostępnych zbiorów danych
+              wystarczy użyć poniższego endpointu. W odpowiedzi otrzymamy listę wszystkich dostępnych zbiorów danych, wraz z linkami do plików csv, które można pobrać.
+          </p>
+          <div class="card">
+              <div class="card-body">
+
+              <pre>
+                  <code>
+                      `/reports/sources/`
+                  </code>
+              </pre>
+              </div>
+          </div>
+      </div>
+  </main>
+{% endblock %}

@@ -11,5 +11,8 @@ from .components import (
     HTMLComponentCreate,
     ReportComponentDetails,
     BarPlotComponentCreate,
-    HeaderComponentCreate
+    HeaderComponentCreate,
+    FrequencyMapComponentCreate,
+    TableComponentCreate,
+    ReferencesComponentCreate,
 )

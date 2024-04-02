@@ -1,9 +1,6 @@
-from collections import OrderedDict
-
 from django.db.models import Count
 from rest_framework import filters
 from rest_framework import generics, status, views
-from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
 from campaigns.api.views.config import StandardResultsSetPagination
@@ -14,7 +11,6 @@ from campaigns.models.factory.documents_factory import DocumentsFactory
 from campaigns.serializers import (
     DocumentSerializer, DocumentCreateSerializer, DocumentFullSerializer, IdListSerializer, DocumentIdSerializer
 )
-from fajne_dane.core import IsAdminOrReadOnly
 
 
 def get_frequency_list(queryset, column):
@@ -43,7 +39,6 @@ class CustomDocumentFilterBackend(filters.BaseFilterBackend):
 
 class DocumentList(generics.ListAPIView):
     serializer_class = DocumentSerializer
-    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = [CustomDocumentFilterBackend]
     search_fields = ['query', 'order', 'status']
     pagination_class = StandardResultsSetPagination
@@ -54,8 +49,6 @@ class DocumentList(generics.ListAPIView):
 
 
 class DocumentsStatusList(views.APIView):
-    #class DocumentsStatusList(generics.ListAPIView):
-    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = [CustomDocumentFilterBackend]
     search_fields = ['query']
 
@@ -77,12 +70,10 @@ class DocumentsStatusList(views.APIView):
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentFullSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
 
 class DocumentCreate(generics.CreateAPIView):
     serializer_class = DocumentCreateSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -111,7 +102,6 @@ class DocumentCreate(generics.CreateAPIView):
 
 
 class DocumentBulkDelete(views.APIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = IdListSerializer
 
     def post(self, request, *args, **kwargs):
@@ -126,7 +116,6 @@ class DocumentBulkDelete(views.APIView):
 
     
 class GetUnsolvedDocument(generics.RetrieveAPIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = DocumentIdSerializer
 
     def get_object(self):

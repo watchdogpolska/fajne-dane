@@ -80,7 +80,7 @@ def _get_campaign_report_data(source: "DataSource", merge_type='left') -> pd.Dat
 
 
 class DataSource(models.Model):
-    campaign = models.OneToOneField(Campaign, on_delete=models.CASCADE)
+    campaign = models.OneToOneField(Campaign, on_delete=models.CASCADE, related_name="source")
     file = models.FileField(upload_to='data_sources', null=True, blank=True)
     include_all_institutions = models.BooleanField(default=True)
     dirty = models.BooleanField(default=True)
@@ -141,8 +141,9 @@ class DataSource(models.Model):
     @property
     def available_keys(self) -> Dict[str, str]:
         groups_path = InstitutionGroup.objects.filter(id__in=self.campaign.institution_groups_path)  \
-                                              .values_list('name', flat=True)
+                                              .values_list('id', 'name')
+        groups_labels = {_id: _name for (_id, _name) in groups_path}
         return {
-            f"institution_key_{depth}": label
-            for (depth, label) in enumerate(groups_path)
+            f"institution_key_{depth}": groups_labels[_id]
+            for (depth, _id) in enumerate(self.campaign.institution_groups_path)
         }

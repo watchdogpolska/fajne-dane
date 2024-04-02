@@ -5,3 +5,4 @@ from .html import HTMLComponent
 from .header import HeaderComponent
 from .consts import ReportComponentTypes
 from .map_frequency import MapFrequencyComponent
+from .references import ReferencesComponent

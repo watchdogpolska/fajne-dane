@@ -11,6 +11,9 @@ from .views import (
     HeaderComponentCreate,
     BarPlotComponentCreate,
     ReportComponentDetails,
+    FrequencyMapComponentCreate,
+    TableComponentCreate,
+    ReferencesComponentCreate,
 )
 
 
@@ -21,9 +24,24 @@ urlpatterns = [
     path('<int:report_id>/components/create/html/', HTMLComponentCreate.as_view(), name="html_component_create"),
     path('<int:report_id>/components/create/header/', HeaderComponentCreate.as_view(), name="header_component_create"),
     path(
+        '<int:report_id>/components/create/references/',
+        ReferencesComponentCreate.as_view(),
+        name="references_component_create"
+    ),
+    path(
         '<int:report_id>/components/create/barplot/',
         BarPlotComponentCreate.as_view(),
         name="barplot_component_create"
+    ),
+    path(
+        '<int:report_id>/components/create/answersmap/',
+        FrequencyMapComponentCreate.as_view(),
+        name="answersmap_component_create"
+    ),
+    path(
+        '<int:report_id>/components/create/table/',
+        TableComponentCreate.as_view(),
+        name="table_component_create"
     ),
     path('components/<int:pk>/', ReportComponentDetails.as_view(), name="report_component_details"),
     path('sources/', DataSourceList.as_view(), name="data_source_list"),

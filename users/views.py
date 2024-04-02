@@ -52,6 +52,13 @@ class LoginView(View):
         return render(request, self.template_name, context)
 
 
+class ExamplesView(View):
+    template_name = 'examples/index.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
 class RegisterView(View):
     template_name = 'users/register.html'
 

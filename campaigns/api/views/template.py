@@ -3,11 +3,9 @@ from rest_framework.response import Response
 
 from campaigns.serializers import TemplateContentSerializer, ValidationReportSerializer
 from campaigns.validators.template import CAMPAIGN_SCHEMA, prepare_validation_report
-from fajne_dane.core import IsAdminOrReadOnly
 
 
 class GetMetaTemplate(views.APIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = TemplateContentSerializer
 
     def get(self, request):
@@ -17,7 +15,6 @@ class GetMetaTemplate(views.APIView):
 
 
 class ValidateCampaignTemplate(views.APIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = ValidationReportSerializer
 
     def post(self, request):

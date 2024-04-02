@@ -24,13 +24,14 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Co to jest Fajne Dane?</h1>
+    <h1>Czym są Fajne Dane?</h1>
     <p class="fs-5 col-md-8">
         To baza danych udostępniaja dane źródłowe i raporty przygotowane przez Siec Obywatelską Watchdog Polska.
     </p>
 
     <div class="mb-5">
-        <a href="{% url 'schema-swagger-ui' %}" class="btn btn-primary btn-lg px-3 py-2">Dokumentacja API</a>
+        <a href="{% url 'schema-swagger-ui' %}" style="width: 220px" class="btn btn-primary btn-lg px-3 py-2">Dokumentacja API</a>
+        <a href="{% url 'users:examples-api' %}" style="width: 220px" class="btn btn-primary btn-lg px-3 py-2">Przykłady użycia</a>
     </div>
 
     <hr class="col-3 col-md-2 mb-5">

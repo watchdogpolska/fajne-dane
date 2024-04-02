@@ -1,14 +1,12 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from campaigns.serializers import RecordSerializer
 from campaigns.models import Record, UserSource, DocumentQuery
-from fajne_dane.core import IsAdminOrReadOnly
+from campaigns.serializers import RecordSerializer
 
 
 class RecordList(generics.ListAPIView):
     serializer_class = RecordSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
         doc_query_id = self.kwargs.get("doc_query_id")
@@ -18,12 +16,10 @@ class RecordList(generics.ListAPIView):
 class RecordDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
 
 class RecordCreate(generics.CreateAPIView):
     serializer_class = RecordSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, many=True)

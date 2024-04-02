@@ -7,6 +7,7 @@ from .bar_plot import BarPlotComponentSerializer
 from .header import HeaderComponentSerializer
 from .html import HTMLComponentSerializer
 from .map_frequency import MapFrequencyComponentSerializer
+from .references import ReferencesComponentSerializer
 from .table import TableComponentSerializer
 
 
@@ -25,4 +26,6 @@ def get_report_component_serializer(source_type: ReportComponent) -> Type[serial
         return HeaderComponentSerializer
     elif source_type == ReportComponentTypes.MAP_FREQUENCY:
         return MapFrequencyComponentSerializer
+    elif source_type == ReportComponentTypes.REFERENCES:
+        return ReferencesComponentSerializer
     raise ReportComponentTypeNotFound(f"Type unknown: {source_type}")

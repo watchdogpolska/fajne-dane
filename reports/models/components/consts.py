@@ -7,4 +7,5 @@ class ReportComponentTypes(models.TextChoices):
     BAR_PLOT = 'BAR_PLOT', _('Bar plot')
     HEADER = 'HEADER', _('Header')
     HTML = 'HTML', _('HTML')
-    MAP_FREQUENCY = 'MAP_FREQUENCY', _('MAP_FREQUENCY')
+    MAP_FREQUENCY = 'MAP_FREQUENCY', _('Map frequency')
+    REFERENCES = 'REFERENCES', _('References')

@@ -64,8 +64,8 @@
             {% block user_context_message %}
                 {% if request.user.is_authenticated %}
                     <div class="hello">
-                        <span class="django-session">Django</span> <span
-                            class="label label-primary">{{ request.user }}</span>
+                        <span class="django-session">Witaj, </span>
+                        <span class="label label-primary">{{ request.user }}</span>
                     </div>
                 {% endif %}
             {% endblock %}

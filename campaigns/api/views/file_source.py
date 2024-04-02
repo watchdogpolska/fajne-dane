@@ -17,7 +17,6 @@ from fajne_dane.core import IsAdminOrReadOnly
 
 class FileSourceList(generics.ListAPIView):
     serializer_class = FileSourceSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
         campaign_id = self.kwargs.get("campaign_id")
@@ -26,7 +25,6 @@ class FileSourceList(generics.ListAPIView):
 
 class FileSourceDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FileSourceSerializer
-    permission_classes = (IsAdminOrReadOnly,)
     queryset = FileSource
 
 
@@ -37,7 +35,6 @@ class FileSourceDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class FileSourceCreate(generics.CreateAPIView):
     serializer_class = FileSourceCreateSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
     @swagger_auto_schema(
         responses={
@@ -74,7 +71,6 @@ class FileSourceCreate(generics.CreateAPIView):
 
 
 class FileSourceValidate(views.APIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = ParsingReportSerializer
 
     def post(self, request, campaign_id):
@@ -91,7 +87,6 @@ class FileSourceValidate(views.APIView):
 
 
 class FileSourceReport(views.APIView):
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = ParsingReportSerializer
 
     def get(self, request, pk):

@@ -6,7 +6,7 @@ from .data_component import DataComponent
 
 
 class TableComponent(DataComponent):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=256, blank=True, null=True)
     columns = ArrayField(models.CharField(max_length=256), default=list)
 
     def __init__(self, *args, **kwargs):

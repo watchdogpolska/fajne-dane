@@ -8,7 +8,7 @@ class ReportComponent(models.Model):
                                on_delete=models.CASCADE,
                                related_name="components")
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=128)
     type = models.CharField(max_length=30,
                             choices=ReportComponentTypes.choices,
                             default=ReportComponentTypes.TABLE)

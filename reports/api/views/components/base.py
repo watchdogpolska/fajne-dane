@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from fajne_dane.core import IsAdminOrReadOnly
 from reports.models import Report
 from reports.models import ReportComponent
+from reports.models.components.data_component import DataComponent
 from reports.models.data_views import get_data_view_class, DataViewTypes
 from reports.serializers.components import get_report_component_serializer
 from reports.serializers.data_view import DataViewCreateSerializer
@@ -56,6 +57,11 @@ class ReportComponentDetails(generics.RetrieveUpdateDestroyAPIView):
             if str(component.id) in report.layout:
                 del report.layout[str(component.id)]
                 report.save()
+
+            data_component = DataComponent.objects.filter(id=component.id).first()
+            if data_component:
+                data_component.data_view.delete()
+
             component.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
 

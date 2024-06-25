@@ -53,11 +53,8 @@ class ReportComponentDetails(generics.RetrieveUpdateDestroyAPIView):
         component = ReportComponent.objects.filter(id=pk).first()
         if component:
             report = component.report
-            print(component.id)
-            print(report.layout)
             if str(component.id) in report.layout:
                 del report.layout[str(component.id)]
-                print("USUWANKO")
                 report.save()
             component.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)

@@ -7,4 +7,4 @@ class ReportComponentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReportComponent
-        fields = ['id', 'name', 'type', 'metadata']
+        fields = ['id', 'name', 'type']

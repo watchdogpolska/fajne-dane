@@ -1,7 +1,7 @@
 # application requirements
 djangorestframework==3.12.4
 djangorestframework-simplejwt
-django-environ==0.4.5
+django-environ==0.14.0
 django-extensions
 django-filter==2.4.0
 django-cors-headers

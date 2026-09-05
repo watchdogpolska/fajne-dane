@@ -1,5 +1,5 @@
 # application requirements
-djangorestframework==3.12.4
+djangorestframework==3.17.2
 djangorestframework-simplejwt
 django-environ==0.4.5
 django-extensions
